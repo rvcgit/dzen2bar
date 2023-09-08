@@ -9,7 +9,7 @@
 5.inxi
 6.trayer [if installed; optional for top/bottom right placement] "trayer-br / trayer-tr" executable is configured for bottom/top,automatically shifts position w.r.t dzen2 location 
 7. Font Awesome 6 Free; Nerd Fonts [ to display iconic fonts; RobotoMono Nerd Fonts;UbuntuMono Nerd Fonts; FuraCode Nerd Font, RobotoMono Nerd Fonts, Opendyslexic Nerd Fonts used.. FYI ] & a bitmap font i love so much from here : https://addy-dclxvi.github.io/post/bitmap-fonts/
-and nerd fonts from here=> https://www.nerdfonts.com/font-downloads [i have included in the download folder
+and nerd fonts from here=> https://www.nerdfonts.com/font-downloads
 8.Openweather script to pipe weather on bar [included in bin]
 	forecast uses info from wttr.in, edit dzenbar file for your location
 9.supportive executable and shell scripts
@@ -24,7 +24,7 @@ JUST SELECT THE 'y=..." LINE BY COMMENTING OUT THE OTHER FOR top/bottom BAR CHOI
 3. Move all contents from the conkys folder to $HOME/.conky/
 4. bar is configured for bottom bar; if you need top bar, open the dzenbar file; edit by commenting out the current y anduncomment the top bar option
 
-rofi + lemonbar is available as simplepanel @ https://github.com/kainonergon/simplepanel.
+rofi + lemonbar is available as simplepanel thats structured modular by @kainonergon => https://github.com/kainonergon/simplepanel
 i have been a great admirer cum user of this simplepanel and i felt i can learn from @kainonergon's scriptsto configure a dzenbar piping info with conky andusing rofi for popups
 
 finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
@@ -33,7 +33,7 @@ optional fo transparency: presuming xorg-transset is installed; open terminal an
 COMMON ISSUES:
 IF ROFI WINDOW[ that follows pointer co-ordinates] may vary, feel free to juggle around the pX and pY part of respective config file
 
-Depending on your distribution; inxi output may differ or display wrongly; simple edit 'dzensysinfo.sh to suit yourdistribution
+Depending on your distribution; inxi output may differ or display wrongly; simple edit 'dzensysinfo.sh' to suit your distribution
 Home / Root device nomes [sdXY; X is a/b/c etc; Y is 1,2,3 etc]
 
 for non EMWH compliant window managers like dwm or XMonad; window list and workspaces will be an issue. workspaces in those cases defaults to one,two,three etc. and active window listwill not function
@@ -51,4 +51,7 @@ i dont think this will work in wayland. i have not tested it nor the config is c
  
 Hope you like this setup. Feel free to upgrade and update...
 dont forget to "fav" or "like" this !
+
+execute this with 'dzenbar'
+
 Cheers !
