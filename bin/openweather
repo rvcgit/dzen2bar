@@ -28,8 +28,7 @@ done
 echo "live" > /tmp/inet && notify-send " iNet is reachable
 Weather is updating... "
 }
-
-weather() {
+# connection && ## -- Uncomment this line if internet connection needs to be checked before executing weather script
 # Open Weather Map API code, register to http://openweathermap.org/api to get one ;)
 
 API_KEY="ENTER YOUR API KEY HERE" # user API KEY
@@ -112,6 +111,3 @@ fi
 if [[ "${WEATHER_TEMP}" -lt "${URGENT_LOWER}" ]] || [[ "${WEATHER_TEMP}" -gt "${URGENT_HIGHER}" ]]; then
   exit 33
 fi
-}
-connection &&
-weather
