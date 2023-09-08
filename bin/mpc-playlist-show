@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+# rofi menu o show mpc playlist and play on select
+
+rofi_mpd() {	# 1 parameter: menu_width. The rest of parameters is passed to rofi
+#	menu_width="$1"	# width in pixels
+	menu_width="$1"
+X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
+Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution ; Y
+XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
+YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
+if [ "$SP_BOTTOM" ] ; then
+	loc="7"
+	anc="7";else
+	loc="1"
+	anc="1";fi &&
+
+if [[ $anc == "1" ]]; then pY=$(($YP+5));elif
+	[[ $anc == "7" ]]; then pY=$(YP-30);fi
+
+if [ $(($X-$XP-10)) -lt $(($menu_width+10)) ];then
+	pX=$(($XP-$menu_width));else
+	pX=$(($XP-20));
+fi
+
+	rofi -config ~/.config/rofi.old/config.rasi $@ \
+	-location $loc -anchor $anc \
+	-xoffset $pX -yoffset $pY \
+	-theme-str 'window {width: 60ch;}' \
+	-theme-str 'listview { lines: 9; dynamic: true; fixed-height: false; }'
+	
+}
+mpd_menu() {
+	mpc playlist \
+	| rofi_mpd 400 -format d -dmenu -p " : " \
+	| xargs mpc play
+}
+mpd_menu
