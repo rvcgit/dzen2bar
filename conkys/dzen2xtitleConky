@@ -1,0 +1,11 @@
+conky.config = {
+    out_to_x = false,
+    out_to_console = true,
+    update_interval = 1,
+    use_xft = true,
+    background = false,
+    total_run_times = 0,
+    use_spacer = none
+}
+
+conky.text = [[ ^bg(\#091020)^ca(1,sh ~/.bin/rofiwindow)^fg(\#00BCD4)  ^ca() ^fg(\#40e0d0)${exec dzen2xtitle} ]]

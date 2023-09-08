@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+#date pipe for dzen with customised cal popup on-click
+X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
+Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
+XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
+YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
+
+if [ $YP -le "30" ];then pY=$(($YP+15));else
+	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
+fi
+
+pX=$(($XP+10)) ## x offset to align
+
+echo "$(cal)" > /tmp/calendar
+(
+echo "Calendar"
+echo "$(cat /tmp/calendar)"
+) | dzen2 -p -x $pX -y $pY -w "200" -l "7" -sa 'c' -ta 'c' -fn "pretzel-12:antialias=true"\
+    -title-name 'Calendar' -e 'onstart=uncollapse;button1=exit;button4=exit;button5=exit'

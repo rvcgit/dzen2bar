@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+trayer --edge bottom --align right --widthtype request  --heighttype request --height 18 --iconspacing 6 --SetDockType true --SetPartialStrut false  --tint 0x091020 --padding 1 --margin 2 --expand true

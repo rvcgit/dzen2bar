@@ -1,0 +1,117 @@
+#!/bin/bash
+### Openweather script [can save anywhere in your home dir OR /usr/local/bin if you wish to have executable]
+### USAGE: openweather OR openweather -i if you wish to have weather icons]
+## save this script and change permissions [chmod a+x /path/to/script OR sudo chmod a+x /usr/local/bin/openweather]
+
+
+# I take this script from Anachron's i3blocks
+# I only slightly modify this script to add an option to show icon, useful for my tint2 executor
+# 'weather -i' = with icon, 'weather' = text only
+# Cheers!
+# Addy
+# credit to contributors as listed above; i have just done mod to check connection before function openweather runs..
+
+# check if internet is available and server has access
+connection()
+{
+# using ping to check if net is active
+server="8.8.8.8"    # Google dns
+checkping="ping -c 1 $server > /dev/null 2>&1" # ping Google to check if iNet is live
+
+$checkping
+while [ $? -ne 0 ]; do
+#  notify-send "\e[1A\e[K $(date): Connecting - ${serverAdr}"
+    notify-send "Connecting - ${server}";
+  sleep 1;
+  $checkping > /dev/null 2>&1;
+done
+echo "live" > /tmp/inet && notify-send " iNet is reachable
+Weather is updating... "
+}
+
+weather() {
+# Open Weather Map API code, register to http://openweathermap.org/api to get one ;)
+
+API_KEY="ENTER YOUR API KEY HERE" # user API KEY
+
+# Check on http://openweathermap.org/find & edit in the  CITY_ID"
+CITY_ID="XXXXXXX"
+
+# i have used nerd fonts for glyphs ; Use Meteocons for weather glyphs for default & reverse comments
+
+URGENT_LOWER=9
+URGENT_HIGHER=38
+
+#ICON_SUNNY="B Clear"
+ICON_SUNNY="  Clear"
+#ICON_CLOUDY="Y  Cloudy"
+ICON_CLOUDY="  Cloudy"
+#ICON_RAINY="X  Rainy"
+ICON_RAINY="  Rainy"
+#ICON_STORM="F  Storm"
+ICON_STORM="Storm"
+#ICON_SNOW="L  Snow"
+ICON_SNOW="  Snow"
+#ICON_FOG="E  Fog"
+ICON_FOG="  Fog"
+#ICON_MISC="H "
+ICON_MISC=" "
+#ICON_MISC="⛅️"
+
+TEXT_RAINY="Rainy"
+TEXT_STORM="Storm"
+TEXT_SNOW="Snow"
+TEXT_FOG="Fog"
+
+SYMBOL_CELSIUS="˚C"
+
+WEATHER_URL="https://api.openweathermap.org/data/2.5/weather?id=${CITY_ID}&appid=${API_KEY}&units=metric"
+
+WEATHER_INFO=$(wget -qO- "${WEATHER_URL}")
+WEATHER_MAIN=$(echo "${WEATHER_INFO}" | grep -o -e '"main":"[a-Z]*"' | awk -F ':' '{print $2}' | tr -d '"')
+WEATHER_TEMP=$(echo "${WEATHER_INFO}" | grep -o -e '"temp":-\?[0-9]*' | awk -F ':' '{print $2}' | tr -d '"')
+
+if [[ "${WEATHER_MAIN}" = *Snow* ]]; then
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_SNOW} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${TEXT_SNOW} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+elif [[ "${WEATHER_MAIN}" = *Rain* ]] || [[ "${WEATHER_MAIN}" = *Drizzle* ]]; then
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_RAINY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${TEXT_RAINY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+elif [[ "${WEATHER_MAIN}" = *Cloud* ]]; then
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_CLOUDY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${TEXT_CLOUDY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+elif [[ "${WEATHER_MAIN}" = *Clear* ]]; then
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_SUNNY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${TEXT_SUNNY} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+elif [[ "${WEATHER_MAIN}" = *Fog* ]] || [[ "${WEATHER_MAIN}" = *Mist* ]]; then
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_FOG} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${TEXT_FOG} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+else
+if  [[ $1 = "-i" ]]; then
+    echo "${ICON_MISC} ${WEATHER_MAIN} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+else
+    echo "${WEATHER_MAIN} ${WEATHER_TEMP}${SYMBOL_CELSIUS}"
+fi
+fi
+
+if [[ "${WEATHER_TEMP}" -lt "${URGENT_LOWER}" ]] || [[ "${WEATHER_TEMP}" -gt "${URGENT_HIGHER}" ]]; then
+  exit 33
+fi
+}
+connection &&
+weather

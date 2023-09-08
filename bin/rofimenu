@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+rofimenu_cmd() {
+X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
+Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
+XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
+YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
+
+if [ $YP -le "30" ];then py=$(($YP+30));else
+	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
+fi
+
+pX="$(($XP+10))" ## 2*dY added for neg x offset to align
+
+if [[ $pX -ge "900" ]];then pX="900";else pX="$pX";fi
+if [[ $pY -ge "400" ]];then pY="400";else pY="$pY";fi
+menu_width="100"
+	rofi -config ~/.config/rofi.old/config.rasi -show "drun" \
+		-modi "drun" \
+		-location 1 -anchor 1 \
+		-xoffset $pX -yoffset $pY \
+		-no-sidebar-mode \
+ 		-theme-str "#window { width: 33%; }" \
+		-theme-str "#listview { lines: 9; dynamic: true; fixed-height: false; }"
+#	 rofimenu
+}
+rofimenu_cmd

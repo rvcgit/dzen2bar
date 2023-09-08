@@ -1,0 +1,13 @@
+conky.config = {
+    out_to_x = false,
+    out_to_console = true,
+    update_interval = 1,
+    use_xft = true,
+    background = false,
+    total_run_times = 0,
+    use_spacer = none
+}
+-- Here command "xdotool key Super+1 or 2 or 3 or 4 or 5" is used presuming "Super" key as your modifier; edit with your keybind
+-- using above mode helps in on-click action even in non ewmh wm like Xmonad
+
+conky.text = [[^bg(\#29ab87)^fg(\#22282e) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS} ^bg(\#091020)^fg(\#e5e4e2)  ^ca(1, xdotool key Super+1)${cat /tmp/WS1}^ca()  ^ca(1, xdotool key Super+2)${cat /tmp/WS2}^ca()  ^ca(1, xdotool key Super+3)${cat /tmp/WS3}^ca()  ^ca(1, xdotool key Super+4)${cat /tmp/WS4}^ca()  ^ca(1, xdotool key Super+5)${cat /tmp/WS5}^ca()  ]]

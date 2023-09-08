@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+# depends on openweather script if alternative is needed
+# update wlan device OR eth device w.r.t your computer
+wifi="wlp6s0" # edit with your device
+interval=${1:-1800}
+ip_check="$(ip addr show $wifi | grep 'inet' | awk '{print $2}' | cut -d/ -f1)"
+
+connection()
+{
+# using ping to check if net is active
+server="8.8.8.8"    # Google dns
+checkping="ping -c 1 $server > /dev/null 2>&1" # ping Google to check if iNet is live
+
+$checkping
+while [ $? -ne 0 ]; do
+#  notify-send "\e[1A\e[K $(date): Connecting - ${serverAdr}"
+    notify-send "Connecting - ${server}";
+  sleep 1;
+  ping -c 1 $server > /dev/null 2>&1;
+done
+echo "live" > /tmp/inet && notify-send " iNet is reachable
+Weather is updating... "
+}
+
+refreshdata()
+{
+location=""
+url="https://v2.wttr.in/$location\?M'"
+data="$(curl -s $url | grep 'Weather:' | sed 's/Weather://g' | sed 's/+//g' | awk '{for(i=2;i<=NF;++i)printf $i""FS ; print ""}')"
+validate="$(echo $data > /tmp/localweather)"
+update="$(cat /tmp/localweather | rev | awk '{print $4}' | rev | sed 's/,//g' > /tmp/weather-short && cat /tmp/localweather | awk '{print$1}' > /tmp/icon && cat /tmp/localweather | rev | awk '{print $2}' | rev | sed 's/,//g' > /tmp/windspeed && echo "$(cat /tmp/icon) $(cat /tmp/weather-short)" > /tmp/i3wttr && $(cat /tmp/localweather | rev | awk '{for(i=2;i<=NF;++i)printf $i""FS ; print ""}' | rev | sed 's/,//g' > /tmp/lemonbarwttr))"
+
+$data && $validate && $update
+
+if [[ "$(cat /tmp/localweather | awk '{print $NF}'| cut -c 5-7)" != "hPa" ]];then
+#alternative="(openweather -i)"	
+openweather -i > /tmp/localweather &&
+	sleep 10 &&
+	cat /tmp/localweather | awk '{print $1}' > /tmp/icon &&
+	cat /tmp/localweather | rev | awk '{print $1}' | rev > /tmp/weather-short &&
+	echo "n/a" > /tmp/windspeed;
+fi;
+}
+
+connection &&
+while : ;do refreshdata;sleep $interval;done

@@ -1,0 +1,78 @@
+#!/bin/sh
+
+# A dwm_bar function that shows the current artist, track, position, duration, and status from mpc
+# Joe Standring <git@joestandring.com>
+# GNU GPLv3
+
+# Dependencies: mpc
+## Edited the TRACK part to restrict track title chars
+
+MAX_LENGTH=27
+
+dwm_mpc () {
+    if ps -C mpd > /dev/null; then
+        ARTIST=$(mpc status -f %artist% | head -n1)
+        if [ ${#ARTIST} -gt $MAX_LENGTH ] ; then	# trim long names
+					ARTIST="$(echo $ARTIST|cut -c -$MAX_LENGTH)..."
+				fi
+        
+        #TRACK=$(mpc current -f %title% | head -n1)
+	TRACK=$(mpc current)
+        if [ ${#TRACK} -gt $MAX_LENGTH ] ; then	# trim long names
+					TRACK="$(echo $TRACK |cut -c -$MAX_LENGTH)..."
+				fi
+        
+        state="$(mpc|sed -n '2s/ .*$//p')"
+        
+        
+        
+        POSITION=$(mpc status | grep "%)" | awk '{ print $3 }' | awk -F/ '{ print $1 }')
+#		POSITION=$(mpc status | sed -n 2p | awk '{print $3}')
+		DURATION=$(mpc status | grep "%)" | awk '{ print $3 }' | awk -F/ '{ print $2 }')
+#        DURATION=$(mpc current -f %time%)
+		STATUS=$(mpc status | sed -n 2p | awk '{print $1}')
+        SHUFFLE=$(mpc status | tail -n 1 | awk '{print $6}')
+
+        if [ "$IDENTIFIER" = "unicode" ]; then
+            if [ "$STATUS" = "[playing]" ]; then
+                STATUS="▶"
+            else
+                STATUS="⏸"
+            fi
+
+            if [ "$SHUFFLE" = "on" ]; then
+                SHUFFLE=" 🔀"
+            else
+                SHUFFLE=""
+            fi
+        else
+            if [ "$STATUS" = "[playing]" ]; then
+                STATUS="PLA"
+            else
+                STATUS="PAU"
+            fi
+
+            if [ "$SHUFFLE" = "on" ]; then
+                SHUFFLE=" S"
+            else
+                SHUFFLE=""
+            fi
+        fi
+        
+        #printf "%s%s %s - %s %s/%s%s%s" "$SEP1" "$STATUS" "$ARTIST" "$TRACK" "$POSITION " " $DURATION" "$SHUFFLE" "$SEP2"
+        
+             if [ "$state" = "[playing]" ] ; then
+			echo "$ARTIST - $TRACK"
+		#	echo "$TRACK $POSITION/$DURATION"
+			fi 
+	if [ "$state" = "[paused]" ] ; then
+           	echo "paused"
+			fi
+	if [ -z "$state" ] ; then
+           echo "stopped"
+			fi
+
+    fi
+}
+
+dwm_mpc

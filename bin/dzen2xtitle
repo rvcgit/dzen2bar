@@ -1,0 +1,15 @@
+#! /usr/bin/env sh
+# xtitle for dzen2  using xdotool
+
+run() {
+title="$(xdotool getwindowfocus getwindowname)"
+MAX_LENGTH=51 ## edit this "51" to suit; dont forget to re-position Appmenubar in "dzenbar" file to shift towards right
+length=$(echo ${#title})
+if [[ "$length" -ge "$MAX_LENGTH" ]]; then
+		# trim the title length
+		title="$(echo $title|cut -c -$MAX_LENGTH)...";
+	else	title="$(echo $title)"
+fi &&
+echo $title
+}
+run
