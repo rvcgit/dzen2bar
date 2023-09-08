@@ -14,6 +14,9 @@ i=' '  i_fa_power_off=$i
 i=' ' i_fa_plug=$i
 i=' ' i_fa_folder=$i
 i=' ' i_fa_exit=$i
+i='  ' i_fa_picker=$i
+i=' ' i_fa_network=$i
+i=' ' i_fa_music=$i
 
 rofi_cmd() {	# 1 parameter: menu_width. The rest of parameters is passed to rofi
 	menu_width="$1"	# width in pixels
@@ -34,7 +37,7 @@ pX="$(($XP))" ## x offset to align
 	-location $loc -anchor $anc \
 	-xoffset $pX -yoffset $pY \
 	-theme-str 'window {width: 15%;}' \
-	-theme-str 'listview { lines: 9; dynamic: true; fixed-height: false; }'
+	-theme-str 'listview { lines: 10; dynamic: true; fixed-height: false; }'
 	
 }
 
@@ -59,13 +62,16 @@ rofi_menu() { # 3 parameters: menu_title menu_width menu_list
 	}
 }
 rofi_fav() {
-	eval $(rofi_menu " :" 100 \
+	eval $(rofi_menu " :" 120 \
 		"	$i_fa_ban cancel:true
 			$i_fa_firefox Web-Browser:firefox
 			$i_fa_term Terminal:sakura
 			$i_fa_gimp Gimp:gimp
-			$i_fa_editor Text-Editor:gedit
-			$i_fa_folder File-Manager:pcmanfm
+			$i_fa_picker Color-Picker:gcolor3
+			$i_fa_editor Text Editor:gedit
+			$i_fa_folder File Manager:pcmanfm
+			$i_fa_network Virt-Manager:virt-manager
+			$i_fa_music MPD Playlist:mpc-playlist-show
 			$i_fa_exit Exit Menu:sh $HOME/.bin/dzen2rofiexit.sh	")
 }
 
