@@ -1,5 +1,5 @@
 # dzen2 config with info piped from conkys and usage of rofi
-# currently configured for 1366x768 resolution;
+# bar location and length auto set w.r.t your screen [uses xrandr];
 # to be edited in respective scripts / binaries to suit location
 # Dependencies:
 1.Conky
