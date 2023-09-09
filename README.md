@@ -24,7 +24,7 @@ JUST SELECT THE 'y=..." LINE BY COMMENTING OUT THE OTHER FOR top/bottom BAR CHOI
 3. Move all contents from the conkys folder to $HOME/.conky/
 4. bar is configured for bottom bar; if you need top bar, open the dzenbar file; edit by commenting out the current y anduncomment the top bar option
 
-rofi + lemonbar is available as simplepanel thats structured modular by @kainonergon => https://github.com/kainonergon/simplepanel
+rofi + lemonbar is available as simplepanel thats structured modular by @kainonergon => https://github.com/kainonergon/simplepanel; honestly, this lemonbar inspired me to explore into dzen2 to pipe similar info and integrate rofi. full credit to @kainonergon ! hope someday thesimplepanel will becoe the default lemonpanelfor some windowmanager !
 i have been a great admirer cum user of this simplepanel and i felt i can learn from @kainonergon's scriptsto configure a dzenbar piping info with conky andusing rofi for popups
 
 finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
