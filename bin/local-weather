@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 # depends on openweather script if alternative is needed
+# when script runs at interval, data is sorted and stored in /tmp; just one script runsto get diff options
+# i call thisdata in /tmp to show in bar / conky
 # update wlan device OR eth device w.r.t your computer
 wifi="wlp6s0" # edit with your device
 interval=${1:-1800}
