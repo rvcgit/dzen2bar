@@ -1,23 +1,28 @@
 #!/usr/bin/env sh
 
 rofimenu_cmd() {
+menu_width="$1"
 X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 
-if [ $YP -le "30" ];then py=$(($YP+30));else
-	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
-fi
+if [ $YP -le "50" ]; then
+loc=1; else loc="7"; fi &&
+if [ $loc = "1" ]; then anc="1";
+else anc="7"; fi
 
-pX="$(($XP+10))" ## 2*dY added for neg x offset to align
+if [ $YP -le "50" ]; then
+pY=$(($pY+10)); else
+pY=$(($YP-$Y)); fi  # Y offset
 
-if [[ $pX -ge "900" ]];then pX="900";else pX="$pX";fi
-if [[ $pY -ge "400" ]];then pY="400";else pY="$pY";fi
-menu_width="100"
-	rofi -config ~/.config/rofi.old/config.rasi -show "drun" \
+if [ $(($X-$XP)) -le $(($menu_width +10)) ]; then
+	pX=$(($XP-$menu_width));else
+	pX=$(($XP+5));fi # X offset
+
+	rofi -show "drun" \
 		-modi "drun" \
-		-location 1 -anchor 1 \
+		-location $loc -anchor $anc \
 		-xoffset $pX -yoffset $pY \
 		-no-sidebar-mode \
  		-theme-str "#window { width: 33%; }" \
