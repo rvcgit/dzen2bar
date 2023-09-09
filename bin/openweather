@@ -1,4 +1,5 @@
 #!/bin/bash
+### Credit to all who have contributed to this script. i have just modified it
 ### Openweather script [can save anywhere in your home dir OR /usr/local/bin if you wish to have executable]
 ### USAGE: openweather OR openweather -i if you wish to have weather icons]
 ## save this script and change permissions [chmod a+x /path/to/script OR sudo chmod a+x /usr/local/bin/openweather]
@@ -6,7 +7,7 @@
 
 # I take this script from Anachron's i3blocks
 # I only slightly modify this script to add an option to show icon, useful for my tint2 executor
-# 'weather -i' = with icon, 'weather' = text only
+# 'openweather -i' = with icon, 'openweather' = text only
 # Cheers!
 # Addy
 # credit to contributors as listed above; i have just done mod to check connection before function openweather runs..
