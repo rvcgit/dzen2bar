@@ -15,6 +15,7 @@ and nerd fonts from here=> https://www.nerdfonts.com/font-downloads
 9.supportive executable and shell scripts
 10. dunst [optional if you like notifiers in regular intervals]
 11. xorg-transset [ for dzen bar transparency ]
+12. added mpd playlist window popup in the fav menu. for those who use mpd
 
 
 # download zip
@@ -32,6 +33,8 @@ optional fo transparency: presuming xorg-transset is installed; open terminal an
 
 COMMON ISSUES:
 IF ROFI WINDOW[ that follows pointer co-ordinates] may vary, feel free to juggle around the pX and pY part of respective config file
+
+i have deliberately not configured dzen2 as dock here; i use 3 different bars so i made trayer as dock so the bars can be acoomodated within that doc space and windows dont overlap ! just for info so those not using trayer may find the windows overlap.
 
 Depending on your distribution; inxi output may differ or display wrongly; simple edit 'dzensysinfo.sh' to suit your distribution
 Home / Root device nomes [sdXY; X is a/b/c etc; Y is 1,2,3 etc]
