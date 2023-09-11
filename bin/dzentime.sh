@@ -11,9 +11,9 @@ fi
 
 pX=$(($XP+10)) ## x offset to align
 
-echo "$(cal)" > /tmp/calendar
+echo "$(cal -m --color=auto)" > /tmp/calendar
 (
 echo "Calendar"
 echo "$(cat /tmp/calendar)"
-) | dzen2 -p -x $pX -y $pY -w "200" -l "7" -sa 'c' -ta 'c' -fn "pretzel-12:antialias=true"\
+) | dzen2 -p -x $pX -y $pY -w "240" -l "7" -sa 'c' -ta 'c' -fn "RobotoMono Nerd Font:pixelsize=13:Bold:antialias=true"\
     -title-name 'Calendar' -e 'onstart=uncollapse;button1=exit;button4=exit;button5=exit'
