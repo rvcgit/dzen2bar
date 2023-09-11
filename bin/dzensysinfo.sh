@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+wit#!/usr/bin/env sh
 ## sys info to dzen pipe clickable
 
 X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
@@ -14,8 +14,8 @@ pX=$(($XP+10)) ## x offset to align
 
 if [[ $pX -ge "400" ]];then pX="$(($X*60/100))";else pX="$pX";fi
 
-D=$(df -h /dev/sda7 | tail -n1 | sed 's/run//g' | sed 's/media//g') # ntfs part; D:
-C=$(df -h /dev/sda5 | tail -n1 | sed 's/run//g' | sed 's/media//g') # ntfs part; C:
+D=$(df -h /dev/sda7 | tail -n1 | sed 's/run//g' | sed 's/media//g') # ntfs part; D: edit to suit your device id sdXY
+C=$(df -h /dev/sda5 | tail -n1 | sed 's/run//g' | sed 's/media//g') # ntfs part; C: edit to suuit yur device id sdXY
 
 (
 echo " [ System Status ] "
