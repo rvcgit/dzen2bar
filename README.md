@@ -1,21 +1,21 @@
 # dzen2 config with info piped from conkys and used rofi for menu
-# bar location and length auto set w.r.t your screen [uses xrandr]
-# edit in respective scripts / binaries to suit location
+* bar location and length auto set w.r.t your screen [uses xrandr]
+* edit in respective scripts / binaries to suit location
 # Dependencies:
-1.Conky
-2.Rofi
-3.Curl
-4.xdotool,xrandr & wmctrl
-5.inxi
-6.trayer [if installed; for top/bottom right placement whichis auto to execute respective scripts]
-7. Font Awesome 6 Free; Nerd Fonts [ to display iconic fonts; RobotoMono Nerd Fonts;UbuntuMono Nerd Fonts; FuraCode Nerd Font, RobotoMono Nerd Fonts, Opendyslexic Nerd Fonts used.. FYI ] & a bitmap font i love so much from here : https://addy-dclxvi.github.io/post/bitmap-fonts/
+* Conky
+* Rofi
+* Curl
+* xdotool,xrandr & wmctrl
+* inxi
+* trayer [if installed; for top/bottom right placement whichis auto to execute respective scripts]
+* Font Awesome 6 Free; Nerd Fonts [ to display iconic fonts; RobotoMono Nerd Fonts;UbuntuMono Nerd Fonts; FuraCode Nerd Font, RobotoMono Nerd Fonts, Opendyslexic Nerd Fonts used.. FYI ] & a bitmap font i love so much from here : https://addy-dclxvi.github.io/post/bitmap-fonts/
 and nerd fonts from here=> https://www.nerdfonts.com/font-downloads
-8.Openweather script to pipe weather on bar [included in bin]
+* Openweather script to pipe weather on bar [included in bin]
 local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar file for your location
-9.supportive executable and shell scripts
-10. dunst [optional if you like notifiers in regular intervals]
-11. xorg-transset [ optional for dzen bar transparency ]
-12. added mpd playlist window popup in the fav menu. for those who use mpd
+* supportive executable and shell scripts
+* dunst [optional if you like notifiers in regular intervals]
+* xorg-transset [ optional for dzen bar transparency ]
+* added mpd playlist window popup in the fav menu. for those who use mpd
 # download zip
 * move contents of "bin" folder to $HOME/.bin folder [ dont forget to do chmod to make all scripts executable ]
 * PATH=$HOME/.bin:$PATH && export PATH [run this to set PATH with $HOME/.bin
@@ -27,10 +27,10 @@ local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar fi
 * ACTIVE WORKSPACE / WINDOWLIST popup will not show in non EWMH WM like dwm / xmonad; though clickable shift will be possible
 * for clickable workspace; i have used xdotoo key Super+{1/2/3/4/5}; edit if its different for you
 
-finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
+* finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
 optional fo transparency: presuming xorg-transset is installed; open terminal and type "transset 0.7 &" without quotes; the cursor changes to  "+" sign. just take it on the required bar to be transparent and click.... viola, you have transperency on dzen.
 
-COMMON ISSUES:
+* COMMON ISSUES:
 IF ROFI WINDOW[ that follows pointer co-ordinates] may vary, feel free to juggle around the pX and pY part of respective config file
 
 i have deliberately not configured dzen2 as dock here; i use 3 different bars so i made trayer as dock so the bars can be acoomodated within that doc space and windows dont overlap ! just for info so those not using trayer may find the windows overlap.
