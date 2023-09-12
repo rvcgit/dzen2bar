@@ -8,12 +8,11 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 if [ $YP -le "30" ];then pY=$(($YP+15));else
 	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
 fi
-
 pX=$(($XP+10)) ## x offset to align
 
-echo "$(cal -m --color=auto)" > /tmp/calendar
 (
 echo "Calendar"
-echo "$(cat /tmp/calendar)"
-) | dzen2 -p -x $pX -y $pY -w "240" -l "7" -sa 'c' -ta 'c' -fn "RobotoMono Nerd Font:pixelsize=13:Bold:antialias=true"\
+echo "$(cal -m | grep --color -EC6 "\b$(date +%e | sed 's/ //g')")"
+echo "It's $(date '+%a %e %b')"
+) | dzen2 -p -x $pX -y $pY -w "240" -l "9" -sa 'c' -ta 'c' -fn "RobotoMono Nerd Font:pizelsize=13:Bold:antialias=true"\
     -title-name 'Calendar' -e 'onstart=uncollapse;button1=exit;button4=exit;button5=exit'
