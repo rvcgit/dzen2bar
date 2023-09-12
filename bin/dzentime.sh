@@ -14,5 +14,5 @@ pX=$(($XP+10)) ## x offset to align
 echo "Calendar"
 echo "$(cal -m | grep --color -EC6 "\b$(date +%e | sed 's/ //g')")"
 echo "It's $(date '+%a %e %b')"
-) | dzen2 -p -x $pX -y $pY -w "240" -l "9" -sa 'c' -ta 'c' -fn "RobotoMono Nerd Font:pizelsize=13:Bold:antialias=true"\
+) | dzen2 -p -x $pX -y $pY -w "240" -l "9" -sa 'c' -ta 'c' -fn "RobotoMono Nerd Font:pixelsize=13:Bold:antialias=true"\
     -title-name 'Calendar' -e 'onstart=uncollapse;button1=exit;button4=exit;button5=exit'
