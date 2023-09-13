@@ -18,12 +18,12 @@ X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolut
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
-if [[ "$YP" -lt "270" ]];then loc="1";else 
+if [ "$YP" -lt "270" ];then loc="1";else 
 	loc="7";fi &&
-if [[ $loc == "1" ]];then anc="1";elif
-	[[ $loc == "7" ]]; then anc="7";fi &&
+if [ $loc = "1" ];then anc="1";elif
+	[ $loc = "7" ]; then anc="7";fi &&
 
-if [[ $loc == "1" ]]; then pY=$(($YP-30));else
+if [ $loc = "1" ]; then pY=$(($YP-30));else
 		pY=$(($YP-$Y));fi
 
 pX="$(($XP))" ## x offset to align
