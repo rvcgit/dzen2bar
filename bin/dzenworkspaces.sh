@@ -57,30 +57,30 @@ elif [ $run != "XMonad" ] || [ $run != "dwm" ];then
 			*)	;;
 		esac
 	
-	if [ $ws2 == $ws1 ]; then		## populating configured workspaces upto 5 workspaces in the bar
+	if [ $ws2 = $ws1 ]; then		## populating configured workspaces upto 5 workspaces in the bar
 		echo "$ws1" > /tmp/WS1
-		echo "" > /tmp/WS2
-		echo "" > /tmp/WS3
-		echo "" > /tmp/WS4
-		echo "" > /tmp/WS5;
-	elif [ $ws3 == $ws2 ];then
+		echo "ii" > /tmp/WS2
+		echo "iii" > /tmp/WS3
+		echo "iv" > /tmp/WS4
+		echo "v" > /tmp/WS5;
+	elif [ $ws3 = $ws2 ];then
 		echo "$ws1" > /tmp/WS1
 		echo "$ws2" > /tmp/WS2
-		echo "" > /tmp/WS3
-		echo "" > /tmp/WS4
-		echo "" > /tmp/WS5;
-	elif [ $ws4 == $ws3 ]; then
+		echo "iii" > /tmp/WS3
+		echo "iv" > /tmp/WS4
+		echo "v" > /tmp/WS5;
+	elif [ $ws4 = $ws3 ]; then
 		echo "$ws1" > /tmp/WS1
 		echo "$ws2" > /tmp/WS2
 		echo "$ws3" > /tmp/WS3
-		echo "" > /tmp/WS4
-		echo "" > /tmp/WS5;
-	elif [ $ws5 == $ws4 ]; then
+		echo "iv" > /tmp/WS4
+		echo "v" > /tmp/WS5;
+	elif [ $ws5 = $ws4 ]; then
 		echo "$ws1" > /tmp/WS1
 		echo "$ws2" > /tmp/WS2
 		echo "$ws3" > /tmp/WS3
 		echo "$ws4" > /tmp/WS4
-		echo "" > /tmp/WS5;
+		echo "v" > /tmp/WS5;
 	elif [ $ws5 != $ws4 ];then
 		echo "$ws1" > /tmp/WS1
 		echo "$ws2" > /tmp/WS2
@@ -90,5 +90,3 @@ elif [ $run != "XMonad" ] || [ $run != "dwm" ];then
 fi
 }
 wsn
-
-
