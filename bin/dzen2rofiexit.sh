@@ -21,12 +21,17 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 if [ "$YP" -lt "270" ];then loc="1";else 
 	loc="7";fi &&
 if [ $loc = "1" ];then anc="1";elif
-	[ $loc = "7" ]; then anc="7";fi &&
+	[ $loc = "7" ]; then anc="7"
+ fi &&
 
 if [ $loc = "1" ]; then pY=$(($YP-30));else
-		pY=$(($YP-$Y));fi
+		pY=$(($YP-$Y))
+  fi &&
 
-pX="$(($XP))" ## x offset to align
+if [ $(($X-$XP+10)) -lt $menu_width ];then
+	pX=$(($XP-$menu_width));else
+ 	pX=$(($XP+5));
+  fi &&
 
 	rofi  $@ \
 	-location $loc -anchor $anc \
