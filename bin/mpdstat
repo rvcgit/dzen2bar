@@ -7,7 +7,7 @@
 # Dependencies: mpc
 ## Edited the TRACK part to restrict track title chars
 
-MAX_LENGTH=27
+MAX_LENGTH=27   # edit to suit your choice
 
 dwm_mpc () {
     if ps -C mpd > /dev/null; then
