@@ -17,9 +17,9 @@ wr=$(($X*321/1000)) # -w value w.r.t  X resolution for righ bar
 ## right for systray
 
 wm="$(wmctrl -m | grep Name: | awk '{print $NF}')"
-if [[ "$wm" != "XMonad" || "$wm" != "dwm" ]];then # non EWMH compliant
-[[ -z $(pgrep -xU $UID trayer) ]];fi &&
-	if [[ "$y" -lt "30" ]];then trayer-tr;else # top-right
+if [ "$wm" != "XMonad" || "$wm" != "dwm" ];then # non EWMH compliant
+[ -z $(pgrep -xU $UID trayer) ];fi &&
+	if [ "$y" -lt "30" ];then trayer-tr;else # top-right
 		trayer-br ; fi & # bottom-right
 
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
@@ -34,5 +34,5 @@ conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=un
 ## deps for workspace and forecast; TYOE YOUR CITY NAME
 location="" ## TYPE YOUR CITY NAME WITHIN QUOTES
 sleep 5 && sh ~/.bin/dzenworkspaces.sh &
-sleep 15 && if [[ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" == " " ]];then echo " " > /tmp/AWS;fi &
+sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
