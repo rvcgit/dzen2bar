@@ -8,14 +8,17 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 if [ "$YP" -lt "50" ];then loc="1";else  # 50% of Y resolution 
 	loc="7";fi &&
 if [ $YP -le "50" ];then anc="1";else
-	anc="7";fi &&
+	anc="7"
+ fi &&
 
 if [ $anc = "1" ]; then pY=$(($YP+10));elif
-	[ $anc = "7" ]; then pY=$($YP-20);fi
+	[ $anc = "7" ]; then pY=$($YP-20)
+ fi &&
 
 if [ $(($X-$XP+10)) -lt "$menu_width"  ];then 
 	pX="$(($XP-$menu_width))";else 
-	pX="$(($XP+5))";fi ## x offset to align
+	pX="$(($XP+5))"
+ fi ## x offset to align
 
 	rofi -show "drun" \
 		-modi "drun" \
