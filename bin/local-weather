@@ -34,7 +34,7 @@ update="$(cat /tmp/localweather | rev | awk '{print $4}' | rev | sed 's/,//g' > 
 
 $data && $validate && $update
 
-if [[ "$(cat /tmp/localweather | awk '{print $NF}'| cut -c 5-7)" != "hPa" ]];then
+if [ "$(cat /tmp/localweather | awk '{print $NF}'| cut -c 5-7)" != "hPa" ];then
 #alternative="(openweather -i)"	whenever wttr.in fails to return data...
 openweather -i > /tmp/localweather &&
 	sleep 10 &&
