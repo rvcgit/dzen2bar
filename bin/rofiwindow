@@ -5,14 +5,18 @@ X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolut
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
+menu_width="$1"
 
-pY="$(($YP))" ## result will be with "-" prefix so menu is above dzenbar
-pX="$(($XP))" ## 2*dY added for neg x offset to align
+if [ $(($X-$XP+10)) -lt $menu_width ];then 
+	dX=$(($XP-$menu_width));else 
+	dX=$((XP+5))
+fi
+if [ $YP -ge "400" ];then 
+	dY="400";else 
+	dY="$pY"
+fi
 
-if [[ $pX -ge "900" ]];then dX="900";else dX="$pX";fi
-if [[ $pY -ge "400" ]];then dY="400";else dY="$pY";fi
-menu_width="100"
-	rofi -config ~/.config/rofi/config.rasi -show "window" \
+	rofi  -show "window" \
 		-modi "drun" \
 		-location 1 -anchor 1 \
 		-xoffset $dX -yoffset $dY \
