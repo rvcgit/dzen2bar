@@ -16,7 +16,7 @@ local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar fi
 * dunst [optional if you like notifiers in regular intervals]
 * xorg-transset [ optional for dzen bar transparency ]
 * added mpd playlist window popup in the fav menu. for those who use mpd
-# download zip
+# clone repo / download & extract zip
 * move contents of "bin" folder to $HOME/.bin folder [ dont forget to do chmod to make all scripts executable ]
 * PATH=$HOME/.bin:$PATH && export PATH [run this to set PATH with $HOME/.bin
 * move contents of the "conkys" folder to $HOME/.conky/
