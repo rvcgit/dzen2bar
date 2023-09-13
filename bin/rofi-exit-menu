@@ -9,22 +9,27 @@ Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolut
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 menu_width="$1"
-if [[ "$YP" -lt "$(($Y*35/100))" ]];then loc="1";else  # 50% of Y resolution 
-	loc="7";fi &&
-		if [[ $YP -le "$(($Y*35/100))" ]];then anc="1";else
-	anc="7";fi &&
+if [ "$YP" -lt "$(($Y*35/100))" ];then 
+	loc="1";else  # 35% of Y resolution 
+	loc="7"
+fi &&
+if [ $YP -le "$(($Y*35/100))" ];then 
+	anc="1";else
+	anc="7"
+fi &&
 
-if [[ $anc == "1" ]]; then pY=$(($YP+5));elif
-	[[ $anc == "7" ]];then pY=$(($YP-$Y));fi
+if [ $anc = "1" ]; then
+	pY=$(($YP+5));elif
+		[ $anc = "7" ];then
+	pY=$(($YP-$Y))
+fi
 
-if [[ $(($X-$XP+5)) -gt "$menu_width"  ]];then 
+if [ $(($X-$XP+5)) -gt "$menu_width"  ];then 
 	pX="$(($XP+5))";else 
-	pX="$(($XP-18*$menu_width/10))";fi ## x offset to align
+	pX="$(($XP-18*$menu_width/10))"
+fi ## x offset to align
 	
-#	notify-send "XP = $XP ; YP = $YP \
-#	location : $loc; anchor : $anc "
-
-	rofi -config ~/.config/rofi.old/config.rasi $@ \
+rofi -config ~/.config/rofi.old/config.rasi $@ \
 		-location $loc -anchor $anc \
 		-xoffset $pX -yoffset $pY \
 		-no-sidebar-mode \
