@@ -15,12 +15,12 @@ pX=$(($XP+10)) ## x offset to align
 if [ $pX -ge "400" ];then pX="$(($X*60/100))";else pX="$pX";fi
 
 basenameD="$(basename $(df -h /dev/sda7 | tail -n1 | awk '{print $NF}'))" # ntfs part; D:
-basenameC="basename $(df -h /dev/sda5 | tail -n1 | awk '{print $NF}')" # ntfs part; C:
+basenameC="$(basename $(df -h /dev/sda5 | tail -n1 | awk '{print $NF}'))" # ntfs part; C:
 
 (
 echo " [ System Status ] "
 echo " "
-echo "Memory  : $(inxi -m | grep System | rev | awk '{print $5$6" / "$2$3}' | rev )   " # edit if outputis erratic for inxi
+echo "Memory  : $(inxi -F | grep Memory | rev | awk '{print $5$6" / "$2$3}' | rev )   " # edit if outputis erratic for inxi
 echo "cpuTemp  : $(inxi -F | grep Temperatures | awk '{print $4}')˚C ; Fan   : $(inxi -F | grep Fan | awk '{print$NF}')rpm   "
 echo "Battery condition ⚡ ' : $(inxi -B | grep condition | rev | awk '{print $1" "$2 " "$3}' | rev | sed 's/\ //g' )  "
 echo "Root Disk  : $(df -h /dev/sda10 | tail -n1 | awk '{$NF=""}1')  ROOT  "
