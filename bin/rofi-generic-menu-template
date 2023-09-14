@@ -1,0 +1,136 @@
+#!/usr/bin/env sh
+# generic menu with rofi
+# font icons that may be helpful reference
+#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#;;;;;;                                                       		;;;;;;;
+#;;;;;;      ♟ ♞ ♝ ♜ ♛ ♚                   		;;;;;;;
+#;;;;;;        ─ │                      ;;;;;;;
+#;;;;;;                        	;;;;;;;
+#;;;;;;                        	;;;;;;;
+#;;;;;;                      ↵      	;;;;;;;
+#;;;;;;         ⚡ ✓ ✘  🌞           	;;;;;;;
+#;;;;;;             ➤ ─              	;;;;;;;
+#;;;;;;       🔥 👌 ( ͡° ͜ʖ ͡°)                 	;;;;;;;
+#;;;;;;              ○ ●              	;;;;;;;
+#;;;;;;                            	;;;;;;;
+#;;;;;;                         ⛅️	;;;;;;;
+#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#;;;;;;;;         Fonts you find useful                    ;;;;;;;;
+#;;;;;;;;      --- ttf-font-awesome                        ;;;;;;;;
+#;;;;;;;;      --- ttf-material-icons                      ;;;;;;;;
+#;;;;;;;;      --- ttf-fira-code                           ;;;;;;;;
+#;;;;;;;;      --- nerd-fonts-complete                     ;;;;;;;;
+#;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+# iconic-font nomenclature
+# Nerd Font icon names. See https://github.com/ryanoasis/nerd-fonts/tree/master/bin/scripts/lib
+
+i='' i_fa_bars=$i
+i='' i_fa_window_maximize=$i
+i='' i_fa_window_minimize=$i
+i='' i_fa_window_restore=$i
+i='' i_fa_close=$i
+i='' i_fa_keyboard_o=$i
+i='' i_fa_wifi=$i
+i='' i_fa_battery_4=$i
+i='' i_fa_battery_3=$i
+i='' i_fa_battery_2=$i
+i='' i_fa_battery_1=$i
+i='' i_fa_battery_0=$i
+i=' ' i_fa_plug=$i
+i='' i_fa_sun_o=$i
+i='' i_fa_clock_o=$i
+i='' i_fa_calendar_o=$i
+i='' i_fa_calendar=$i
+i='' i_fa_volume_off=$i
+i='' i_fa_volume_down=$i
+i='' i_fa_volume_up=$i
+i='' i_oct_mute=$i
+i='' i_fae_sun_cloud=$i
+#i='⛅️' i_fae_sun_cloud=$i
+i='' i_fa_temp=$i
+i='' i_fa_mem=$i
+i=' ' i_fa_ban=$i
+i=' ' i_fa_lock=$i
+i='' i_fa_circle_o_notch=$i
+i='' i_fa_circle_o=$i
+i='' i_fa_moon_o=$i
+i=' ' i_fa_sign_out=$i
+i=' ' i_fa_refresh=$i
+i=' '  i_fa_power_off=$i
+i='' i_fa_music=$i
+i='' i_fa_backward=$i
+i='' i_fa_play=$i
+i='' i_fa_pause=$i
+i='' i_fa_stop=$i
+i='' i_fa_forward=$i
+i='1:♚' i_fa_ws1=$i
+i='2:♛' i_fa_ws2=$i
+i='3:♜' i_fa_ws3=$i
+i='4:♞' i_fa_ws4=$i
+i=' ' i_fa_start=$i
+i='' i_fa_manjaro=$i # font\-logos '<i class="fl-manjaro"></i>' 0xf312 keycode
+##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;##;;
+
+rofi_cmd() {	# 1 parameter: menu_width. The rest of parameters is passed to rofi
+menu_width="$1"	# width in pixels
+
+X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution ; X
+Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution ; Y
+XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" # mouse X-Coordinate
+YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" # mouse Y-coordinate
+
+if [ "$YP" -lt "$(($Y*50/100))" ];then loc="1";else  # 50% of Y resolution 
+	loc="7";fi &&
+if [ $YP -le "50" ];then anc="1";else
+	anc="7"
+fi &&
+
+if [ $anc = "1" ]; then pY=$(($YP+5));elif
+	[ $anc = "7" ];then pY=$(($YP-$Y))
+fi &&
+
+if [ $(($XP+5)) -gt "$menu_width"  ];then 
+	pX="$(($XP-17*$menu_width/10))";else 
+	pX="$(($XP+5))"
+fi ## x offset to align
+	# edit your rofi-theme config path if different ; edit 'lines' value if you need a long list
+	rofi -config ~/.config/rofi/config.rasi $@ \
+		-location $loc -anchor $anc \
+		-xoffset $pX -yoffset $pY \
+		-no-sidebar-mode \
+ 		-theme-str 'window { width: 22ch; }' \
+		-theme-str 'listview { lines: 12; dynamic: true; fixed-height: false; }'
+}
+rofi_menu() { # 3 parameters: menu_title menu_width menu_list
+	menu_title="$1"
+	menu_width="$2"
+	menu_list="$3"
+
+	IFS='
+	'
+	for line in $menu_list ; do
+		echo "${line%%:*}"
+	done \
+	| rofi_cmd "$menu_width" -dmenu -p "$menu_title" \
+	| {	read choice
+		for line in $menu_list ; do
+			if [ "$choice" = "${line%%:*}" ] ; then
+				echo "${line#*:}"
+				break
+			fi
+		done
+	}
+}
+## below is example ; edit to suit your menu-info
+rofi_gmenu() {
+### format style = icon_name ACTION_NAME:'executable_name' demo with exit options
+	eval $(rofi_menu ":" 100 \
+		"$i_fa_ban cancel:true  
+		$i_fa_start Terminal:TERM_CMD # found in the bin folder
+		$i_fa_circle_o Files:FILE-MANAGER_CMD
+		$i_fa_moon_o Web Browser:WEB-BROWSER_CMD
+		$i_fa_refresh Text Editor:TEXT-EDITOR_CMD
+		$i_fa_sign_out logout:xdotool key --clearmodifiers super+shift+q
+		$i_fa_plug poweroff:systemctl poweroff")
+}
+rofi_gmenu
