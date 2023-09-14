@@ -1,4 +1,4 @@
-# dzen2 config with info piped from conkys and used rofi for menu
+# dzen2 config with conkys for info and rofi for menu
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 # Dependencies:
@@ -17,7 +17,7 @@ local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar fi
 * xorg-transset [ optional for dzen bar transparency ]
 * added mpd playlist window popup in the fav menu. for those who use mpd
 # clone repo / download & extract zip
-* move contents of "bin" folder to $HOME/.bin folder [ dont forget to do chmod to make all scripts executable ]
+* move contents of "bin" folder to $HOME/.bin folder; make all files executable; give sym link to dzenbar in your PATH [$HOME/.local/bin OR $HOME/bin OR /usr/local/bin]
 * PATH=$HOME/.bin:$PATH && export PATH [run this to set PATH with $HOME/.bin
 * move contents of the "conkys" folder to $HOME/.conky/
 * check and edit openweather & local-weather scripts for location settings
