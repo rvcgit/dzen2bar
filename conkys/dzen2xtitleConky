@@ -8,4 +8,4 @@ conky.config = {
     use_spacer = none
 }
 
-conky.text = [[ ^bg(\#091020)^ca(1,sh ~/.bin/rofiwindow)^fg(\#00BCD4)  ^ca() ^fg(\#40e0d0)${exec dzen2xtitle} ]]
+conky.text = [[ ^bg(\#091020)^ca(1,sh ~/.bin/rofiwindow)^fg(\#00BCD4)  ^ca() ^fg(\#40e0d0)${exec ~/.bin/dzen2xtitle} ]]
