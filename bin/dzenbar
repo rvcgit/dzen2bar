@@ -25,10 +25,10 @@ if [ "$wm" != "XMonad" || "$wm" != "dwm" ];then # non EWMH compliant
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
 conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'OpenDyslexicM Nerd Font:pixelsize=9:bold:antialias=true' -w $wl -expand right &
 
-conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $x2 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $x2 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## center [appmenu, time & calendar,weather forcast, sysinfo, favs ]
-conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta c -x $x3 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta c -x $x3 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
 
 ## deps for workspace and forecast; TYOE YOUR CITY NAME
