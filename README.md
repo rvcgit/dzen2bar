@@ -40,7 +40,7 @@ i have deliberately not configured dzen2 as dock here; i use 3 different bars so
 Depending on your distribution; inxi output may differ or display wrongly; simple edit 'dzensysinfo.sh' to suit your distribution
 Home / Root device nomes [sdXY; X is a/b/c etc; Y is 1,2,3 etc]
 
-rofi + lemonbar is available as simplepanel thats structured modular by @kainonergon => [simplepanel(https://github.com/kainonergon/simplepanel); honestly, this lemonbar inspired me to explore into dzen2 to pipe similar info and integrate rofi. full credit to @kainonergon ! hope someday thesimplepanel will becoe the default lemonpanelfor some windowmanager !
+rofi + lemonbar is available as simplepanel thats structured modular by @kainonergon's [simplepanel](https://github.com/kainonergon/simplepanel); honestly, this lemonbar inspired me to explore into dzen2 to pipe similar info and integrate rofi. full credit to @kainonergon ! hope someday thesimplepanel will becoe the default lemonpanelfor some windowmanager !
 i have been a great admirer cum user of this simplepanel and i felt i can learn from @kainonergon's scriptsto configure a dzenbar piping info with conky andusing rofi for popups
 
 rofi theme used is my configurtion of colors. rofi menus will use the default rofi theme of your installation.
@@ -48,7 +48,7 @@ rofi theme used is my configurtion of colors. rofi menus will use the default ro
 Font Color / Foreground Color can be edited to suit your choice in the respective Conky Config
 
 ICONICFONT LOGOS FOR SOME DISTRIBUTIONS
-current is for Manjaro... Choose your option/choice from here => https://github.com/lukas-w/font-logos OR any of the iconic font
+current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
 
 i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
  
