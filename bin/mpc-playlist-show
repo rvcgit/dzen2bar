@@ -8,21 +8,19 @@ X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolut
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution ; Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
-if [ "$SP_BOTTOM" ] ; then
-	loc="7"
-	anc="7";else
-	loc="1"
-	anc="1";fi &&
+if [ "$YP" -lt "50" ];then loc="1";else 
+	loc="7";fi &&
+if [ $loc = "1" ];then anc="1";elif
+	[ $loc = "7" ]; then anc="7"
+fi &&
 
-if [ $anc = "1" ]; then 
-	pY=$(($YP+5));elif
-		[ $anc = "7" ]; then 
-	pY=$(YP-30)
-fi
+if [ $loc = "1" ]; then pY=$(($YP+10));else
+		pY=$(($YP-$Y))
+fi &&
 
-if [ $(($X-$XP-10)) -lt $(($menu_width+10)) ];then
+if [ $(($X-$XP+10)) -lt $menu_width ];then
 	pX=$(($XP-$menu_width));else
-	pX=$(($XP-20))
+	pX=$((XP+5))
 fi
 
 	rofi  $@ \
