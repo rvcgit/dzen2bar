@@ -25,35 +25,35 @@ elif [ $run != "XMonad" ] || [ $run != "dwm" ];then
 	done
 	
 		case "$cws" in
-			0)	echo -e "$wsn" > /tmp/AWS ;;
+			0)	echo "$wsn" > /tmp/AWS ;;
 			*) ;;
 		esac
 		case "$cws" in
-			1)	echo -e "$wsn" > /tmp/AWS ;;
+			1)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			2)	echo -e "$wsn" > /tmp/AWS ;;
+			2)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			3)	echo -e "$wsn" > /tmp/AWS ;;
+			3)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			4)	echo -e "$wsn" > /tmp/AWS ;;
+			4)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			5)	echo -e "$wsn" > /tmp/AWS ;;
+			5)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			6)	echo -e "$wsn" > /tmp/AWS ;;
+			6)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 		case "$cws" in
-			7)	echo -e "$wsn" > /tmp/AWS ;;
+			7)	echo "$wsn" > /tmp/AWS ;;
 			*)	;;
 		esac
 	
