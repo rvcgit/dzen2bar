@@ -5,11 +5,12 @@ Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolut
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 
-if [ $YP -le "30" ];then pY=$(($YP+15));else
+if [ $YP -le "30" ];then 
+	pY=$(($YP+15));else
 	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
 fi
 pX=$(($XP+10)) ## x offset to align
-
+# some distro doesnt permit the -m flag in cal [i like monday to be day 1; in such cases use just cal [without -m]
 (
 echo "Calendar"
 echo "$(cal -m | grep --color -EC6 "\b$(date +%e | sed 's/ //g')")" # ifcal -m returns blank, use just cal OR ncal -C
