@@ -11,14 +11,14 @@ if [ $YP -le "50" ];then anc="1";else
 	anc="7"
  fi &&
 
-if [ $anc = "1" ]; then pY=$(($YP+10));elif
-	[ $anc = "7" ]; then pY=$($YP-20)
- fi &&
+if [ $loc = "1" ]; then pY=$(($YP+10));else
+		pY=$(($YP-$Y))
+fi &&
 
-if [ $(($X-$XP+10)) -lt "$menu_width"  ];then 
-	pX="$(($XP-$menu_width))";else 
-	pX="$(($XP+5))"
- fi ## x offset to align
+if [ $(($X-$XP+10)) -lt $menu_width ];then
+	pX=$(($XP-$menu_width));else
+	pX=$((XP+5))
+fi
 
 	rofi -show "drun" \
 		-modi "drun" \
