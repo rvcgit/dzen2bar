@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# TOPRIGHT ALIGN
+# BOTTOMRIGHT ALIGN
 sleep 5 &
 trayer --edge bottom --align right --transparent false\
 --alpha 0 --widthtype request  --heighttype request --height 18\
