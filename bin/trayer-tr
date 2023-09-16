@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# TOPRIGHT ALIGN
+# TOPRIGHT ALIGN [undocked to run with dzen2panel]
 sleep 5 &
 trayer --edge top --align right --transparent false\
 --alpha 0 --widthtype request  --heighttype request --height 18\
