@@ -2,13 +2,16 @@
 * [PREVIEW](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
+* UPDATED with 2 options :
+* [1] dzenbar executes 3 seperate dzen2 instance with trayer in dock mode
+* [2] dzen2panel executes a single dzen2 instance which is docked [trayer is un-docked]
 # Dependencies:
 * dzen2 [ if your distro doent provide; find it [HERE](https://github.com/minos-org/dzen2.git) ]
 * Conky
 * Rofi
 * Curl
 * xdotool,xrandr & wmctrl
-* inxi
+* inxi [refer the dzensysinfo details and edit with your required syntax for inxi as your distro provides]
 * trayer [optional if needed; for top/bottom right placement whichis auto to execute respective scripts]
 * Font Awesome 6 Free; Nerd Fonts [ to display iconic fonts; RobotoMono Nerd Fonts;UbuntuMono Nerd Fonts; FuraCode Nerd Font, RobotoMono Nerd Fonts, Opendyslexic Nerd Fonts used.. FYI ] & a bitmap font i love so much from [HERE](https://addy-dclxvi.github.io/post/bitmap-fonts/)
 and nerd fonts from [HERE](https://www.nerdfonts.com/font-downloads)
@@ -54,6 +57,6 @@ i dont think this will work in wayland. i have not tested it nor the config is c
  
 Hope you like this setup. Feel free to upgrade and fork/update...
 
-execute this bar with 'dzenbar'
+execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 
 Cheers !
