@@ -52,12 +52,11 @@ rofi theme used is my configurtion of colors. rofi menus will use the default ro
 Font Color / Foreground Color can be edited to suit your choice in the respective Conky Config
 
 ICONICFONT LOGOS FOR SOME DISTRIBUTIONS
-current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
+* current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
+* i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
+* Hope you like this setup. Feel free to upgrade and fork/update...
+* execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
+* P.S: Exit Option seperated from fav and provided on panel. USE BUTTON "3";middle click to get exit option menu
 
-i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
- 
-Hope you like this setup. Feel free to upgrade and fork/update...
-
-execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 
 Cheers !
