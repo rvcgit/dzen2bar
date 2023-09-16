@@ -18,25 +18,25 @@ X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolut
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
-if [ "$YP" -lt "270" ];then loc="1";else 
+if [ "$YP" -lt "50" ];then loc="1";else 
 	loc="7";fi &&
 if [ $loc = "1" ];then anc="1";elif
 	[ $loc = "7" ]; then anc="7"
  fi &&
 
-if [ $loc = "1" ]; then pY=$(($YP-30));else
+if [ $loc = "1" ]; then pY=$(($YP+10));else
 		pY=$(($YP-$Y))
   fi &&
 
-if [ $(($X-$XP+10)) -lt $menu_width ];then
+if [ $(($X-$XP-20)) -lt $menu_width ];then
 	pX=$(($XP-$menu_width));else
- 	pX=$(($XP+5));
+ 	pX=$(($XP-20));
   fi &&
 
 	rofi  $@ \
 	-location $loc -anchor $anc \
 	-xoffset $pX -yoffset $pY \
-	-theme-str 'window {width: 15%;}' \
+	-theme-str 'window {width: 11%;}' \
 	-theme-str 'listview { lines: 9; dynamic: true; fixed-height: false; }'
 }
 
