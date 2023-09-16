@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# xtitle for dzen2  using rofi commands
+# xtitle for dzen2  using rofi commands [not used in the current dzen FYI
 title_cmd() {
 	rofi -modi windowcd -show windowcd -display-windowcd "Window:" -no-sidebar-mode
 }
