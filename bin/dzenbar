@@ -4,31 +4,31 @@ Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your verti
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordinate X
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
-x1=$(($X*5/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-x2=$(($X*234/1000)) # title bar X position [edit the value "21%" to suit;current is 21% of x resolution ]
-x3=$(($X*503/1000)) # Appmenu bar X position [ edit value "47.5%" to suit; current is 45% of x resolution ]
+x1=$(($X*3/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
+x2=$(($X*187/1000)) # title bar X position [edit the value "21%" to suit;current is 21% of x resolution ]
+x3=$(($X*562/1000)) # Appmenu bar X position [ edit value "47.5%" to suit; current is 45% of x resolution ]
 wl=$(($X*212/1000)) # -w value w.r.t X resolution for left bar
-wc=$(($X*266/1000)) # -w value w.r.t X resolution for center bar
-wr=$(($X*321/1000)) # -w value w.r.t  X resolution for righ bar
+wc=$(($X*375/1000)) # -w value w.r.t X resolution for center bar
+wr=$(($X*366/1000)) # -w value w.r.t  X resolution for righ bar
 
-# y=$(($Y*990/1000)) # y offset from y resolution; current is 99.5% of Y resolution; 	[ BOTTOM BAR ]
- y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; 	[ TOP BAR ] ; comment above line and uncomment this line to use TOP BAR
+ y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution; 	[ BOTTOM BAR ]
+# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; 	[ TOP BAR ] ; comment above line and uncomment this line to use TOP BAR
 
 ## right for systray
 
 wm="$(wmctrl -m | grep Name: | awk '{print $NF}')"
-if [ "$wm" != "XMonad" || "$wm" != "dwm" ];then # non EWMH compliant
+if [ "$wm" != "XMonad" ] || [ "$wm" != "dwm" ];then # non EWMH compliant
 [ -z $(pgrep -xU $UID trayer) ];fi &&
-	if [ "$y" -lt "30" ];then trayer-tr;else # top-right
-		trayer-br ; fi & # bottom-right
+	if [ "$y" -lt "30" ];then trayer-dtr;else # top-right
+		trayer-dbr ; fi & # bottom-right
 
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
 conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'OpenDyslexicM Nerd Font:pixelsize=9:bold:antialias=true' -w $wl -expand right &
 
-conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $x2 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $x2 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## center [appmenu, time & calendar,weather forcast, sysinfo, favs ]
-conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta c -x $x3 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta c -x $x3 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 
 ## deps for workspace and forecast; TYOE YOUR CITY NAME
