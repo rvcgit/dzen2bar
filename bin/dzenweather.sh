@@ -5,7 +5,8 @@ Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolut
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 
-if [ $YP -le "30" ];then pY=$(($YP+15));else
+if [ $YP -le "30" ];then 
+	pY=$(($YP+15));else
 	pY=$(($YP-30)) ## result will be with "-" prefix so menu is above dzenbar
 fi
 
