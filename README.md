@@ -1,5 +1,6 @@
 # customised bar using den2 with conky & rofi
-* [PREVIEW](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
+* [PREVIEW OF POPUPS](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
+* [PREVIEW OF UPDATED PANELS](https://i.postimg.cc/WzGRRsz8/dzenpanels.jpg)
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 * UPDATED with 2 options :
