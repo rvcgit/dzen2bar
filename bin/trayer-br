@@ -1,3 +1,7 @@
 #!/usr/bin/env sh
-# trayer for BOTTOM_RIGHT
-trayer --edge bottom --transparent true --alpha 255 --align right --widthtype request  --heighttype request --height 18 --iconspacing 6 --SetDockType true --SetPartialStrut false  --tint 0x091020 --padding 1 --margin 2 --expand true
+# TOPRIGHT ALIGN
+sleep 5 &
+trayer --edge bottom --align right --transparent false\
+--alpha 0 --widthtype request  --heighttype request --height 18\
+--iconspacing 4 --SetDockType false --SetPartialStrut false\
+--tint 0x1a1e22 --padding 1 --margin 2 --expand true
