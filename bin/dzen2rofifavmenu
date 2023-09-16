@@ -76,8 +76,7 @@ rofi_fav() {
 			$i_fa_editor Text Editor:gedit
 			$i_fa_folder File Manager:pcmanfm
 			$i_fa_network Virt-Manager:virt-manager
-			$i_fa_music MPD Playlist:mpc-playlist-show
-			$i_fa_exit Exit Menu:sh $HOME/.bin/dzen2rofiexit.sh	")
+			$i_fa_music MPD Playlist:mpc-playlist-show	")
 }
 
 rofi_fav
