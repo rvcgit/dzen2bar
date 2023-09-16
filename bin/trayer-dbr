@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# BOTTOMRIGHT ALIGN # dock mode to run with dzenbar
+trayer --edge bottom --align right --transparent false --alpha 0\
+--widthtype request  --heighttype request --height 19 --iconspacing 4\
+--SetDockType true --SetPartialStrut false\
+--tint 0x111827 --padding 1 --margin 2 --expand true
