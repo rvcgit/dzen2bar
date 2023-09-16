@@ -3,7 +3,7 @@
 
 wsn() {
 run=$(wmctrl -m | sed -n '/Name: /s///p')
-if [ $run == "XMonad" ] || [ $run == "dwm" ];then
+if [ $run = "XMonad" ] || [ $run = "dwm" ];then
 	echo "OnE" > /tmp/WS1
 	echo "tWo" > /tmp/WS2
 	echo "ThReE" > /tmp/WS3
