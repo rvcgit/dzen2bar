@@ -30,7 +30,7 @@ if [ "$wm" != "XMonad"] || [ "$wm" != "dwm" ];then # non EWMH compliant
 conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -expand left -dock -w $wc -ta l -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## deps for workspace and forecast; TYOE YOUR CITY NAME
-location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES
 sleep 5 && sh ~/.bin/dzenworkspaces.sh &
 sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
