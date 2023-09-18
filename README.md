@@ -1,6 +1,5 @@
 # customised bar using den2 with conky & rofi
-* [PREVIEW OF POPUPS](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
-* [PREVIEW OF UPDATED PANELS](https://i.postimg.cc/WzGRRsz8/dzenpanels.jpg)
+* [PREVIEW](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 * UPDATED with 2 options :
@@ -14,9 +13,9 @@
 * xdotool,xrandr & wmctrl
 * inxi [refer the dzensysinfo details and edit with your required syntax for inxi as your distro provides]
 * trayer [optional if needed; for top/bottom right placement whichis auto to execute respective scripts]
-* Font Awesome 6 Free; Nerd Fonts [ to display iconic fonts; RobotoMono Nerd Fonts;UbuntuMono Nerd Fonts; FuraCode Nerd Font, RobotoMono Nerd Fonts, Opendyslexic Nerd Fonts used.. FYI ] & a bitmap font i love so much from [HERE](https://addy-dclxvi.github.io/post/bitmap-fonts/)
+* Font Awesome 6 Free; Nerd Fonts [ link provided below ] & a bitmap font i love so much from [HERE](https://addy-dclxvi.github.io/post/bitmap-fonts/) forthe dzen sysinfo and calendar popup
 and nerd fonts from [HERE](https://www.nerdfonts.com/font-downloads)
-* Openweather script to pipe weather on bar [included in bin]
+* Openweather script to pipe weather on bar [included in bin]; edit with your credentials
 local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar file for your location
 * supportive executable and shell scripts
 * dunst [optional if you like notifiers in regular intervals]
@@ -24,13 +23,13 @@ local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar fi
 * added mpd playlist window popup in the fav menu. for those who use mpd
 # clone repo OR download & extract zip
 * move contents of "bin" folder to $HOME/.bin folder; make all files executable; give sym link to dzenbar in your PATH [$HOME/.local/bin OR $HOME/bin OR /usr/local/bin]
-* PATH=$HOME/.bin:$PATH && export PATH [run this to set PATH with $HOME/.bin
+* PATH=$HOME/.bin:$PATH && export PATH [ do this if $HOME/.bin is not in your $PATH ]
 * move contents of the "conkys" folder to $HOME/.conky/
 * check and edit openweather & local-weather scripts for location settings
 * check dzensysinfo.sh to edit device path in the script [sdXY]
 * edit dzen2rofifavmenu to set your fav programs
 * WORKSPACES are configured upto 5; FYI
-* ACTIVE WORKSPACE / WINDOWLIST popup will not show in non EWMH WM like dwm / xmonad; though clickable shift will be possible
+* ACTIVE WORKSPACE / WINDOWLIST popup will not show in non EWMH WM like xmonad; though clickable shift will be possible
 * for clickable workspace; i have used xdotoo key Super+{1/2/3/4/5}; edit if its different for you
 
 * finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
@@ -52,11 +51,12 @@ rofi theme used is my configurtion of colors. rofi menus will use the default ro
 Font Color / Foreground Color can be edited to suit your choice in the respective Conky Config
 
 ICONICFONT LOGOS FOR SOME DISTRIBUTIONS
-* current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
-* i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
-* Hope you like this setup. Feel free to upgrade and fork/update...
-* execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
-* P.S: Exit Option seperated from fav and provided on panel. USE BUTTON "3";middle click to get exit option menu
+current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
 
+i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
+ 
+Hope you like this setup. Feel free to upgrade and fork/update...
+
+execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 
 Cheers !
