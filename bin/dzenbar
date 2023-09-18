@@ -5,16 +5,21 @@ XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordi
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
 x1=$(($X*3/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-x2=$(($X*187/1000)) # title bar X position [edit the value "21%" to suit;current is 21% of x resolution ]
-x3=$(($X*562/1000)) # Appmenu bar X position [ edit value "47.5%" to suit; current is 45% of x resolution ]
 wl=$(($X*212/1000)) # -w value w.r.t X resolution for left bar
-wc=$(($X*375/1000)) # -w value w.r.t X resolution for center bar
-wr=$(($X*366/1000)) # -w value w.r.t  X resolution for righ bar
+
+x2=$(($X*200/1000)) # Appmenu bar X position [ edit value "18.5%" to suit; current is 45% of x resolution ]
+wc=$(($X*315/1000)) # -w value w.r.t  X resolution for appmenu bar
+
+x3=$(($X*520/1000)) # title bar X position [edit the value "56.2%" to suit;current is 21% of x resolution ]
+wr=$(($X*360/1000)) # -w value w.r.t X resolution for xtitle bar
+
+x4=$(($X*885/1000)) # Exit button X position [ edit value "90%" to suit; current is 45% of x resolution ]
+we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
  y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution; 	[ BOTTOM BAR ]
 # y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; 	[ TOP BAR ] ; comment above line and uncomment this line to use TOP BAR
 
-## right for systray
+##bottom right right for systray
 
 wm="$(wmctrl -m | grep Name: | awk '{print $NF}')"
 if [ "$wm" != "XMonad" ] || [ "$wm" != "dwm" ];then # non EWMH compliant
@@ -23,12 +28,13 @@ if [ "$wm" != "XMonad" ] || [ "$wm" != "dwm" ];then # non EWMH compliant
 		trayer-dbr ; fi & # bottom-right
 
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
-conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'OpenDyslexicM Nerd Font:pixelsize=9:bold:antialias=true' -w $wl -expand right &
+conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' -w $wl -expand right &
 
-conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $x2 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta c -x $x2 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
-## center [appmenu, time & calendar,weather forcast, sysinfo, favs ]
-conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta c -x $x3 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta l -x $x3 -y $y -fn 'Inconsolata Nerd Font:pixelsize=12:antialias=true' &
+
+conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 
 ## deps for workspace and forecast; TYOE YOUR CITY NAME

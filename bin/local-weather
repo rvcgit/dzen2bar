@@ -26,7 +26,7 @@ Weather is updating... "
 
 refreshdata()
 {
-location=""  ### TYPE YOUR LOCATION WITHIN QUOTES; else DEFAULT LOCATION WILL BE PICKED
+location="MY_CITY_NAME"  ### TYPE YOUR LOCATION WITHIN QUOTES; else DEFAULT LOCATION WILL BE PICKED
 url="https://v2.wttr.in/$location\?M'"
 data="$(curl -s $url | grep 'Weather:' | sed 's/Weather://g' | sed 's/+//g' | awk '{for(i=2;i<=NF;++i)printf $i""FS ; print ""}')"
 validate="$(echo $data > /tmp/localweather)"

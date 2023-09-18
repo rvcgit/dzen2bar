@@ -4,4 +4,4 @@ sleep 5 &
 trayer --edge top --align right --transparent false \
 --alpha 0 --widthtype request  --heighttype request --height 18 \
 --iconspacing 4 --SetDockType false --SetPartialStrut false \
---tint 0x1a1e22 --padding 1 --margin 2 --expand true
+--tint 0x111827 --padding 1 --margin 2 --expand true

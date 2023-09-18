@@ -3,7 +3,7 @@
 
 run() {
 title="$(xdotool getwindowfocus getwindowname)"
-MAX_LENGTH=77 ## edit this "77" to suit; dont forget to re-position Appmenubar in "dzenbar" file to shift towards right
+MAX_LENGTH=73 ## edit this "77" to suit; dont forget to re-position Appmenubar in "dzenbar" file to shift towards right
 length=$(echo ${#title})
 if [ "$length" -ge "$MAX_LENGTH" ]; then
 		# trim the title length
