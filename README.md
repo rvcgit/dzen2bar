@@ -13,7 +13,7 @@
 * xdotool,xrandr & wmctrl
 * inxi [refer the dzensysinfo details and edit with your required syntax for inxi as your distro provides]
 * trayer [optional if needed; for top/bottom right placement whichis auto to execute respective scripts]
-* Font Awesome 6 Free; Nerd Fonts [ link provided below ] & a bitmap font i love so much from [HERE](https://addy-dclxvi.github.io/post/bitmap-fonts/) forthe dzen sysinfo and calendar popup
+* Font Awesome 6 Free; Nerd Fonts [ link provided below ] & a bitmap font i love so much from [HERE](https://addy-dclxvi.github.io/post/bitmap-fonts/) for the dzen sysinfo and calendar popup
 and nerd fonts from [HERE](https://www.nerdfonts.com/font-downloads)
 * Openweather script to pipe weather on bar [included in bin]; edit with your credentials
 local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar file for your location
