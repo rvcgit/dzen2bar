@@ -11,7 +11,7 @@ conky.config = {
 -- using above mode helps in on-click action even in non ewmh wm like Xmonad
 
 conky.text = [[
- ^bg() ^bg(\#111827)^fg(\#e5e4e2)^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca()  ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca()  ^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca()  ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca()  ^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca()\
+ ^bg(\#111827)^fg(\#e5e4e2)^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca()  ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca()  ^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca()  ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca()  ^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca()\
  ^fg(\#10B981)  ^bg(\#000000)^fg(\#10B981) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  ^bg()\
   ^bg(\#111827)^fg(\#009688)^ca(1,~/.bin/dzenrofi.sh) ^fg(\#eceff4) AppMenu^ca()\
   ^bg(\#111827)^fg(\#F06292)^ca(1,~/.bin/dzen2rofifavmenu) ^fg(\#eceff4) Favs ^ca()\
