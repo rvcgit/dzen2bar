@@ -12,11 +12,12 @@ conky.config = {
 
 conky.text = [[
  ^bg(\#111827)^fg(\#e5e4e2)^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca()  ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca()  ^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca()  ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca()  ^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca()\
- ^fg(\#10B981)  ^bg(\#000000)^fg(\#10B981) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  ^bg()\
+ ^fg(\#10B981)  ^bg(\#090909)^fg(\#10B981) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  ^bg()\
   ^bg(\#111827)^fg(\#009688)^ca(1,~/.bin/dzenrofi.sh) ^fg(\#eceff4) AppMenu^ca()\
   ^bg(\#111827)^fg(\#F06292)^ca(1,~/.bin/dzen2rofifavmenu) ^fg(\#eceff4) Favs ^ca()\
   ^ca(3,sh ~/.bin/dzentime.sh)^fg(\#FFCC80) ^ca()^bg(\#111827) ^fg(\#C8E6C9)${time %d %b %Y}; ${time %r}^ca(3,sh ~/.bin/dzenweather.sh) ^fg(\#FFCC80)${execpi 1818 ~/.bin/openweather -i | rev | awk '{print $1"  "$3}' | rev}^ca()\
   ^ca(3,sh ~/.bin/dzensysinfo.sh)^fg(\#fb607f)^fg(\#FF5722) ^fg(\#7986CB) SysInfo ^ca()\
   ^ca(3,~/.bin/rofiwindow)^fg(\#4CAF50)   ^fg(\#B2EBF2)${exec ~/.bin/dzen2xtitle}^ca()\
-  ^fg(\#000000) ^bg(\#000000)^fg(\#ed2939)^ca(2,~/.bin/dzen2rofiexit.sh)    ^ca()\
+  ^bg(\#090909) ^fg(\#ff7043)^ca(2,~/.bin/dzen2rofiexit.sh)   ^bg()^fg(\#ff7043)   ^ca()\
+^bg(\#111827)\
 ]]

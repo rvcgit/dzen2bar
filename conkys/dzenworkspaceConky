@@ -14,5 +14,5 @@ conky.text = [[
 ^bg(\#111827)^fg(\#E5E7EB)  ^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca() ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca() \
 ^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca() ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca() \
 ^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca() \
-^bg(\#000000)^fg(\#4ADE80) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  \
+^bg(\#4ade80)^fg(\#111827) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  \
 ]]
