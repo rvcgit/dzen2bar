@@ -11,7 +11,7 @@ wl=$(($X*40/100)) # -w value w.r.t X resolution for left bar
 wm=$(($X*266/1000)) # -w value w.r.t X resolution for middle bar
 wr=$(($X*321/1000)) # -w value w.r.t  X resolution for right bar
 
-bar_length=93 # % length w.r.t X width; edit to suit your need
+bar_length=97 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
 xc=$(($X*(100-$bar_length)/100)) # balance remaining from bar length X resolution
 
@@ -27,7 +27,7 @@ if [ "$wm" != "XMonad"] || [ "$wm" != "dwm" ];then # non EWMH compliant
 	if [ "$y" -lt "30" ];then trayer-tr;else # top-right
 		trayer-br ; fi & # bottom-right
 
-conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -expand left -dock -w $wc -ta l -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#111827' -expand left -dock -w $wc -ta r -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## deps for workspace and forecast
 location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES

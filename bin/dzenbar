@@ -13,8 +13,8 @@ wc=$(($X*315/1000)) # -w value w.r.t  X resolution for appmenu bar
 x3=$(($X*520/1000)) # title bar X position [edit the value "56.2%" to suit;current is 21% of x resolution ]
 wr=$(($X*360/1000)) # -w value w.r.t X resolution for xtitle bar
 
-x4=$(($X*885/1000)) # Exit button X position [ edit value "90%" to suit; current is 45% of x resolution ]
-we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
+x4=$(($X*882/1000)) # Exit button X position [ edit value to suit; current is 88.2% of x resolution ]
+we=$(($X*24/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
  y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution; 	[ BOTTOM BAR ]
 # y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; 	[ TOP BAR ] ; comment above line and uncomment this line to use TOP BAR
@@ -34,7 +34,7 @@ conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=un
 
 conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta l -x $x3 -y $y -fn 'Inconsolata Nerd Font:pixelsize=12:antialias=true' &
 
-conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#ff7043' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 
 ## deps for workspace and forecast
