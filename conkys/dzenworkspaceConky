@@ -9,6 +9,7 @@ conky.config = {
 }
 -- Here command "xdotool key Super+1 or 2 or 3 or 4 or 5" is used presuming "Super" key as your modifier; edit with your keybind
 -- using above mode helps in on-click action even in non ewmh wm like Xmonad
+-- Alternatively if ewmh wm recognise xdotool commands; use "xdotool set_desktop 0 OR 1 OR 2 OR 3 OR 4" for respective workspaces
 
 conky.text = [[
 ^bg(\#111827)^fg(\#E5E7EB)  ^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca() ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca() \
