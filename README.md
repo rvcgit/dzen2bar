@@ -3,8 +3,8 @@
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 * UPDATED with 2 options :
-* [1] dzenbar executes 4 seperate dzen2 instance with trayer in dock mode
-* [2] dzen2panel executes a single dzen2 instance which is docked [trayer is un-docked]
+* [1] dzenbar executes 4 seperate dzen2 instance
+* [2] dzen2panel executes a single dzen2 instance
 # Dependencies:
 * dzen2 [ if your distro doent provide; find it [HERE](https://github.com/minos-org/dzen2.git) ]
 * Conky
