@@ -5,7 +5,7 @@ XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordi
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
 x1=$(($X*5/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-x2=$(($X*234/1000)) # title bar X position [edit the value "21%" to suit;current is 21% of x resolution ]
+x2=$(($X*234/1000)) # title bar X position [edit the value "234%" to suit;current is 23.4% of x resolution ]
 x3=$(($X*503/1000)) # Appmenu bar X position [ edit value "47.5%" to suit; current is 45% of x resolution ]
 wl=$(($X*40/100)) # -w value w.r.t X resolution for left bar
 wm=$(($X*266/1000)) # -w value w.r.t X resolution for middle bar
@@ -13,10 +13,10 @@ wr=$(($X*321/1000)) # -w value w.r.t  X resolution for right bar
 
 bar_length=97 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
-xc=$(($X*(100-$bar_length)/100)) # balance remaining from bar length X resolution
+xc=$(($X*75/1000)) # 7.5% offset of X resolution
 
 # BOTTOM BAR
- y=$((($Y-(99/100*$Y)))) # y offset from y resolution; current is 99% of Y resolution
+ y=$(($Y*997/1000)) # y offset from y resolution; current is 99% of Y resolution
 # TOP BAR ; comment out above line and uncomment below line for TOP BAR
 # y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution;
 
@@ -24,10 +24,10 @@ xc=$(($X*(100-$bar_length)/100)) # balance remaining from bar length X resolutio
 wm="$(wmctrl -m | grep Name: | awk '{print $NF}')"
 if [ "$wm" != "XMonad"] || [ "$wm" != "dwm" ];then # non EWMH compliant
 [ -z $(pgrep -xU $UID trayer) ];fi &&
-	if [ "$y" -lt "30" ];then trayer-tr;else # top-right
-		trayer-br ; fi & # bottom-right
+	if [ "$y" -lt "30" ];then sleep 10 && trayer-tr;else # top-right
+		sleep 10 && trayer-br ; fi & # bottom-right
 
-conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#111827' -expand left -dock -w $wc -ta r -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w '1150' -ta r -x $xc -y $y -fn 'Inconsolata Nerd Font:pixelsize=11:antialias=true' &
 
 ## deps for workspace and forecast
 location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES
