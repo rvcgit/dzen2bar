@@ -9,11 +9,9 @@ conky.config = {
 }
 -- Here command "xdotool key Super+1 or 2 or 3 or 4 or 5" is used presuming "Super" key as your modifier; edit with your keybind
 -- using above mode helps in on-click action even in non ewmh wm like Xmonad
--- used 'xdotool set_desktop 0/1/2/3/4 for workspace change on-click [check your config for keybind]
--- for non ewmh substitute with "xdotool key 'Super+1/2/3/4/5'" as may be for instances
 
 conky.text = [[
-  ^ca(3,~/.bin/rofiwindow)^fg(\#4CAF50)   ^fg(\#B2EBF2)${exec ~/.bin/dzen2xtitle}^ca()\
+ ^ca(3,~/.bin/rofiwindow)^fg(\#4CAF50)   ^fg(\#B2EBF2)${exec ~/.bin/dzen2xtitle}^ca()\
  ^fg(\#10B981)  ^bg(\#090909)^fg(\#10B981) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  ^bg()\
  ^bg(\#111827)^fg(\#e5e4e2)^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca()  ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca()  ^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca()  ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca()  ^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca()\
   ^bg(\#111827)^fg(\#009688)^ca(1,~/.bin/dzenrofi.sh) ^fg(\#eceff4) AppMenu^ca()\
