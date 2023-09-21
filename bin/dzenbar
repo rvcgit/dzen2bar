@@ -16,16 +16,33 @@ wr=$(($X*360/1000)) # -w value w.r.t X resolution for xtitle bar
 x4=$(($X*882/1000)) # Exit button X position [ edit value to suit; current is 88.2% of x resolution ]
 we=$(($X*24/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
- y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution; 	[ BOTTOM BAR ]
-# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; 	[ TOP BAR ] ; comment above line and uncomment this line to use TOP BAR
+# BOTTOM BAR
+ y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
 
-##bottom right right for systray
+# TOP BAR
+# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; comment above line and uncomment this line to use TOP BAR
 
-wm="$(wmctrl -m | grep Name: | awk '{print $NF}')"
-if [ "$wm" != "XMonad" ] || [ "$wm" != "dwm" ];then # non EWMH compliant
-[ -z $(pgrep -xU $UID trayer) ];fi &&
-	if [ "$y" -lt "30" ];then trayer-tr;else # top-right; setDock to 'true' in trayer-script if needed
-		trayer-br ; fi & # bottom-right
+## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
+# alignment is always to right by default; change to left if you need
+w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
+if [ "$w_mgr" != "XMonad"] || [ "$wm" != "dwm" ];then # non EWMH compliant
+	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ];then 
+		dock="true"
+		else
+		dock="false"
+	fi
+	if [ $y -lt 40 ]; then
+		edge="top"
+		else
+		edge="bottom"
+	fi
+alfa="0" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
+trayer --edge $edge --align right --distancefrom right --distance 5 \
+--widthtype request --heighttype pixel --height 18 \
+--transparent true --alpha $alfa --tint 0x111827 \
+--SetDockType $dock \
+--padding 2 --margin 1 --iconspacing 4 --expand false
+fi &
 
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
 conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' -w $wl -expand right &
@@ -35,7 +52,6 @@ conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=un
 conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta l -x $x3 -y $y -fn 'Inconsolata Nerd Font:pixelsize=12:antialias=true' &
 
 conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#ff7043' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
-
 
 ## deps for workspace and forecast
 location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES
