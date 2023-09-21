@@ -3,7 +3,7 @@
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 * UPDATED with 2 options :
-* [1] dzenbar executes 4 seperate dzen2 instance
+* [1] dzenbar executes 4 seperate dzen2 instance [seperate bars]
 * [2] dzen2panel executes a single dzen2 instance
 # Dependencies:
 * dzen2 [ if your distro doent provide; find it [HERE](https://github.com/minos-org/dzen2.git) ]
@@ -30,15 +30,16 @@ local-weather [included in bin];forecast uses info from wttr.in, edit dzenbar fi
 * edit dzen2rofifavmenu to set your fav programs
 * WORKSPACES are configured upto 5; FYI
 * ACTIVE WORKSPACE / WINDOWLIST popup will not show in non EWMH WM like xmonad; though clickable shift will be possible
-* for clickable workspace; i have used xdotoo key Super+{1/2/3/4/5}; edit if its different for you
+* for clickable workspace; i have used xdotool key Super+{1/2/3/4/5}; edit if its different for you
 
-* finally after all ~/.bin/ files been made executable and openweather configured script; simple run dzenbar!
-optional fo transparency: presuming xorg-transset is installed; open terminal and type "transset 0.7 &" without quotes; the cursor changes to  "+" sign. just take it on the required bar to be transparent and click.... viola, you have transperency on dzen.
+* Edit  "dzenbar" ; "dzen2panel" ; "openweather" & "local-weather" scriptswith your CREDENTIALS
+* After moving all scripts intp the $HOME/.bin [local executable PATH]; choose either dzenbar OR dzen2panel to run the status bar
+* optional fo transparency: presuming xorg-transset is installed; open terminal and type "transset 0.7 &" without quotes; the cursor changes to  "+" sign. just take it on the required bar to be transparent and click.... viola, you have transperency on dzen.
 
 * COMMON ISSUES:
 IF ROFI WINDOW[ that follows pointer co-ordinates] may vary, feel free to juggle around the pX and pY part of respective config file
 
-i have deliberately not configured dzen2 as dock here; i use 3 different bars so i made trayer as dock so the bars can be acoomodated within that doc space and windows dont overlap ! just for info so those not using trayer may find the windows overlap.
+Edit your dzenbar OR dzen2panel to make trayer dock OR undock
 
 Depending on your distribution; inxi output may differ or display wrongly; simple edit 'dzensysinfo.sh' to suit your distribution
 Home / Root device nomes [sdXY; X is a/b/c etc; Y is 1,2,3 etc]
@@ -51,7 +52,7 @@ rofi theme used is my configurtion of colors. rofi menus will use the default ro
 Font Color / Foreground Color can be edited to suit your choice in the respective Conky Config
 
 ICONICFONT LOGOS FOR SOME DISTRIBUTIONS
-current is for Manjaro... Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
+Choose your option/choice from [HERE](https://github.com/lukas-w/font-logos)
 
 i dont think this will work in wayland. i have not tested it nor the config is compatible for non X11 as of now.
  
