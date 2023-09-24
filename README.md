@@ -8,7 +8,7 @@
 # Dependencies:
 * dzen2 [ if your distro doent provide; find it [HERE](https://github.com/minos-org/dzen2.git) ]
 * Conky
-* Rofi
+* Rofi [ if your distro doesnt provide; you can find it [ HERE ](https://github.com/davatorium/rofi) ]
 * Curl
 * xdotool,xrandr & wmctrl
 * inxi [refer the dzensysinfo details and edit with your required syntax for inxi as your distro provides]
@@ -60,4 +60,9 @@ Hope you like this setup. Feel free to upgrade and fork/update...
 
 execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 
-Cheers !
+* To use with i3wm: edit config file; comment out all info related to i3status etc... add this "i3bar_command PATH/TO/dzenbar OR dzen2panel"
+* openbox/bspwm provides config to allocate dock padding so "dzenbar OR dzen2bar" can be added in the autostart file if respective bspwmrc or rc.xml is edited to suit
+* For dwm and xmonad, xtitle; workspaces active show etc will not function coz i have used tools that are EMWH compliant and i have not added config for non-ewmh windowmanagers
+* Works fine with freeBSD too; obviously with some edits to be freebsd specific syntax [i have tried with fluxbox and its working flawlessly]
+
+CHEERS !
