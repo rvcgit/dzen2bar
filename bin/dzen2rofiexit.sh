@@ -4,8 +4,8 @@
 # for icon [using nerd fonts]
 i='  ' i_fa_ban=$i
 i='  ' i_fa_lock=$i
-i=' ' i_fa_circle_o=$i
-i=' ' i_fa_moon_o=$i
+i='  ' i_fa_circle_o=$i
+i='  ' i_fa_moon_o=$i
 i='  ' i_fa_sign_out=$i
 i='  ' i_fa_refresh=$i
 i='  '  i_fa_power_off=$i
@@ -61,7 +61,7 @@ rofi_menu() { # 3 parameters: menu_title menu_width menu_list
 	}
 }
 rofi_exit() {
-	eval $(rofi_menu " :" 100 \
+	eval $(rofi_menu " " 100 \
 		"	$i_fa_ban cancel:true
 			$i_fa_lock lock:screenlock
 			$i_fa_circle_o suspend:systemctl suspend
