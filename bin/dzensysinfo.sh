@@ -34,5 +34,5 @@ echo "Home Disk  : $(df -h /dev/sdaY | tail -n1 | awk '{$NF=""}1')  HOME  "
 echo "D:\ $(df -h /dev/sda7 | tail -n1 | awk '{$NF=""}1')  $basenameD  "
 echo "C:\ $(df -h /dev/sda5 | tail -n1 | awk '{$NF=""}1')  $basenameC  "
 ) | dzen2 -p -x $pX -y $pY -w $popup_width -l "9" -sa 'r' -ta 'l' \
--bg '#0C4A6E' -fg '#BAE6FD' -fn "RobotoMono Nerd Font:bold:pixelsize=10:antialias=true"\
+-bg '#0C4A6E' -fg '#BAE6FD' -fn "RobotoMono Nerd Font:bold:pixelsize=10:antialias=true" \
 -title-name 'System Info' -e 'onstart=uncollapse;button1=exit;button4=exit;button5=exit'
