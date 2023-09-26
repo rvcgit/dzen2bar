@@ -25,8 +25,8 @@ we=$(($X*24/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 ## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
 # alignment is always to right by default; change to left if you need
 w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
-if [ "$w_mgr" != "XMonad"] || [ "$wm" != "dwm" ];then # non EWMH compliant
-	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ];then 
+if [ "$w_mgr" != "dwm"];then # non EWMH compliant
+	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] || [ $w_mgr = "XMonad" ];then 
 		dock="true"
 		else
 		dock="false"
