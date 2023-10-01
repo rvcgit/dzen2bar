@@ -64,5 +64,6 @@ execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 * openbox/bspwm provides config to allocate dock padding so "dzenbar OR dzen2bar" can be added in the autostart file if respective bspwmrc or rc.xml is edited to suit
 * For dwm and xmonad, xtitle; workspaces active show etc will not function coz i have used tools that are EMWH compliant and i have not added config for non-ewmh windowmanagers
 * Works fine with freeBSD too; obviously with some edits to be freebsd specific syntax [i have tried with fluxbox and its working flawlessly]
+* added mpd control buttons in the bar [ left and right click controls added ]
 
 CHEERS !
