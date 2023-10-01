@@ -5,15 +5,15 @@ XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordi
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
 x1=$(($X*3/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-wl=$(($X*212/1000)) # -w value w.r.t X resolution for left bar
+wl=$(($X*150/1000)) # -w value w.r.t X resolution for left bar
 
-x2=$(($X*200/1000)) # Appmenu bar X position [ edit value "18.5%" to suit; current is 45% of x resolution ]
-wc=$(($X*315/1000)) # -w value w.r.t  X resolution for appmenu bar
+x2=$(($X*162/1000)) # Appmenu bar X position [ edit value "18.5%" to suit; current is 45% of x resolution ]
+wc=$(($X*390/1000)) # -w value w.r.t  X resolution for appmenu bar
 
-x3=$(($X*520/1000)) # title bar X position [edit the value "56.2%" to suit;current is 21% of x resolution ]
-wr=$(($X*360/1000)) # -w value w.r.t X resolution for xtitle bar
+x3=$(($X*570/1000)) # title bar X position [edit the value "56.2%" to suit;current is 21% of x resolution ]
+wr=$(($X*325/1000)) # -w value w.r.t X resolution for xtitle bar
 
-x4=$(($X*882/1000)) # Exit button X position [ edit value to suit; current is 88.2% of x resolution ]
+x4=$(($X*900/1000)) # Exit button X position [ edit value to suit; current is 88.2% of x resolution ]
 we=$(($X*24/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
 # BOTTOM BAR
@@ -25,8 +25,8 @@ we=$(($X*24/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 ## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
 # alignment is always to right by default; change to left if you need
 w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
-if [ "$w_mgr" != "dwm"];then # non EWMH compliant
-	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] || [ $w_mgr = "XMonad" ];then 
+if [ "$w_mgr" != "dwm" ];then # non EWMH compliant
+	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] ||  [ $w_mgr = "XMonad" ] ;then 
 		dock="true"
 		else
 		dock="false"
@@ -36,7 +36,7 @@ if [ "$w_mgr" != "dwm"];then # non EWMH compliant
 		else
 		edge="bottom"
 	fi
-alfa="0" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
+alfa="255" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
 trayer --edge $edge --align right --distancefrom right --distance 5 \
 --widthtype request --heighttype pixel --height 18 \
 --transparent true --alpha $alfa --tint 0x111827 \
@@ -45,16 +45,16 @@ trayer --edge $edge --align right --distancefrom right --distance 5 \
 fi &
 
 ## left [workspaces & window title] --making expandable ; can replace to -w 'pixels' for fixed width
-conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' -w $wl -expand right &
+conky -c ~/.conky/dzenworkspaceConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -ta l -x $x1 -y $y -fn 'Inconsolata Nerd Font:pixelsize=11:antialias=true' -w $wl -expand right &
 
 conky -c ~/.conky/dzen2barConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta c -x $x2 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
 
 conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wr -ta l -x $x3 -y $y -fn 'Inconsolata Nerd Font:pixelsize=12:antialias=true' &
 
-conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#ff7043' -w $we -ta l -x $x4 -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' &
+conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#ff7043' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## deps for workspace and forecast
-location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
 sleep 5 && sh ~/.bin/dzenworkspaces.sh &
 sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
