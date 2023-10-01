@@ -17,7 +17,7 @@ xc=$(($X*2/1000)) # 7.5% offset of X resolution
 ## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
 # alignment is always to right by default; change to left if you need
 w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
-if [ "$w_mgr" != "dwm"];then # non EWMH compliant
+if [ "$w_mgr" != "i3" ] ;then # non EWMH compliant
 	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] || [ $w_mgr = "XMonad" ];then 
 		dock="true"
 		else
@@ -28,6 +28,7 @@ if [ "$w_mgr" != "dwm"];then # non EWMH compliant
 		else
 		edge="bottom"
 	fi
+
 alfa="0" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
 trayer --edge $edge --align right --distancefrom right \
 --distance 10 --widthtype request --heighttype pixel --height 18 \
@@ -39,7 +40,7 @@ fi &
 conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta r -x $xc -y $y -fn 'Inconsolata Nerd Font:pixelsize=11:antialias=true' &
 
 ## deps for workspace and forecast
-location="MY_CITY_NAME" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
 sleep 5 && sh ~/.bin/dzenworkspaces.sh &
 sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
