@@ -9,5 +9,5 @@ conky.config = {
 }
 
 conky.text = [[
-^fg(\#111827) ^ca(2,~/.bin/dzen2rofiexit.sh)  ^ca()\
+^bg(\#d56c30)^fg(\#111827) ^ca(2,~/.bin/dzen2rofiexit.sh)  ^ca()\
  ]]
