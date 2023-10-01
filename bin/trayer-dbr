@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# TOPRIGHT ALIGN # dock mode to run with dzenbar [un docked for multiple dzen2 instance]
+alfa="255" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
+dock="true" # XMonad has to set trayer in Dock mode else its visibleonly on the first workspace
+edge="bottom"
+trayer --edge $edge --align right --distancefrom right --distance 5 \
+--widthtype request --heighttype pixel --height 18 \
+--transparent true --alpha $alfa --tint 0x111827 \
+--SetDockType $dock \
+--padding 2 --margin 1 --iconspacing 4 --expand false
