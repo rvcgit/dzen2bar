@@ -7,7 +7,7 @@ Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolut
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 
-if [ $YP -le "50" ]; then
+if [ $YP -le "$(($Y*5/10))" ]; then
 loc=1; else loc="7"
 fi &&
 if [ $loc = "1" ]; then
@@ -15,7 +15,7 @@ if [ $loc = "1" ]; then
 	anc="7"
 fi
 
-if [ $YP -le "50" ]; then
+if [ $YP -le "$(($Y*5/10))" ]; then
 	pY=$(($pY+10)); else
 	pY=$(($YP-$Y))
 fi  # Y offset

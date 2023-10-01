@@ -61,14 +61,14 @@ rofi_menu() { # 3 parameters: menu_title menu_width menu_list
 	}
 }
 rofi_exit() {
-	eval $(rofi_menu " " 100 \
+	eval $(rofi_menu " :" 100 \
 		"	$i_fa_ban cancel:true
 			$i_fa_lock lock:screenlock
 			$i_fa_circle_o suspend:systemctl suspend
 			$i_fa_moon_o hibernate:systemctl hibernate
 			$i_fa_sign_out logout:xdotool key --clearmodifiers super+shift+q
 			$i_fa_refresh reboot:systemctl reboot
-			$i_fa_plug poweroff:systemctl poweroff	")
+			$i_fa_power_off poweroff:systemctl poweroff	")
 }
 
 rofi_exit

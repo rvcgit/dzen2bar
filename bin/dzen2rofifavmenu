@@ -2,20 +2,20 @@
 # rofi_cmd to locate rofi relatively
 
 # for icon [using nerd fonts]
-i=' ' i_fa_ban=$i
-i=' ' i_fa_gimp=$i
+i='  ' i_fa_ban=$i
+i='  ' i_fa_gimp=$i
 i=' ' i_fa_circle_o=$i
-i=' ' i_fa_term=$i
-i=' ' i_fa_editor=$i
-i=' ' i_fa_firefox=$i
+i='  ' i_fa_term=$i
+i='  ' i_fa_editor=$i
+i='  ' i_fa_firefox=$i
 i=' ' i_fa_iexplore=$1
 i=' ' i_fa_chrome=$1
 i=' '  i_fa_power_off=$i
 i=' ' i_fa_plug=$i
-i=' ' i_fa_folder=$i
-i='' i_fa_exit=$i
-i=' ' i_fa_picker=$i
-i='' i_fa_network=$i
+i='  ' i_fa_folder=$i
+i=' ' i_fa_exit=$i
+i='  ' i_fa_picker=$i
+i=' ' i_fa_network=$i
 i=' ' i_fa_music=$i
 
 rofi_cmd() {	# 1 parameter: menu_width. The rest of parameters is passed to rofi
@@ -67,7 +67,7 @@ rofi_menu() { # 3 parameters: menu_title menu_width menu_list
 	}
 }
 rofi_fav() {
-	eval $(rofi_menu " " 120 \
+	eval $(rofi_menu " :" 120 \
 		"	$i_fa_ban cancel:true
 			$i_fa_firefox Web-Browser:firefox
 			$i_fa_term Terminal:sakura
@@ -75,8 +75,7 @@ rofi_fav() {
 			$i_fa_picker Color-Picker:gcolor3
 			$i_fa_editor Text Editor:gedit
 			$i_fa_folder File Manager:pcmanfm
-			$i_fa_network Virt-Manager:virt-manager
-			$i_fa_music MPD Playlist:~/.bin/mpc-playlist-show	")
+			$i_fa_network Virt-Manager:virt-manager    ")
 }
 
 rofi_fav
