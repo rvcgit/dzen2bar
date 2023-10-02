@@ -32,7 +32,7 @@ if [ $YP -le "$(($Y*50/100))" ]; then
 fi  # Y offset
 
 if [ $(($X-$XP)) -lt $(($menu_width +10)) ]; then
-	pX=$(($XP-$menu_width));else
+	pX=$(($XP-15*$menu_width/10));else
 	pX=$(($XP+5))
 fi # X offset
 
