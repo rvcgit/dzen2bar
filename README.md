@@ -1,5 +1,6 @@
 # customised bar using den2 with conky & rofi
 * [PREVIEW](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
+* [PREVIEW ANIMATED GIF](https://github.com/rvcgit/dzen2bar/blob/main/preview.gif)
 * bar location and length auto set w.r.t your screen [uses xrandr]
 * edit in respective scripts / binaries to suit location
 * UPDATED with 2 options :
@@ -65,6 +66,6 @@ execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 * For dwm and xmonad, xtitle; workspaces active show etc will not function coz i have used tools that are EMWH compliant and i have not added config for non-ewmh windowmanagers
 * Works fine with freeBSD too; obviously with some edits to be freebsd specific syntax [i have tried with fluxbox and its working flawlessly]
 * added mpd control buttons in the bar [ left and right click controls added ]
-* < 1mb file in mp4 added as preview.
+* an animated gif added as preview.
 
 CHEERS !
