@@ -24,9 +24,10 @@ if [ $loc = "1" ];then anc="1";elif
 	[ $loc = "7" ]; then anc="7"
  fi &&
 
-if [ $loc = "1" ]; then pY=$(($YP+10));else
-		pY=$(($YP-$Y))
-  fi &&
+if [ $YP -le "$(($Y*5/10))" ]; then
+	pY=$(($pY+10)); else
+	pY=$(($YP-$Y))
+fi  # Y offset
 
 if [ $(($X-$XP-20)) -lt $menu_width ];then
 	pX=$(($XP-$menu_width));else
