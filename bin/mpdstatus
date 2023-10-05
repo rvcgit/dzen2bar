@@ -1,0 +1,20 @@
+#! /usr/bin/env dash
+the_runner() {
+MAX_LENGTH=27
+state="$(mpc|sed -n '2s/ .*$//p')"
+#song="$(mpc current)"
+ song="$(mpc current -f %title% | head -n1)"
+				if [ ${#song} -gt $MAX_LENGTH ] ; then	# trim long names
+					song="$(echo $song|cut -c -$MAX_LENGTH)..."
+				fi
+if [ "$state" = "[playing]" ] ; then
+	echo $song
+fi 
+	if [ "$state" = "[paused]" ] ; then
+           echo "paused"
+     fi
+if [ -z "$state" ] ; then
+           echo "stopped"
+     fi
+}
+the_runner "$@" | less
