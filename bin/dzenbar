@@ -65,7 +65,7 @@ conky -c ~/.conky/dzen2xtitleConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave
 conky -c ~/.conky/dzen2ExitConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -bg '#ff7043' -w $we -ta l -x $x4 -y $y -fn 'FuraCode Nerd Font:pixelsize=10:antialias=true' &
 
 ## deps for workspace and forecast
-location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
 if [ $wm != "herbstluftwm" ] || [ $wm != "dwm" ] || [ $wm != "XMonad" ];then sleep 5 && sh ~/.bin/dzenworkspaces.sh; fi &
 sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
