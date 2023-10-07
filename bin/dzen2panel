@@ -4,43 +4,37 @@ Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your verti
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordinate X
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
-bar_length=90 # % length w.r.t X width; edit to suit your need
+bar_length=93 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
-xc=$(($X*2/1000)) # 7.5% offset of X resolution
+xc=$(($X*2/1000)) # 0.2% offset of X resolution
+
+xmpd=$(($X*66/100)) # mpd status info x-offset
+wmpd=$(($X*27/100)) # mpc icon / title
+
+x4=$(($X*888/1000)) # Exit button X position [ edit value to suit; current is 88.8% of x resolution ]
+we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
 # BOTTOM BAR
- y=$(($Y*997/1000)) # y offset from y resolution; current is 99% of Y resolution
+ y=$(($Y*995/1000)) # y offset from y resolution; current is 99.5% of Y resolution
 
 # TOP BAR ; comment out above line and uncomment below line for TOP BAR
-# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution;
+# y=$(($Y-$Y))  # y offser from y resolution; current is 0.3% of Y resolution;
 
 ## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
 # alignment is always to right by default; change to left if you need
-w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
-if [ "$w_mgr" != "i3" ] ;then # non EWMH compliant
-	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] || [ $w_mgr = "XMonad" ];then 
-		dock="true"
-		else
-		dock="false"
-	fi
-	if [ $y -lt 40 ]; then
-		edge="top"
-		else
-		edge="bottom"
-	fi
 
-alfa="0" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
-trayer --edge $edge --align right --distancefrom right \
---distance 10 --widthtype request --heighttype pixel --height 18 \
---transparent true --alpha $alfa --tint 0x111827 \
---SetDockType $dock \
---padding 2 --margin 1 --iconspacing 4 --expand false
-fi &
+## pkill dzen2 and conky instances first
+killall dzen2 conky &
+## dzen to be docked or not ?
+if [ $(wmctrl -m | grep Name | awk '{print$2}') = "Openbox" ] || [ $(wmctrl -m | grep Name | awk '{print$2}') = "herbstluftwm" ]; then 
+dock=" "; else dock="-dock"
+fi
 
-conky -c ~/.conky/dzenpanelConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta r -x $xc -y $y -fn 'Inconsolata Nerd Font:pixelsize=11:antialias=true' &
+sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock &
 
-## deps for workspace and forecast
-location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
-sleep 5 && sh ~/.bin/dzenworkspaces.sh &
-sleep 15 && if [ "$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" = " " ];then echo " " > /tmp/AWS;fi &
+# optional transparency
+sleep 10 && exec `(transset .85 -n "dzen title" >/dev/null 2>&1 &)` &
+
+## deps for  forecast
+location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done

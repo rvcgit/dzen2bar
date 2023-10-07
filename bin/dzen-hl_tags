@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#!/bin/bash
+# vim: set fileencoding=utf-8 ts=4 sts=4 sw=4 tw=80 expandtab :
+# Florian Bruhin <me@the-compiler.org>
+
+#foreground = '#E8222d32'
+#background = '#E8e6e6fa'
+#modb = '#E8f8f5fa'
+#modb1 = '#E8fffff0'
+#modb2 = '#E8f0e68c'
+X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
+Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
+XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordinate X
+YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
+
+x1=$(($X*3/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
+wl=$(($X*180/1000)) # -w value w.r.t X resolution for left bar
+# BOTTOM BAR
+ y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
+
+# TOP BAR
+# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; comment above line and uncomment this line to use TOP BAR
+dzen_fg="#3f5f4f"
+dzen_bg="#111827"
+normal_fg="#E7E5E4"
+normal_bg="#99111827"
+viewed_fg="#ffd700" # gold
+viewed_bg=""
+urgent_fg="#ef4444"
+urgent_bg=""
+used_fg="mediumseagreen" # yellow
+used_bg=""
+
+herbstclient --idle 2>/dev/null | {
+    tags=( $(herbstclient tag_status) )
+    while true; do
+        for tag in "${tags[@]}" ; do
+            case ${tag:0:1} in
+                '#') cstart="^fg($viewed_fg)^bg($viewed_bg)" ;;
+                '+') cstart="^fg($viewed_fg)^bg($viewed_bg)" ;;
+                ':') cstart="^fg($used_fg)^bg($used_bg)"     ;;
+                '!') cstart="^fg($urgent_fg)^bg($urgent_bg)" ;;
+                *)   cstart=''                               ;;
+            esac
+            dzenstring="${cstart}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
+            dzenstring+="^ca()^fg()^bg()"
+            echo -n "$dzenstring"
+        done
+        echo 
+        read hook || exit
+        case "$hook" in
+            tag*) tags=( $(herbstclient tag_status) ) ;;
+            quit_panel*) exit ;;
+        esac
+    done
+} | dzen2 -h 18 -fn 'Cousine Nerd Font:pixelsize=10' -ta l -sa l \
+          -x $x1 -y $y -w $wl -fg "$dzen_fg" -bg "$dzen_bg" && transset-df 0 -e 'button3='
