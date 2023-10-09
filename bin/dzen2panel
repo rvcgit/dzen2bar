@@ -41,5 +41,5 @@ fi &
 sleep 10 && exec `(transset .85 -n "dzen title" >/dev/null 2>&1 &)` &
 
 ## deps for  forecast
-location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
