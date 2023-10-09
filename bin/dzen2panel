@@ -6,8 +6,10 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordi
 
 bar_length=93 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
+wcbspwm=$(($X*15/100)) # bar length for workspaces bspwm; % width as per panel_length
+wapbspwm=$(($X*75/100)) # apps length
 xc=$(($X*2/1000)) # 0.2% offset of X resolution
-
+xapps=$(($X*15/100))
 xmpd=$(($X*66/100)) # mpd status info x-offset
 wmpd=$(($X*27/100)) # mpc icon / title
 
@@ -29,12 +31,15 @@ killall dzen2 conky &
 if [ $(wmctrl -m | grep Name | awk '{print$2}') = "Openbox" ] || [ $(wmctrl -m | grep Name | awk '{print$2}') = "herbstluftwm" ]; then 
 dock=" "; else dock="-dock"
 fi
-
-sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x $xc -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock &
+if [ $(wmctrl -m | grep Name: | awk '{print $2}') = "bspwm" ];then 
+	conky -c ~/.conky/dzenpanel-bspwmConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w "$wc" -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock;else
+        sh ~/.bin/dzenworkspaces.sh
+        sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock
+fi &
 
 # optional transparency
 sleep 10 && exec `(transset .85 -n "dzen title" >/dev/null 2>&1 &)` &
 
 ## deps for  forecast
-location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="Vapi" ## TYPE YOUR CITY NAME WITHIN QUOTES
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
