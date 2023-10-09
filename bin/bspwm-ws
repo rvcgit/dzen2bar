@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+rm -rf /tmp/WS*
+rm -rf /tmp/AWS
+workspace() { \
+	      WS=$(bspc wm -g |
+		       sed -Ee 's/:m/ \n  M\>/g' \
+			   -e 's/:O|:F/ \n ^bg(#111827)^fg(#4ade80)/g'\
+			   -e 's/:o/ \n ^bg(#111827)^fg(#525e54)/g' \
+			   -e 's/:U/ \n ^bg(#111827)^fg(#fafa37)/g' \
+			   -e 's/:u/ \n ^bg(#111827)^fg(#d56c30)/g' \
+			   -e 's/:/ \n  /g' \
+			   | grep "fg" \
+			   | sed 's/Desktop/S/g' \
+			   | tr '\n' '@' \
+			   | sed 's/@/^fg(#10b981)\|/g')
+
+	      echo $WS
+}
+
+bspwmWS() {
+BLUE="\033[1;34m"
+ENDCOLOR="\e[0m"
+fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
+ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
+#bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
+
+echo $fws > /tmp/AWS
+ws1="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
+ws2="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
+ws3="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
+ws4="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
+ws5="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
+      
+if [ $fws = $ws1 ]; then echo "one" > /tmp/WS1; else echo $ws1 > /tmp/WS1; fi
+if [ $fws = $ws2 ]; then echo "two" > /tmp/WS2; else echo $ws2 > /tmp/WS2; fi
+if [ $fws = $ws3 ]; then echo "thri" > /tmp/WS3; else echo $ws3 > /tmp/WS3; fi
+if [ $fws = $ws4 ]; then echo "four" > /tmp/WS4; else echo $ws4 > /tmp/WS4; fi
+if [ $fws = $ws5 ]; then echo "five" > /tmp/WS5; else echo $ws5 > /tmp/WS5; fi
+                
+}
+
+workspace
