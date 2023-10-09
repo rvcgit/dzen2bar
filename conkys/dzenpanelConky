@@ -21,7 +21,7 @@ conky.text = [[
  ^bg(\#111827)^fg(\#8db600)^ca(1,mpc toggle)${exec ~/.xmonad/music-state}^fg()^ca()^bg() \
  ^bg(\#111827)^fg(\#b76e79)^ca(1,mpc next)  ^fg()^ca()^bg() \
   ^ca(3,sh ~/.bin/dzentime.sh)^fg(\#FFCC80) ^ca()^bg(\#111827) ^fg(\#C8E6C9)${time %d %b %Y}; ${time %r}^ca(3,sh ~/.bin/dzenweather.sh)  ^fg(\#FFCC80)${execpi 1818 ~/.bin/openweather -i | rev | awk '{print $1"  "$3}' | rev}^ca()\
-  ^ca(3,sh ~/.bin/dzensysinfo.sh)^fg(\#EC4899)  ^fg(\#7986CB) SysInfo ^ca()\
+  ^ca(3,sh ~/.bin/dzensysinfo.sh)^fg(\#EC4899)  ^fg(\#8ff6dc) SysInfo ^ca()\
  ^bg(\#090909)^fg(\#EF4444)^ca(2,~/.bin/dzen2rofiexit.sh)    ^bg()^fg(\#EF4444)   ^ca()\
 ^bg(\#111827)\
 ]]

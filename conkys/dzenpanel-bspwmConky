@@ -9,9 +9,7 @@ conky.config = {
 }
 
 conky.text = [[
-^bg(\#111827)^fg(\#E5E7EB)  ^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca() ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca() \
-^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca() ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca() \
-^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca() \
+  ${exec ~/.bin/bspwm-ws}\
 ^bg(\#000000)^fg(\#4ade80) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}\
  ^bg(\#111827)^fg(\#82afff)^ca(1,~/.bin/dzenrofi.sh)  ^fg(\#eceff4) AppMenu^ca()\
  ^bg(\#111827)^fg(\#a0522d)^ca(1,~/.bin/dzen2rofifavmenu) ^fg(\#eceff4) Favs^ca()\
