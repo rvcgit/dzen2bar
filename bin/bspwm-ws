@@ -4,15 +4,15 @@ rm -rf /tmp/AWS
 workspace() { \
 	      WS=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^bg(#111827)^fg(#4ade80)/g'\
-			   -e 's/:o/ \n ^bg(#111827)^fg(#525e54)/g' \
+			   -e 's/:O|:F/ \n ^bg(#111827)^fg(#6EE7B7)/g'\
+			   -e 's/:o/ \n ^bg(#111827)^fg(#4A5459)/g' \
 			   -e 's/:U/ \n ^bg(#111827)^fg(#fafa37)/g' \
 			   -e 's/:u/ \n ^bg(#111827)^fg(#d56c30)/g' \
 			   -e 's/:/ \n  /g' \
 			   | grep "fg" \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
-			   | sed 's/@/^fg(#10b981)\|/g')
+			   | sed 's/@/^fg(#525E54)\|/g')
 
 	      echo $WS
 }
