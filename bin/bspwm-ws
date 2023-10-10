@@ -18,8 +18,6 @@ workspace() { \
 }
 
 bspwmWS() {
-BLUE="\033[1;34m"
-ENDCOLOR="\e[0m"
 fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
 ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
 #bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
