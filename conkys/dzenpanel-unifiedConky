@@ -9,6 +9,7 @@ conky.config = {
 }
 
 conky.text = [[
+${exec ~/.bin/dzenworkspaces.sh}\
 ^bg(\#111827)^fg(\#E5E7EB)^ca(1, xdotool key Super+1)${cat /tmp/WS1}^ca()\
 ^ca(1, xdotool key Super+2)${cat /tmp/WS2}^ca()\
 ^ca(1, xdotool key Super+3)${cat /tmp/WS3}^ca()\
