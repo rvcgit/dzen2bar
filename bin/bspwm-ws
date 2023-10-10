@@ -1,39 +1,63 @@
 #!/usr/bin/env sh
 rm -rf /tmp/WS*
 rm -rf /tmp/AWS
+fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
 workspace() { \
 	      WS=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^bg(#110022)^fg(#6EE7B7)/g'\
-			   -e 's/:o/ \n ^bg(#110022)^fg(#4A5459)/g' \
-			   -e 's/:U/ \n ^bg(#110022)^fg(#fafa37)/g' \
-			   -e 's/:u/ \n ^bg(#110022)^fg(#d56c30)/g' \
+			   -e 's/:O|:F/ \n ^fg(#ffd700)/g'\
+			   -e 's/:o/ \n ^fg(#4A5459)/g' \
+			   -e 's/:U/ \n ^fg(#fafa37)/g' \
+			   -e 's/:u/ \n ^fg(#d56c30)/g' \
 			   -e 's/:/ \n  /g' \
 			   | grep "fg" \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
 			   | sed 's/@/^fg(#525E54)\|/g')
 
-	      echo $WS
+	      echo "$WS^bg(#030303) $fws"
 }
 
 bspwmWS() {
 fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
 ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
 #bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
-
-echo $fws > /tmp/AWS
-ws1="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
-ws2="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
-ws3="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
-ws4="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
-ws5="$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
+ws1=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
+ws2=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
+ws3=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
+ws4=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
+ws5=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
       
 if [ $fws = $ws1 ]; then echo "^fg(#ffd700)$ws1 " > /tmp/WS1; else echo "^fg(#525e54)$ws1 " > /tmp/WS1;fi
 if [ $fws = $ws2 ]; then echo "^fg(#ffd700)$ws2 " > /tmp/WS2; else echo "^fg(#525e54)$ws2 " > /tmp/WS2; fi
 if [ $fws = $ws3 ]; then echo "^fg(#ffd700)$ws3 " > /tmp/WS3; else echo "^fg(#525e54)$ws3 " > /tmp/WS3; fi
 if [ $fws = $ws4 ]; then echo "^fg(#ffd700)$ws4 " > /tmp/WS4; else echo "^fg(#525e54)$ws4 " > /tmp/WS4; fi
 if [ $fws = $ws5 ]; then echo "^fg(#ffd700)$ws5 " > /tmp/WS5; else echo "^fg(#525e54)$ws5 " > /tmp/WS5; fi
+#echo $fws > /tmp/AWS
 }
+## work in progress
+trial() {
+while true; do
+   if read line < $PANEL_FIFO; then # fifo problem
+     wm_status=""
+     IFS=':' read -a array <<< "$line"
+     for element in "${array[[@]]}"; do
+       if [[ $element =~ ^D ]]; then
+         wm_status="$wm_status ^fg(white)${element:1}"
+       elif [[ $element =~ ^d ]]; then
+         wm_status="$wm_status ^ca(1, bspc use ${element:1})^fg(darkgray)${element:1}^ca()"
+       elif [[ $element =~ ^E ]]; then
+         wm_status="$wm_status ^ca(1, bspc use ${element:1})^fg(#6b6b6b)${element:1}^ca()"
+       elif [[ $element =~ ^L ]]; then
+         wm_status="$wm_status • ^ca(1, bspc cycle_layout)^fg(white)${element:1}^ca()"
+       fi
+     done
+     echo $wm_status
+   fi
+ done
+ }
 
+## execute either "workspace" OR "bspwmWS" whichever is liked
+## workspace is default without clickable workspace [occupied workspace highlighted]
+## bspwmWS is clickable but occupied workspace is yet to be highlighted
 workspace
