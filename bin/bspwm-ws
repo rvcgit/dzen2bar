@@ -60,4 +60,6 @@ while true; do
    fi
  done
  }
-wsnames
+# wsnames will have clickable workspaces with just focused as highlighted
+# tags will have default bspwm style [clickable yet to achieve, but occupied workspace is displayed]
+wsnames   
