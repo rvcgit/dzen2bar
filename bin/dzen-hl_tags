@@ -13,8 +13,8 @@ Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your verti
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordinate X
 YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
 
-x1=$(($X*3/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-wl=$(($X*180/1000)) # -w value w.r.t X resolution for left bar
+x1=$(($X*2/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
+wl=$(($X*145/1000)) # -w value w.r.t X resolution for left bar
 # BOTTOM BAR
  y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
 
