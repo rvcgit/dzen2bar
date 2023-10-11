@@ -12,7 +12,8 @@ xc=$(($X*2/1000)) # 0.2% offset of X resolution
 xapps=$(($X*15/100))
 xmpd=$(($X*66/100)) # mpd status info x-offset
 wmpd=$(($X*27/100)) # mpc icon / title
-
+xherbs=$(($X*18/100)) # offset to accomodate herbs tags
+wherbs=$(($wc*90/100))
 x4=$(($X*888/1000)) # Exit button X position [ edit value to suit; current is 88.8% of x resolution ]
 we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
@@ -27,19 +28,34 @@ we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
 ## pkill dzen2 and conky instances first
 killall dzen2 conky &
+wmgr=$(wmctrl -m | grep Name | awk '{print$2}')
 ## dzen to be docked or not ?
-if [ $(wmctrl -m | grep Name | awk '{print$2}') = "Openbox" ] || [ $(wmctrl -m | grep Name | awk '{print$2}') = "herbstluftwm" ]; then 
+if [ $wmgr = "Openbox" ] || [ $wmgr = "herbstluftwm" ]; then 
 dock=" "; else dock="-dock"
 fi
-if [ $(wmctrl -m | grep Name: | awk '{print $2}') = "bspwm" ];then 
-	conky -c ~/.conky/dzenpanel-bspwmConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w "$wc" -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock;else
-        sh ~/.bin/dzenworkspaces.sh
-        sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock
-fi &
 
-# optional transparency
-sleep 10 && exec `(transset .85 -n "dzen title" >/dev/null 2>&1 &)` &
+if [ $wmgr = "bspwm" ];then 
+	sleep 5 && conky -c ~/.conky/dzenpanel-bspwmConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; \
+	button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' \
+	-h '18' -w "$wc" -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock;
+
+elif [ $wmgr = "herbstluftwm" ]; then
+        ~/.bin/dzen-hl_tags | conky -c ~/.conky/dzenpanel-herbsConky | \
+dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; \
+button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; \
+button1=menuexec' -h '18' -w 1050 -ta l -x 250 -y 765 \
+-fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock;
+
+else
+        sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | \
+        dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; \
+        key_Left=scrollup;key_Right=scrolldown; button1=menuexec' \
+        -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock
+        fi
+
+# optional dzen2 transparency
+sleep 10 && exec `(transset .75 -n "dzen title" >/dev/null 2>&1 &)` &
 
 ## deps for  forecast
-location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="MyCity" ## TYPE YOUR CITY NAME WITHIN QUOTES
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
