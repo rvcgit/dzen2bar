@@ -12,8 +12,8 @@ xc=$(($X*2/1000)) # 0.2% offset of X resolution
 xapps=$(($X*15/100))
 xmpd=$(($X*66/100)) # mpd status info x-offset
 wmpd=$(($X*27/100)) # mpc icon / title
-xherbs=$(($X*18/100)) # offset to accomodate herbs tags
-wherbs=$(($wc*90/100))
+xherbs=$(($X*153/1000)) # offset to accomodate herbs tags
+wherbs=$(($X*77/100)) #re-adjust the apps panel width
 x4=$(($X*888/1000)) # Exit button X position [ edit value to suit; current is 88.8% of x resolution ]
 we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
@@ -23,8 +23,7 @@ we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 # TOP BAR ; comment out above line and uncomment below line for TOP BAR
 # y=$(($Y-$Y))  # y offser from y resolution; current is 0.3% of Y resolution;
 
-## right for systray ; add your tray app [stalonetray OR trayer; below is trayer command]
-# alignment is always to right by default; change to left if you need
+## right for systray ; add your tray app [stalonetray OR trayer
 
 ## pkill dzen2 and conky instances first
 killall dzen2 conky &
@@ -43,7 +42,7 @@ elif [ $wmgr = "herbstluftwm" ]; then
         ~/.bin/dzen-hl_tags | conky -c ~/.conky/dzenpanel-herbsConky | \
 dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; \
 button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; \
-button1=menuexec' -h '18' -w 1050 -ta l -x 250 -y 765 \
+button1=menuexec' -h '18' -w $wherbs -ta l -x $xherbs -y $y \
 -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock;
 
 else
