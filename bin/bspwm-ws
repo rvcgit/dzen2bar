@@ -6,19 +6,20 @@ fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
 tags() { \
 	      WS=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^bg(#030505)^fg(#ffd700)/g'\
-			   -e 's/:o/ \n ^bg(#030505)^fg(#4A5459)/g' \
-			   -e 's/:U/ \n ^bg(#030505)^fg(#fafa37)/g' \
-			   -e 's/:u/ \n ^bg(#030505)^fg(#d56c30)/g' \
+			   -e 's/:O|:F/ \n ^fg(#82d600)/g'\
+			   -e 's/:o/ \n ^fg(#6366F1)/g' \
+			   -e 's/:f/ \n ^fg(#52525B)/g' \
+			   -e 's/:U/ \n ^fg(#fafa37)/g' \
+			   -e 's/:u/ \n ^fg(#d56c30)/g' \
 			   -e 's/:/ \n  /g' \
 			   | grep "fg" \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
-			   | sed 's/@/^fg(#525E54)\|/g')
+			   | sed 's/@/^fg(#3f5f4f)\|/g')
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
-echo "^bg(#030505)  $WS ^bg(#002211)^fg(#82d600)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
+echo "^bg(#111827) $WS^fg(#82d600)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
 }
 
 wsnames() {
