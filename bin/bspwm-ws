@@ -3,28 +3,6 @@ rm -rf /tmp/WS*
 rm -rf /tmp/AWS
 fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
 
-benmills() {
-while true; do
-   if read line < $PANEL_FIFO; then
-     wm_status=""
-     IFS=':' read -a array <<< "$line"
-     for element in "${array[[@]]}"; do
-       if [[ $element =~ ^D ]]; then
-         wm_status="$wm_status ^fg(white)${element:1}"
-       elif [[ $element =~ ^d ]]; then
-         wm_status="$wm_status ^ca(1, bspc use ${element:1})^fg(darkgray)${element:1}^ca()"
-       elif [[ $element =~ ^E ]]; then
-         wm_status="$wm_status ^ca(1, bspc use ${element:1})^fg(#6b6b6b)${element:1}^ca()"
-       elif [[ $element =~ ^L ]]; then
-         wm_status="$wm_status • ^ca(1, bspc cycle_layout)^fg(white)${element:1}^ca()"
-       fi
-     done
-
-     echo $wm_status
-   fi
- done
- }
-
 tags() { \
 	      WS=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
@@ -39,7 +17,7 @@ tags() { \
 			   | sed 's/@/^fg(#525E54)\|/g')
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
-	      echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws $layout "
+	      echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws ^ca(1,xdotool key super + m)$layout^ca() "
 }
 
 wsnames() {
@@ -52,13 +30,15 @@ ws3=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')
 ws4=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
 ws5=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
       
-if [ $fws = $ws1 ]; then echo "^bg(#030303)^fg(#ffd700)$ws1 " > /tmp/WS1; else echo "^bg(#111827)^fg(#525e54)$ws1 " > /tmp/WS1;fi
-if [ $fws = $ws2 ]; then echo "^bg(#030303)^fg(#ffd700)$ws2 " > /tmp/WS2; else echo "^bg(#111827)^fg(#525e54)$ws2 " > /tmp/WS2;fi
-if [ $fws = $ws3 ]; then echo "^bg(#030303)^fg(#ffd700)$ws3 " > /tmp/WS3; else echo "^bg(#111827)^fg(#525e54)$ws3 " > /tmp/WS3;fi
-if [ $fws = $ws4 ]; then echo "^bg(#030303)^fg(#ffd700)$ws4 " > /tmp/WS4; else echo "^bg(#111827)^fg(#525e54)$ws4 " > /tmp/WS4;fi
-if [ $fws = $ws5 ]; then echo "^bg(#030303)^fg(#ffd700)$ws5 " > /tmp/WS5; else echo "^bg(#111827)^fg(#525e54)$ws5" > /tmp/WS5;fi
+if [ $fws = $ws1 ]; then WS1=$(echo "^ca(1,xdotool set_desktop 0)^bg(#030303)^fg(#ffd700)$ws1 ^ca()") ; else WS1=$(echo "^ca(1,xdotool set_desktop 0)^bg(#111827)^fg(#525e54)$ws1 ^ca()");fi
+if [ $fws = $ws2 ]; then WS2=$(echo "^ca(1,xdotool set_desktop 1)^bg(#030303)^fg(#ffd700)$ws2 ^ca()") ; else WS2=$(echo "^ca(1,xdotool set_desktop 1)^bg(#111827)^fg(#525e54)$ws2 ^ca()");fi
+if [ $fws = $ws3 ]; then WS3=$(echo "^ca(1,xdotool set_desktop 2)^bg(#030303)^fg(#ffd700)$ws3 ^ca()") ; else WS3=$(echo "^ca(1,xdotool set_desktop 2)^bg(#111827)^fg(#525e54)$ws3 ^ca()");fi
+if [ $fws = $ws4 ]; then WS4=$(echo "^ca(1,xdotool set_desktop 3)^bg(#030303)^fg(#ffd700)$ws4 ^ca()") ; else WS4=$(echo "^ca(1,xdotool set_desktop 3)^bg(#111827)^fg(#525e54)$ws4 ^ca()");fi
+if [ $fws = $ws5 ]; then WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#030303)^fg(#ffd700)$ws5 ^ca()") ; else WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#111827)^fg(#525e54)$ws5^ca()") ;fi
 
-#echo " $(cat /tmp/WS1) $(cat /tmp/WS2) $(cat /tmp/WS3) $(cat /tmp/WS4) $(cat /tmp/WS5) "
+layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
+echo " $WS1$WS2$WS3$WS4$WS5 ^fg(#ffd700)$layout "
 #echo $fws > /tmp/AWS
 }
-tags
+#tags  ## run either "tags" OR "wsnames" to suit your chice ! sodont forget to comment out the flavor not needed
+wsnames
