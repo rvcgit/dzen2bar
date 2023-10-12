@@ -37,7 +37,7 @@ if [ $fws = $ws4 ]; then WS4=$(echo "^ca(1,xdotool set_desktop 3)^bg(#030303)^fg
 if [ $fws = $ws5 ]; then WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#030303)^fg(#ffd700)$ws5 ^ca()") ; else WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#111827)^fg(#525e54)$ws5^ca()") ;fi
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
-echo " $WS1$WS2$WS3$WS4$WS5 ^fg(#ffd700)$layout "
+echo "$WS1$WS2$WS3$WS4$WS5 ^fg(#ffd700)$layout"
 #echo $fws > /tmp/AWS
 }
 #tags  ## run either "tags" OR "wsnames" to suit your chice ! sodont forget to comment out the flavor not needed
