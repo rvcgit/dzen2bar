@@ -2,46 +2,10 @@
 rm -rf /tmp/WS*
 rm -rf /tmp/AWS
 fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
-tags() { \
-	      WS=$(bspc wm -g |
-		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^bg(#030303)^fg(#ffd700)/g'\
-			   -e 's/:o/ \n ^bg(#030303)^fg(#4A5459)/g' \
-			   -e 's/:U/ \n ^bg(#030303)^fg(#fafa37)/g' \
-			   -e 's/:u/ \n ^bg(#030303)^fg(#d56c30)/g' \
-			   -e 's/:/ \n  /g' \
-			   | grep "fg" \
-			   | sed 's/Desktop/S/g' \
-			   | tr '\n' '@' \
-			   | sed 's/@/^fg(#525E54)\|/g')
-
-	      echo "^bg(#030303)$WS ^bg(#111827)^fg(#40e0d0) $fws  "
-}
-
-wsnames() {
-fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
-ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
-#bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
-ws1=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
-ws2=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
-ws3=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
-ws4=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
-ws5=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
-      
-if [ $fws = $ws1 ]; then echo "^bg(#030303)^fg(#ffd700)$ws1 " > /tmp/WS1; else echo "^bg(#111827)^fg(#525e54)$ws1 " > /tmp/WS1;fi
-if [ $fws = $ws2 ]; then echo "^bg(#030303)^fg(#ffd700)$ws2 " > /tmp/WS2; else echo "^bg(#111827)^fg(#525e54)$ws2 " > /tmp/WS2;fi
-if [ $fws = $ws3 ]; then echo "^bg(#030303)^fg(#ffd700)$ws3 " > /tmp/WS3; else echo "^bg(#111827)^fg(#525e54)$ws3 " > /tmp/WS3;fi
-if [ $fws = $ws4 ]; then echo "^bg(#030303)^fg(#ffd700)$ws4 " > /tmp/WS4; else echo "^bg(#111827)^fg(#525e54)$ws4 " > /tmp/WS4;fi
-if [ $fws = $ws5 ]; then echo "^bg(#030303)^fg(#ffd700)$ws5 " > /tmp/WS5; else echo "^bg(#111827)^fg(#525e54)$ws5 " > /tmp/WS5;fi
-
-#echo " $(cat /tmp/WS1) $(cat /tmp/WS2) $(cat /tmp/WS3) $(cat /tmp/WS4) $(cat /tmp/WS5) "
-#echo $fws > /tmp/AWS
-}
-
 
 benmills() {
 while true; do
-   if read line < $PANEL_FIFO; then # fifo problem
+   if read line < $PANEL_FIFO; then
      wm_status=""
      IFS=':' read -a array <<< "$line"
      for element in "${array[[@]]}"; do
@@ -60,6 +24,41 @@ while true; do
    fi
  done
  }
-# wsnames will have clickable workspaces with just focused as highlighted
-# tags will have default bspwm style [clickable yet to achieve, but occupied workspace is displayed]
-wsnames   
+
+tags() { \
+	      WS=$(bspc wm -g |
+		       sed -Ee 's/:m/ \n  M\>/g' \
+			   -e 's/:O|:F/ \n ^bg(#030505)^fg(#ffd700)/g'\
+			   -e 's/:o/ \n ^bg(#030505)^fg(#4A5459)/g' \
+			   -e 's/:U/ \n ^bg(#030505)^fg(#fafa37)/g' \
+			   -e 's/:u/ \n ^bg(#030505)^fg(#d56c30)/g' \
+			   -e 's/:/ \n  /g' \
+			   | grep "fg" \
+			   | sed 's/Desktop/S/g' \
+			   | tr '\n' '@' \
+			   | sed 's/@/^fg(#525E54)\|/g')
+layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
+
+	      echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws $layout "
+}
+
+wsnames() {
+fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
+ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
+#bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
+ws1=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
+ws2=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
+ws3=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
+ws4=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
+ws5=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
+      
+if [ $fws = $ws1 ]; then echo "^bg(#030303)^fg(#ffd700)$ws1 " > /tmp/WS1; else echo "^bg(#111827)^fg(#525e54)$ws1 " > /tmp/WS1;fi
+if [ $fws = $ws2 ]; then echo "^bg(#030303)^fg(#ffd700)$ws2 " > /tmp/WS2; else echo "^bg(#111827)^fg(#525e54)$ws2 " > /tmp/WS2;fi
+if [ $fws = $ws3 ]; then echo "^bg(#030303)^fg(#ffd700)$ws3 " > /tmp/WS3; else echo "^bg(#111827)^fg(#525e54)$ws3 " > /tmp/WS3;fi
+if [ $fws = $ws4 ]; then echo "^bg(#030303)^fg(#ffd700)$ws4 " > /tmp/WS4; else echo "^bg(#111827)^fg(#525e54)$ws4 " > /tmp/WS4;fi
+if [ $fws = $ws5 ]; then echo "^bg(#030303)^fg(#ffd700)$ws5 " > /tmp/WS5; else echo "^bg(#111827)^fg(#525e54)$ws5" > /tmp/WS5;fi
+
+#echo " $(cat /tmp/WS1) $(cat /tmp/WS2) $(cat /tmp/WS3) $(cat /tmp/WS4) $(cat /tmp/WS5) "
+#echo $fws > /tmp/AWS
+}
+tags
