@@ -18,7 +18,7 @@ tags() { \
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
-echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws ^ca(1,xdotool key super+m)$layout^ca() "
+echo "^bg(#030505)  $WS ^bg(#002211)^fg(#82d600)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
 }
 
 wsnames() {
@@ -41,5 +41,5 @@ layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || 
 echo "$WS1$WS2$WS3$WS4$WS5 ^fg(#ffd700)$layout"
 #echo $fws > /tmp/AWS
 }
-#tags  ## run either "tags" OR "wsnames" to suit your chice ! sodont forget to comment out the flavor not needed
-wsnames
+tags  ## run either "tags" OR "wsnames" to suit your chice ! sodont forget to comment out the flavor not needed
+#wsnames
