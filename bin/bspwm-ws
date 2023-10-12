@@ -15,9 +15,10 @@ tags() { \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
 			   | sed 's/@/^fg(#525E54)\|/g')
+
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
-	      echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws ^ca(1,xdotool key super + m)$layout^ca() "
+echo "^bg(#030505)  $WS ^bg(#001122)^fg(#40e0d0) $fws ^ca(1,xdotool key super+m)$layout^ca() "
 }
 
 wsnames() {
