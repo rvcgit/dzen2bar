@@ -6,41 +6,78 @@ fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
 tags() { \
 	      WS=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^fg(#82d600)/g'\
-			   -e 's/:o/ \n ^fg(#6366F1)/g' \
-			   -e 's/:f/ \n ^fg(#52525B)/g' \
-			   -e 's/:U/ \n ^fg(#fafa37)/g' \
+			   -e 's/:O|:F/ \n ^fg(#9E9D24)/g'\
+			   -e 's/:o/ \n ^fg(#8E8CD8)/g' \
+			   -e 's/:f/ \n ^fg(#4C4A48)/g' \
+			   -e 's/:U/ \n ^fg(#8E8CD8)/g' \
 			   -e 's/:u/ \n ^fg(#d56c30)/g' \
 			   -e 's/:/ \n  /g' \
 			   | grep "fg" \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
-			   | sed 's/@/^fg(#3f5f4f)\|/g')
+			   | sed 's/@/^fg(#4C4A48)\|/g')
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
-echo "^bg(#111827) $WS^fg(#82d600)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
+echo "^bg(#111827) $WS^fg(#9E9D24)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
+
 }
 
-wsnames() {
+clickable_tags() {
 fws=$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')
 ufws=$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')
-#bspwmWS=$(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d')
-ws1=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $4}')"
-ws2=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $5}')"
-ws3=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $6}')"
-ws4=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $7}')"
-ws5=" $(cat ~/.config/bspwm/bspwmrc | grep 'bspc monitor -d' | awk '{print $8}')"
-      
-if [ $fws = $ws1 ]; then WS1=$(echo "^ca(1,xdotool set_desktop 0)^bg(#030303)^fg(#ffd700)$ws1 ^ca()") ; else WS1=$(echo "^ca(1,xdotool set_desktop 0)^bg(#111827)^fg(#525e54)$ws1 ^ca()");fi
-if [ $fws = $ws2 ]; then WS2=$(echo "^ca(1,xdotool set_desktop 1)^bg(#030303)^fg(#ffd700)$ws2 ^ca()") ; else WS2=$(echo "^ca(1,xdotool set_desktop 1)^bg(#111827)^fg(#525e54)$ws2 ^ca()");fi
-if [ $fws = $ws3 ]; then WS3=$(echo "^ca(1,xdotool set_desktop 2)^bg(#030303)^fg(#ffd700)$ws3 ^ca()") ; else WS3=$(echo "^ca(1,xdotool set_desktop 2)^bg(#111827)^fg(#525e54)$ws3 ^ca()");fi
-if [ $fws = $ws4 ]; then WS4=$(echo "^ca(1,xdotool set_desktop 3)^bg(#030303)^fg(#ffd700)$ws4 ^ca()") ; else WS4=$(echo "^ca(1,xdotool set_desktop 3)^bg(#111827)^fg(#525e54)$ws4 ^ca()");fi
-if [ $fws = $ws5 ]; then WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#030303)^fg(#ffd700)$ws5 ^ca()") ; else WS5=$(echo "^ca(1,xdotool set_desktop 4)^bg(#111827)^fg(#525e54)$ws5^ca()") ;fi
+ws_state="$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $4" "$5" "$6" "$7" "$8}' | rev  | tr -s ' ' '\n')"
+
+# isolating the workspaces from bspc subscribe
+ONE=$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $8}' | rev)
+TWO=$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $7}' | rev)
+THR=$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $6}' | rev)
+FOU=$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $5}' | rev)
+FIV=$(bspc wm -g | sed 's/:/\ /g' | rev | awk '{print $4}' | rev)
+# getting the current state of workspace [(o)ccupied / (O)ccupied but in focus / (f)empty ]]
+st1=$(echo $ONE | cut -b1)
+st2=$(echo $TWO | cut -b1)
+st3=$(echo $THR | cut -b1)
+st4=$(echo $FOU | cut -b1)
+st5=$(echo $FIV | cut -b1)
+# isolating the workspace name as defined in bspwmrc
+ws1=$(echo $ONE | cut -c 2-) && echo $ws1 > /tmp/WS1
+ws2=$(echo $TWO | cut -c 2-) && echo $ws2 > /tmp/WS2
+ws3=$(echo $THR | cut -c 2-) && echo $ws3 > /tmp/WS3
+ws4=$(echo $FOU | cut -c 2-) && echo $ws4 > /tmp/WS4
+ws5=$(echo $FIV | cut -c 2-) && echo $ws5 > /tmp/WS5
+# populating the workspaces with predefined FG colors
+if [ "$st1" = "f" ]; then WS1="^fg(#4c4a48)$ws1"; fi
+if [ "$st1" = "O" ]; then WS1="^fg(#9e9d24)$ws1"; fi
+if [ "$st1" = "o" ]; then WS1="^fg(#8e8cd8)$ws1"; fi
+
+if [ "$st2" = "f" ]; then WS2="^fg(#4c4a48)$ws2"; fi
+if [ "$st2" = "O" ]; then WS2="^fg(#9e9d24)$ws2"; fi
+if [ "$st2" = "o" ]; then WS2="^fg(#8e8cd8)$ws2"; fi
+
+if [ "$st3" = "f" ]; then WS3="^fg(#4c4a48)$ws3"; fi
+if [ "$st3" = "O" ]; then WS3="^fg(#9e9d24)$ws3"; fi
+if [ "$st3" = "o" ]; then WS3="^fg(#8e8cd8)$ws3"; fi
+
+if [ "$st4" = "f" ]; then WS4="^fg(#4c4a48)$ws4"; fi
+if [ "$st4" = "O" ]; then WS4="^fg(#9e9d24)$ws4"; fi
+if [ "$st4" = "o" ]; then WS4="^fg(#8e8cd8)$ws4"; fi
+
+if [ "$st5" = "f" ]; then WS5="^fg(#4c4a48)$ws5"; fi
+if [ "$st5" = "O" ]; then WS5="^fg(#9e9d24)$ws5"; fi
+if [ "$st5" = "o" ]; then WS5="^fg(#8e8cd8)$ws5"; fi
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
-echo "$WS1$WS2$WS3$WS4$WS5 ^fg(#ffd700)$layout"
+#echo "$WS1$WS2$WS3$WS4$WS5 ^fg(#82d700)$layout"
+echo " ^ca(1,xdotool set_desktop 0)$WS1 ^ca()" > /tmp/WS1
+echo "^ca(1,xdotool set_desktop 1)$WS2 ^ca()" > /tmp/WS2
+echo "^ca(1,xdotool set_desktop 2)$WS3 ^ca()" > /tmp/WS3
+echo "^ca(1,xdotool set_desktop 3)$WS4 ^ca()" > /tmp/WS4
+echo "^ca(1,xdotool set_desktop 4)$WS5 ^ca()" > /tmp/WS5
+echo "^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)^fg(#9E9D24)$layout^ca()" > /tmp/layout
+
 #echo $fws > /tmp/AWS
 }
-tags  ## run either "tags" OR "wsnames" to suit your chice ! sodont forget to comment out the flavor not needed
-#wsnames
+## run either "tags" OR "clickable_tags" to suit your chice ! dont forget to comment out the flavor not needed
+clickable_tags
+#tags
