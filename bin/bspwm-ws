@@ -79,5 +79,5 @@ echo "^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)^fg(#9E9D24)$layout
 #echo $fws > /tmp/AWS
 }
 ## run either "tags" OR "clickable_tags" to suit your chice ! dont forget to comment out the flavor not needed
-clickable_tags
-#tags
+#clickable_tags
+tags # default bspwm style
