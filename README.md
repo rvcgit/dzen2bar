@@ -1,4 +1,5 @@
 # customised bar using den2 with conky & rofi
+* tested in bspwm; dwm; herbstluftwm; i3; openbox [multiple bars OR panel] 
 * [PREVIEW](https://github.com/rvcgit/dzen2bar/blob/main/preview.png)
 * [PREVIEW ANIMATED GIF](https://github.com/rvcgit/dzen2bar/blob/main/preview.gif)
 * bar location and length auto set w.r.t your screen [uses xrandr]
