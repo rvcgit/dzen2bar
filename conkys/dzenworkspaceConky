@@ -7,12 +7,18 @@ conky.config = {
     total_run_times = 0,
     use_spacer = none
 }
--- Here command "xdotool key Super+1 or 2 or 3 or 4 or 5" is used presuming "Super" key as your modifier; edit with your keybind
--- using above mode helps in on-click action even in non ewmh wm like Xmonad
+-- Here command "xdotool set_desktop 1 or 2 or 3 or 4 or 5" is used ; edit with your keybind
+
 
 conky.text = [[
-^bg(\#111827)^fg(\#E5E7EB)  ^ca(1, xdotool key Super+1)${cat /tmp/WS1} ^ca() ^ca(1, xdotool key Super+2)${cat /tmp/WS2} ^ca() \
-^ca(1, xdotool key Super+3)${cat /tmp/WS3} ^ca() ^ca(1, xdotool key Super+4)${cat /tmp/WS4} ^ca() \
-^ca(1, xdotool key Super+5)${cat /tmp/WS5} ^ca() \
-^bg(\#000000)^fg(\#4ADE80) ${exec ~/.bin/dzenworkspaces.sh && cat /tmp/AWS}  \
+${exec ~/.bin/dzenworkspaces.sh}\
+${if_match ${"$(wmctrl -m | sed -n '/Name: /s///p')}" == "bspwm"}${cat /tmp/layout}${endif}\
+^ca(1, xdotool set_desktop 0)${cat /tmp/WS1} ^ca()\
+^ca(1, xdotool set_desktop 1)${cat /tmp/WS2} ^ca()\
+^ca(1, xdotool set_desktop 2)${cat /tmp/WS3} ^ca()\
+^ca(1, xdotool set_desktop 3)${cat /tmp/WS4} ^ca()\
+^ca(1, xdotool set_desktop 4)${cat /tmp/WS5} ^ca()\
+^ca(1, xdotool set_desktop 5)${cat /tmp/WS6} ^ca()\
+^ca(1, xdotool set_desktop 6)${cat /tmp/WS7} ^ca()\
+^ca(1, xdotool set_desktop 7)${cat /tmp/WS8} ^ca()\
 ]]
