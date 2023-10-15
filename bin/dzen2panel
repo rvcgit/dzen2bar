@@ -6,16 +6,7 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordi
 
 bar_length=93 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
-wcbspwm=$(($X*15/100)) # bar length for workspaces bspwm; % width as per panel_length
-wapbspwm=$(($X*75/100)) # apps length
 xc=$(($X*2/1000)) # 0.2% offset of X resolution
-xapps=$(($X*15/100))
-xmpd=$(($X*66/100)) # mpd status info x-offset
-wmpd=$(($X*27/100)) # mpc icon / title
-xherbs=$(($X*153/1000)) # offset to accomodate herbs tags
-wherbs=$(($X*77/100)) #re-adjust the apps panel width
-x4=$(($X*888/1000)) # Exit button X position [ edit value to suit; current is 88.8% of x resolution ]
-we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
 # BOTTOM BAR
  y=$(($Y*995/1000)) # y offset from y resolution; current is 99.5% of Y resolution
@@ -24,6 +15,25 @@ we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 # y=$(($Y-$Y))  # y offser from y resolution; current is 0.3% of Y resolution;
 
 ## right for systray ; add your tray app [stalonetray OR trayer
+w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
+if [ "$w_mgr" != "dwm" ];then # non EWMH compliant
+	if [ $w_mgr = "i3" ] || [ $w_mgr = "herbstluftwm" ] ||  [ $w_mgr = "XMonad" ] ;then 
+		dock="true"
+		else
+		dock="false"
+	fi
+	if [ $y -lt 40 ]; then
+		edge="top"
+		else
+		edge="bottom"
+	fi
+alfa="0" #set your trayer bg alpha value [ 0 is opaque; to 255 full transparent ]
+trayer --edge $edge --align right --distancefrom right --distance 5 \
+--widthtype request --heighttype pixel --height 18 \
+--transparent true --alpha $alfa --tint 0x111827 \
+--SetDockType $dock \
+--padding 2 --margin 1 --iconspacing 4 --expand false
+fi &&
 
 ## pkill dzen2 and conky instances first
 killall dzen2 conky &
@@ -32,29 +42,17 @@ wmgr=$(wmctrl -m | grep Name | awk '{print$2}')
 if [ $wmgr = "Openbox" ] || [ $wmgr = "herbstluftwm" ]; then 
 dock=" "; else dock="-dock"
 fi
+# the dzenpanel 
 
-if [ $wmgr = "bspwm" ];then 
-	sleep 5 && conky -c ~/.conky/dzenpanel-bspwmConky | dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; \
-	button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; button1=menuexec' \
-	-h '18' -w "$wc" -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=9:antialias=true' $dock;
-
-elif [ $wmgr = "herbstluftwm" ]; then
-        ~/.bin/dzen-hl_tags | conky -c ~/.conky/dzenpanel-herbsConky | \
-dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; \
-button4=scrollup;button5=scrolldown; key_Left=scrollup;key_Right=scrolldown; \
-button1=menuexec' -h '18' -w $wherbs -ta l -x $xherbs -y $y \
--fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock;
-
-else
-        sleep 5 && conky -c ~/.conky/dzenpanel-unifiedConky | \
+        sh ~/.bin/dzenworkspaces.sh && conky -c ~/.conky/dzenpanel-unifiedConky | \
         dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; \
         key_Left=scrollup;key_Right=scrolldown; button1=menuexec' \
         -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock
         fi
 
 # optional dzen2 transparency
-sleep 10 && exec `(transset .75 -n "dzen title" >/dev/null 2>&1 &)` &
+sleep 10 && exec `(transset .95 -n "dzen title" >/dev/null 2>&1 &)` &
 
 ## deps for  forecast
-location="MyCity" ## TYPE YOUR CITY NAME WITHIN QUOTES
+location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
 while : ;do curl -s 'http://v1.wttr.in/$location\?MT' | tail -n33 | head -n30 > /tmp/asciiwttr;sleep 1801;done
