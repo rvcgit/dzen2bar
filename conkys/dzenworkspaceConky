@@ -12,7 +12,7 @@ conky.config = {
 
 conky.text = [[
 ${exec ~/.bin/dzenworkspaces.sh}\
-${if_match ${"$(wmctrl -m | sed -n '/Name: /s///p')}" == "bspwm"}${cat /tmp/layout}${endif}\
+${if_match "${wmctrl -m | sed -n '/Name: /s///p'}" == "bspwm" }${cat /tmp/layout}${endif}\
 ^ca(1, xdotool set_desktop 0)${cat /tmp/WS1} ^ca()\
 ^ca(1, xdotool set_desktop 1)${cat /tmp/WS2} ^ca()\
 ^ca(1, xdotool set_desktop 2)${cat /tmp/WS3} ^ca()\
