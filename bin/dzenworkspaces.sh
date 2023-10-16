@@ -3,6 +3,8 @@
 
 rm -rf /tmp/WS*
 rm -rf /tmp/AWS
+rm -rf /tmp/layout
+
 X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution X
 Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
 XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
@@ -152,7 +154,7 @@ fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
 #echo $fws > /tmp/AWS
 if [ $fws = $ws1 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws1 " > /tmp/WS1; else
-	echo "^bg($dbg^fg($dfg) $ws1 " > /tmp/WS1
+	echo "^bg($dbg)^fg($dfg) $ws1 " > /tmp/WS1
 fi
 if [ $fws = $ws2 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws2 " > /tmp/WS2; else 
