@@ -12,7 +12,7 @@ ufws="$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')" # unfocused workspac
 cwm="$(wmctrl -m | sed -n '/Name: /s///p')" # detect current window manager
 dfg="#525e54"
 dbg="#111827"
-nfg="#E7E5E4"
+nfg="#b2bdb5"
 nbg="#99111827"
 ffg="#ffd700" # gold
 fbg=""
@@ -23,8 +23,8 @@ obg=""
 bspwmtags() { \
 	      tags=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^fg(#20b2aa)/g'\
-			   -e 's/:o/ \n ^fg(#5e8c31)/g' \
+			   -e 's/:O|:F/ \n ^fg($ffg)/g'\
+			   -e 's/:o/ \n ^fg(#$ofg)/g' \
 			   -e 's/:U/ \n ^fg(#00fa9a)/g' \
 			   -e 's/:u/ \n ^fg(#d56c30)/g' \
 			   -e 's/:/ \n  /g' \
@@ -37,7 +37,7 @@ bspwmtags() { \
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
 # above data piped into dzen so /tmp creation unnecessary
-echo "^bg(#111827) $tags^fg(#20b2aa)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
+echo "^bg($dbg) $tags^fg($nfg)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
 }
 
 # same as above but with cickable options and display empty tags
@@ -92,7 +92,7 @@ echo "^ca(1,xdotool set_desktop 1)$ws2 ^ca()" > /tmp/WS2
 echo "^ca(1,xdotool set_desktop 2)$ws3 ^ca()" > /tmp/WS3
 echo "^ca(1,xdotool set_desktop 3)$ws4 ^ca()" > /tmp/WS4
 echo "^ca(1,xdotool set_desktop 4)$ws5 ^ca()" > /tmp/WS5
-echo "^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)^fg($ffg)$layout^ca()" > /tmp/layout
+echo "^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)^fg($nfg)$layout^ca()" > /tmp/layout
 }
 
 ewmh_ws() {
