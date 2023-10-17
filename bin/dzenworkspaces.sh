@@ -224,34 +224,42 @@ hl_tags() {
 	# populating the workspaces with predefined FG colors
 if [ "$st1" = "." ]; then ws1="^fg($dfg)$ws1"; elif
    [ "$st1" = "#" ]; then ws1="^fg($ffg)$ws1"; elif
+   [ "$st1" = "!" ]; then ws1="^fg($ufg)$ws1"; elif
    [ "$st1" = ":" ]; then ws1="^fg($ofg)$ws1"; fi
 
 if [ "$st2" = "." ]; then ws2="^fg($dfg)$ws2"; elif
    [ "$st2" = "#" ]; then ws2="^fg($ffg)$ws2"; elif
+   [ "$st2" = "!" ]; then ws2="^fg($ufg)$ws2"; elif
    [ "$st2" = ":" ]; then ws2="^fg($ofg)$ws2"; fi
 
 if [ "$st3" = "." ]; then ws3="^fg($dfg)$ws3"; elif
    [ "$st3" = "#" ]; then ws3="^fg($ffg)$ws3"; elif
+   [ "$st3" = "!" ]; then ws3="^fg($ufg)$ws3"; elif
    [ "$st3" = ":" ]; then ws3="^fg($ofg)$ws3"; fi
 
 if [ "$st4" = "." ]; then ws4="^fg($dfg)$ws4"; elif
    [ "$st4" = "#" ]; then ws4="^fg($ffg)$ws4"; elif
+   [ "$st4" = "!" ]; then ws4="^fg($ufg)$ws4"; elif
    [ "$st4" = ":" ]; then ws4="^fg($ofg)$ws4"; fi
 
 if [ "$st5" = "." ]; then ws5="^fg($dfg)$ws5"; elif
    [ "$st5" = "#" ]; then ws5="^fg($ffg)$ws5"; elif
+   [ "$st5" = "!" ]; then ws5="^fg($ufg)$ws5"; elif
    [ "$st5" = ":" ]; then ws5="^fg($ofg)$ws5"; fi
     
 if [ "$st6" = "." ]; then ws6="^fg($dfg)$ws6"; elif
    [ "$st6" = "#" ]; then ws6="^fg($ffg)$ws6"; elif
+   [ "$st6" = "!" ]; then ws6="^fg($ufg)$ws6"; elif
    [ "$st6" = ":" ]; then ws6="^fg($ofg)$ws6"; fi
 
 if [ "$st7" = "." ]; then ws7="^fg($dfg)$ws7"; elif
    [ "$st7" = "#" ]; then ws7="^fg($ffg)$ws7"; elif
+   [ "$st7" = "!" ]; then ws7="^fg($ufg)$ws7"; elif
    [ "$st7" = ":" ]; then ws7="^fg($ofg)$ws7"; fi
 
 if [ "$st8" = "." ]; then ws8="^fg($dfg)$ws8"; elif
    [ "$st8" = "#" ]; then ws8="^fg($ffg)$ws8"; elif
+   [ "$st8" = "!" ]; then ws8="^fg($ufg)$ws8"; elif
    [ "$st8" = ":" ]; then ws8="^fg($ofg)$ws8"; fi
    
 # creating /tmp data for enabling clickable tags
