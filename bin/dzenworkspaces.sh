@@ -211,7 +211,7 @@ hl_tags() {
 	st7=$(echo $SEV | cut -b1)
 	st8=$(echo $EIG | cut -b1)
 
-# isolating the workspace name as defined in bspwmrc
+# isolating the workspace name as defined in autostart
 	ws1=$(echo $ONE | cut -c 2-)
 	ws2=$(echo $TWO | cut -c 2-)
 	ws3=$(echo $THR | cut -c 2-)
