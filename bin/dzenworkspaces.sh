@@ -274,11 +274,51 @@ echo "^ca(1,xdotool set_desktop 7)$ws8 ^ca()" > /tmp/WS8
 
 }
 
+# default hlwm style [ no populating /tmp]
+hlwm_tags() {
+X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
+Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
+x1=$(($X*2/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
+wl=$(($X*145/1000)) # -w value w.r.t X resolution for left bar
+# BOTTOM BAR
+ y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
+
+# TOP BAR
+# y=$(($Y*3/1000))  # y offser from y resolution; current is 0.3% of Y resolution; comment above line and uncomment this line to use TOP BAR
+herbstclient --idle 2>/dev/null | {
+    tags=( $(herbstclient tag_status) )
+    while true; do
+        for tag in "${tags[@]}" ; do
+            case "${tag:0:1}" in
+                '#') cstart="^fg($ffg)^bg($fbg)" ;;
+                '+') cstart="^fg($viewed_fg)^bg($fbg)" ;;
+                ':') cstart="^fg($ofg)^bg($obg)"     ;;
+                '!') cstart="^fg($ufg)^bg($ubg)" ;;
+                *)   cstart=''                               ;;
+            esac
+            dzenstring="${cstart}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
+            dzenstring+="^ca()^fg()^bg()"
+            echo -n "$dzenstring"
+        done
+        echo 
+        read hook || exit
+        case "$hook" in
+            tag*) tags=( $(herbstclient tag_status) ) ;;
+            quit_panel*) exit ;;
+        esac
+    done
+} | dzen2 -h 18 -fn 'Cousine Nerd Font:pixelsize=10' -ta l -sa l \
+          -x $x1 -y $y -w $wl -fg "$dfg" -bg "$dbg" && transset-df 0 -e 'button3='
+}
+
+# fn hl_tags populates /tmp fn hlwm_tags directly pipes ifo into dzen the default style
+# c_bspwmtags is clickable; bspwmtags is default bspwm
+
 if [ "$cwm" = "bspwm" ]; then
-        tags="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
+        taglist="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
         [ "$cwm" = "herbstluftwm" ]; then
-        tags="hl_tags"; else
-        tags="ewmh_ws"
+        taglist="hlwm_tags"; else  # alternative is hl_tags
+        taglist="ewmh_ws"
 fi
 
-$tags
+$taglist
