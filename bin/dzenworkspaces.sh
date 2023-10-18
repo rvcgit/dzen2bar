@@ -280,6 +280,7 @@ X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horiz
 Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
 x1=$(($X*2/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
 wl=$(($X*145/1000)) # -w value w.r.t X resolution for left bar
+
 # BOTTOM BAR
  y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
 
@@ -317,7 +318,7 @@ herbstclient --idle 2>/dev/null | {
 if [ "$cwm" = "bspwm" ]; then
         taglist="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
         [ "$cwm" = "herbstluftwm" ]; then
-        taglist="hlwm_tags"; else  # alternative is hl_tags
+        taglist="hl_tags"; else  # options is hlwm_tags OR hl_tags [unified panel mode]
         taglist="ewmh_ws"
 fi
 

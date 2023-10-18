@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# toggle play | pause icon in dzenbar
+pkill -x mpc >/dev/null 2>&1
+state="$(mpc status | head -n2 | tail -n1 | awk '{print $1}')"
+if 
+        [ $state = "[paused]" ]; then 
+        echo " " 
+        else
+        echo " "
+fi
