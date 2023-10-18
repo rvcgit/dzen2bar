@@ -12,15 +12,15 @@ YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
 fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" # current focused workspace
 ufws="$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')" # unfocused workspaces
 cwm="$(wmctrl -m | sed -n '/Name: /s///p')" # detect current window manager
-dfg="#525e54"
+dfg="#4C4A48"
 dbg="#111827"
-nfg="#b2bdb5"
+nfg="#647c64"
 nbg="#99111827"
-ffg="#ffd700" # gold
-fbg=""
-ufg="#ef4444"
+ffg="#FFB900" # golden
+fbg="#050301"
+ufg="#D13438"
 ubg=""
-ofg="mediumseagreen" # yellow
+ofg="#bdb76b" # fluent dark khaki
 obg=""
 bspwmtags() { \
 	      tags=$(bspc wm -g |
@@ -222,45 +222,70 @@ hl_tags() {
 	ws8=$(echo $EIG | cut -c 2-) &&
 	
 	# populating the workspaces with predefined FG colors
-if [ "$st1" = "." ]; then ws1="^fg($dfg)$ws1"; elif
-   [ "$st1" = "#" ]; then ws1="^fg($ffg)$ws1"; elif
-   [ "$st1" = "!" ]; then ws1="^fg($ufg)$ws1"; elif
-   [ "$st1" = ":" ]; then ws1="^fg($ofg)$ws1"; fi
 
-if [ "$st2" = "." ]; then ws2="^fg($dfg)$ws2"; elif
-   [ "$st2" = "#" ]; then ws2="^fg($ffg)$ws2"; elif
-   [ "$st2" = "!" ]; then ws2="^fg($ufg)$ws2"; elif
-   [ "$st2" = ":" ]; then ws2="^fg($ofg)$ws2"; fi
+	case "$st1" in
+		'.') ws1="^fg($dfg)$ws1"	;;
+		'#') ws1="^fg($ffg)$ws1"	;;
+		'!') ws1="^fg($ufg)$ws1"	;;
+		':') ws1="^fg($ofg)$ws1"	;;
+		*)	ws1="^fg($nfg)$ws1"		;;
+	esac
 
-if [ "$st3" = "." ]; then ws3="^fg($dfg)$ws3"; elif
-   [ "$st3" = "#" ]; then ws3="^fg($ffg)$ws3"; elif
-   [ "$st3" = "!" ]; then ws3="^fg($ufg)$ws3"; elif
-   [ "$st3" = ":" ]; then ws3="^fg($ofg)$ws3"; fi
+	case "$st2" in
+		'.') ws2="^fg($dfg)$ws2"	;;
+		'#') ws2="^fg($ffg)$ws2"	;;
+		'!') ws2="^fg($ufg)$ws2"	;;
+		':') ws2="^fg($ofg)$ws2"	;;
+		*)	ws2="^fg($nfg)$ws2"		;;
+	esac
 
-if [ "$st4" = "." ]; then ws4="^fg($dfg)$ws4"; elif
-   [ "$st4" = "#" ]; then ws4="^fg($ffg)$ws4"; elif
-   [ "$st4" = "!" ]; then ws4="^fg($ufg)$ws4"; elif
-   [ "$st4" = ":" ]; then ws4="^fg($ofg)$ws4"; fi
+	case "$st3" in
+		'.') ws3="^fg($dfg)$ws3"	;;
+		'#') ws3="^fg($ffg)$ws3"	;;
+		'!') ws3="^fg($ufg)$ws3"	;;
+		':') ws3="^fg($ofg)$ws3"	;;
+		*)	ws3="^fg($nfg)$ws3"		;;
+	esac
 
-if [ "$st5" = "." ]; then ws5="^fg($dfg)$ws5"; elif
-   [ "$st5" = "#" ]; then ws5="^fg($ffg)$ws5"; elif
-   [ "$st5" = "!" ]; then ws5="^fg($ufg)$ws5"; elif
-   [ "$st5" = ":" ]; then ws5="^fg($ofg)$ws5"; fi
+	case "$st4" in
+		'.') ws4="^fg($dfg)$ws4"	;;
+		'#') ws4="^fg($ffg)$ws4"	;;
+		'!') ws4="^fg($ufg)$ws4"	;;
+		':') ws4="^fg($ofg)$ws4"	;;
+		*)	ws4="^fg($nfg)$ws4"		;;
+	esac
+
+	case "$st5" in
+		'.') ws5="^fg($dfg)$ws5"	;;
+		'#') ws5="^fg($ffg)$ws5"	;;
+		'!') ws5="^fg($ufg)$ws5"	;;
+		':') ws5="^fg($ofg)$ws5"	;;
+		*)	ws5="^fg($nfg)$ws5"		;;
+	esac
     
-if [ "$st6" = "." ]; then ws6="^fg($dfg)$ws6"; elif
-   [ "$st6" = "#" ]; then ws6="^fg($ffg)$ws6"; elif
-   [ "$st6" = "!" ]; then ws6="^fg($ufg)$ws6"; elif
-   [ "$st6" = ":" ]; then ws6="^fg($ofg)$ws6"; fi
+	case "$st6" in
+		'.') ws6="^fg($dfg)$ws6"	;;
+		'#') ws6="^fg($ffg)$ws6"	;;
+		'!') ws6="^fg($ufg)$ws6"	;;
+		':') ws6="^fg($ofg)$ws6"	;;
+		*)	ws6="^fg($nfg)$ws6"		;;
+	esac
 
-if [ "$st7" = "." ]; then ws7="^fg($dfg)$ws7"; elif
-   [ "$st7" = "#" ]; then ws7="^fg($ffg)$ws7"; elif
-   [ "$st7" = "!" ]; then ws7="^fg($ufg)$ws7"; elif
-   [ "$st7" = ":" ]; then ws7="^fg($ofg)$ws7"; fi
+	case "$st7" in
+		'.') ws7="^fg($dfg)$ws7"	;;
+		'#') ws7="^fg($ffg)$ws7"	;;
+		'!') ws7="^fg($ufg)$ws7"	;;
+		':') ws7="^fg($ofg)$ws7"	;;
+		*)	ws7="^fg($nfg)$ws7"		;;
+	esac
 
-if [ "$st8" = "." ]; then ws8="^fg($dfg)$ws8"; elif
-   [ "$st8" = "#" ]; then ws8="^fg($ffg)$ws8"; elif
-   [ "$st8" = "!" ]; then ws8="^fg($ufg)$ws8"; elif
-   [ "$st8" = ":" ]; then ws8="^fg($ofg)$ws8"; fi
+	case "$st8" in
+		'.') ws8="^fg($dfg)$ws8"	;;
+		'#') ws8="^fg($ffg)$ws8"	;;
+		'!') ws8="^fg($ufg)$ws8"	;;
+		':') ws8="^fg($ofg)$ws8"	;;
+		*)	ws8="^fg($nfg)$ws8"		;;
+	esac
    
 # creating /tmp data for enabling clickable tags
 echo " ^ca(1,xdotool set_desktop 0)$ws1 ^ca()" > /tmp/WS1
@@ -291,13 +316,13 @@ herbstclient --idle 2>/dev/null | {
     while true; do
         for tag in "${tags[@]}" ; do
             case "${tag:0:1}" in
-                '#') cstart="^fg($ffg)^bg($fbg)" ;;
-                '+') cstart="^fg($viewed_fg)^bg($fbg)" ;;
-                ':') cstart="^fg($ofg)^bg($obg)"     ;;
-                '!') cstart="^fg($ufg)^bg($ubg)" ;;
-                *)   cstart=''                               ;;
+                '#') prefix="^fg($ffg)^bg($fbg)" ;;
+                '+') prefix="^fg($ffg)^bg($fbg)" ;;
+                ':') prefix="^fg($ofg)^bg($obg)" ;;
+                '!') prefix="^fg($ufg)^bg($ubg)" ;;
+                *)   prefix=''                   ;;
             esac
-            dzenstring="${cstart}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
+            dzenstring="${prefix}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
             dzenstring+="^ca()^fg()^bg()"
             echo -n "$dzenstring"
         done
@@ -309,16 +334,16 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 18 -fn 'Cousine Nerd Font:pixelsize=10' -ta l -sa l \
-          -x $x1 -y $y -w $wl -fg "$dfg" -bg "$dbg" && transset-df 0 -e 'button3='
+          -x $x1 -y $y -w $wl -fg "$nfg" -bg "$dbg" && transset-df 0 -e 'button3='
 }
 
-# fn hl_tags populates /tmp fn hlwm_tags directly pipes ifo into dzen the default style
+# function hl_tags populates /tmp fn hlwm_tags directly pipes info into dzen the default style
 # c_bspwmtags is clickable; bspwmtags is default bspwm
 
 if [ "$cwm" = "bspwm" ]; then
         taglist="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
         [ "$cwm" = "herbstluftwm" ]; then
-        taglist="hl_tags"; else  # options is hlwm_tags OR hl_tags [unified panel mode]
+        taglist="hl_tags"; else		# hl_tags for panelbar; hlwm is default hlwm styled
         taglist="ewmh_ws"
 fi
 
