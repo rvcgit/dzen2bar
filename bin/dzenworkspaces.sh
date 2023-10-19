@@ -113,40 +113,7 @@ if [ $cwm != "XMonad" ] || [ $run != "dwm" ];then
 		sleep 0.5
 	done
 fi
-	# update active workspace in realtime
-		case "$cws" in
-			0)	echo "$ws1 " > /tmp/AWS ;;
-			*) ;;
-		esac
-		case "$cws" in
-			1)	echo "$ws2 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			2)	echo "$ws3 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			3)	echo "$ws4 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			4)	echo "$ws5 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			5)	echo "$ws6 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			6)	echo "$ws7 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		case "$cws" in
-			7)	echo "$ws8 " > /tmp/AWS ;;
-			*)	;;
-		esac
-		
+
 # lets populate workspaces	
 fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
 #echo $fws > /tmp/AWS
