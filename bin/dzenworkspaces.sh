@@ -4,11 +4,7 @@
 rm -rf /tmp/WS*
 rm -rf /tmp/AWS
 rm -rf /tmp/layout
-
-X=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1) #screen resolution X
-Y=$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2) #screen resolution Y
-XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')"
-YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')"
+# the decorative stuff
 fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')" # current focused workspace
 ufws="$(wmctrl -d | sed -n '/- /s///p' | awk '{print$NF}')" # unfocused workspaces
 cwm="$(wmctrl -m | sed -n '/Name: /s///p')" # detect current window manager
@@ -17,11 +13,13 @@ dbg="#111827"
 nfg="#647c64"
 nbg="#99111827"
 ffg="#FFB900" # golden
-fbg="#050301"
+fbg="#050303"
 ufg="#D13438"
 ubg=""
 ofg="#bdb76b" # fluent dark khaki
 obg=""
+
+
 bspwmtags() { \
 	      tags=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
@@ -224,64 +222,64 @@ hl_tags() {
 	# populating the workspaces with predefined FG colors
 
 	case "$st1" in
+		'#') ws1="^fg($ffg)^bg($fbg)$ws1^bg()"	;;
 		'.') ws1="^fg($dfg)$ws1"	;;
-		'#') ws1="^fg($ffg)$ws1"	;;
 		'!') ws1="^fg($ufg)$ws1"	;;
 		':') ws1="^fg($ofg)$ws1"	;;
 		*)	ws1="^fg($nfg)$ws1"		;;
 	esac
 
 	case "$st2" in
+		'#') ws2="^fg($ffg)^bg($fbg)$ws2^bg()"	;;
 		'.') ws2="^fg($dfg)$ws2"	;;
-		'#') ws2="^fg($ffg)$ws2"	;;
 		'!') ws2="^fg($ufg)$ws2"	;;
 		':') ws2="^fg($ofg)$ws2"	;;
 		*)	ws2="^fg($nfg)$ws2"		;;
 	esac
 
 	case "$st3" in
+		'#') ws3="^fg($ffg)^bg($fbg)$ws3^bg()"	;;
 		'.') ws3="^fg($dfg)$ws3"	;;
-		'#') ws3="^fg($ffg)$ws3"	;;
 		'!') ws3="^fg($ufg)$ws3"	;;
 		':') ws3="^fg($ofg)$ws3"	;;
 		*)	ws3="^fg($nfg)$ws3"		;;
 	esac
 
 	case "$st4" in
+		'#') ws4="^fg($ffg)^bg($fbg)$ws4^bg()"	;;
 		'.') ws4="^fg($dfg)$ws4"	;;
-		'#') ws4="^fg($ffg)$ws4"	;;
 		'!') ws4="^fg($ufg)$ws4"	;;
 		':') ws4="^fg($ofg)$ws4"	;;
 		*)	ws4="^fg($nfg)$ws4"		;;
 	esac
 
 	case "$st5" in
+		'#') ws5="^fg($ffg)^bg($fbg)$ws5^bg()"	;;
 		'.') ws5="^fg($dfg)$ws5"	;;
-		'#') ws5="^fg($ffg)$ws5"	;;
 		'!') ws5="^fg($ufg)$ws5"	;;
 		':') ws5="^fg($ofg)$ws5"	;;
 		*)	ws5="^fg($nfg)$ws5"		;;
 	esac
     
 	case "$st6" in
+		'#') ws6="^fg($ffg)^bg($fbg)$ws6^bg()"	;;
 		'.') ws6="^fg($dfg)$ws6"	;;
-		'#') ws6="^fg($ffg)$ws6"	;;
 		'!') ws6="^fg($ufg)$ws6"	;;
 		':') ws6="^fg($ofg)$ws6"	;;
 		*)	ws6="^fg($nfg)$ws6"		;;
 	esac
 
 	case "$st7" in
+		'#') ws7="^fg($ffg)^bg($fbg)$ws7^bg()"	;;
 		'.') ws7="^fg($dfg)$ws7"	;;
-		'#') ws7="^fg($ffg)$ws7"	;;
 		'!') ws7="^fg($ufg)$ws7"	;;
 		':') ws7="^fg($ofg)$ws7"	;;
 		*)	ws7="^fg($nfg)$ws7"		;;
 	esac
 
 	case "$st8" in
+		'#') ws8="^fg($ffg)^bg($fbg)$ws8^bg()"	;;
 		'.') ws8="^fg($dfg)$ws8"	;;
-		'#') ws8="^fg($ffg)$ws8"	;;
 		'!') ws8="^fg($ufg)$ws8"	;;
 		':') ws8="^fg($ofg)$ws8"	;;
 		*)	ws8="^fg($nfg)$ws8"		;;
@@ -334,7 +332,7 @@ herbstclient --idle 2>/dev/null | {
         esac
     done
 } | dzen2 -h 18 -fn 'Cousine Nerd Font:pixelsize=10' -ta l -sa l \
-          -x $x1 -y $y -w $wl -fg "$nfg" -bg "$dbg" && transset-df 0 -e 'button3='
+          -x $x1 -y $y -w $wl -fg "$nfg" -bg "$dbg" && transset-df 0.9 -e 'button3='
 }
 
 # function hl_tags populates /tmp fn hlwm_tags directly pipes info into dzen the default style
