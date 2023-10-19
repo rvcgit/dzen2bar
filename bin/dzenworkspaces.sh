@@ -115,8 +115,6 @@ if [ $cwm != "XMonad" ] || [ $run != "dwm" ];then
 fi
 
 # lets populate workspaces	
-fws="$(wmctrl -d | sed -n '/* /s///p' | awk '{print$NF}')"
-#echo $fws > /tmp/AWS
 if [ $fws = $ws1 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws1 " > /tmp/WS1; else
 	echo "^bg($dbg)^fg($dfg) $ws1 " > /tmp/WS1
