@@ -17,28 +17,29 @@ fbg="#050303"
 ufg="#D13438"
 ubg=""
 ofg="#bdb76b" # fluent dark khaki
-obg=""
+obg="#101510"
 
 
-bspwmtags() { \
+bspwmtags() {
 	      tags=$(bspc wm -g |
 		       sed -Ee 's/:m/ \n  M\>/g' \
-			   -e 's/:O|:F/ \n ^fg($ffg)/g'\
-			   -e 's/:o/ \n ^fg(#$ofg)/g' \
+			   -e 's/:O|:F/ \n ^fg(#ffb900)/g'\
+			   -e 's/:o/ \n ^fg(#4c4a48)/g' \
 			   -e 's/:U/ \n ^fg(#00fa9a)/g' \
-			   -e 's/:u/ \n ^fg(#d56c30)/g' \
+			   -e 's/:u/ \n ^fg(#d13438)/g' \
 			   -e 's/:/ \n  /g' \
 			   | grep "fg" \
 			   | sed 's/Desktop/S/g' \
 			   | tr '\n' '@' \
-			   | sed 's/@/^fg($dfg)\|/g')
+			   | sed 's/@/^fg(#4c4a48)\|/g')
 
 #toggle between monocle and tiled on-click
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
 
 # above data piped into dzen so /tmp creation unnecessary
 echo "^bg($dbg) $tags^fg($nfg)^ca(1,bspc desktop -l tiled || bspc desktop -l monocle)$layout^ca()"
-}
+
+}          
 
 # same as above but with cickable options and display empty tags
 
@@ -63,6 +64,7 @@ ws2=$(echo $TWO | cut -c 2-)
 ws3=$(echo $THR | cut -c 2-)
 ws4=$(echo $FOU | cut -c 2-)
 ws5=$(echo $FIV | cut -c 2-) &&
+
 # populating the workspaces with predefined FG colors
 if [ "$st1" = "f" ]; then ws1="^fg($dfg)$ws1"; elif
    [ "$st1" = "O" ]; then ws1="^fg($ffg)^bg($fbg)$ws1 ^bg()"; elif
@@ -301,13 +303,13 @@ herbstclient --idle 2>/dev/null | {
           -x $x1 -y $y -w $wl -fg "$nfg" -bg "$dbg" && transset-df 0.9 -e 'button3='
 }
 
-# function hl_tags populates /tmp fn hlwm_tags directly pipes info into dzen the default style
-# c_bspwmtags is clickable; bspwmtags is default bspwm
+# hl_tags is clickable and works in panel and individual dzen mode; hlwm_tags is default bspwm [ needs seperate dzen instance ]
+# c_bspwmtags is clickable and works in panel and individual dzen mode; bspwmtags is default bspwm [ needs seperate dzen instance ]
 
 if [ "$cwm" = "bspwm" ]; then
-        taglist="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
+        taglist="c_bspwmtags"; elif  
         [ "$cwm" = "herbstluftwm" ]; then
-        taglist="hl_tags"; else		# hl_tags for panelbar; hlwm_tags is default hlwm
+        taglist="hl_tags"; else		
         taglist="ewmh_ws"
 fi
 
