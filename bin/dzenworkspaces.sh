@@ -113,41 +113,42 @@ if [ $cwm != "XMonad" ] || [ $run != "dwm" ];then
 		sleep 0.5
 	done
 fi
-
+		
 # lets populate workspaces	
+
 if [ $fws = $ws1 ]; then 
-	echo "^bg($fbg)^fg($ffg) $ws1 " > /tmp/WS1; else
+	echo "^bg($fbg)^fg($ffg) $ws1 ^bg($dbg)" > /tmp/WS1; else
 	echo "^bg($dbg)^fg($dfg) $ws1 " > /tmp/WS1
 fi
 if [ $fws = $ws2 ]; then 
-	echo "^bg($fbg)^fg($ffg) $ws2 " > /tmp/WS2; else 
+	echo "^bg($fbg)^fg($ffg) $ws2 ^bg($dbg)" > /tmp/WS2; else 
 	echo "^bg($dbg)^fg($dfg) $ws2 " > /tmp/WS2
 fi
 if [ $ws2 = $ws1 ]; then 
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS2;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS3;\
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS2;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS3;\
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS4;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 if [ $fws = $ws3 ]; then 
-	echo "^bg($fbg)^fg($ffg) $ws3 " > /tmp/WS3; else 
+	echo "^bg($fbg)^fg($ffg) $ws3 ^bg($dbg)" > /tmp/WS3; else 
 	echo "^bg($dbg)^fg($dfg) $ws3 " > /tmp/WS3
 fi
 if [ $ws3 = $ws2 ]; then 
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS3;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;\
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS3;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS4;\
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 if [ $fws = $ws4 ]; then 
-	echo "^bg($fbg)^fg($ffg) $ws4 " > /tmp/WS4; else 
+	echo "^bg($fbg)^fg($ffg) $ws4 ^bg($dbg)" > /tmp/WS4; else 
 	echo "^bg($dbg)^fg($dfg) $ws4 " > /tmp/WS4
 fi
 if [ $ws4 = $ws3 ]; then 
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS4;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 if [ $fws = $ws5 ]; then 
-	echo "^bg($fbg)^fg($ffg) $ws5 " > /tmp/WS5; else 
+	echo "^bg($fbg)^fg($ffg) $ws5 ^bg($dbg)" > /tmp/WS5; else 
 	echo "^bg($dbg)^fg($dfg) $ws5 " > /tmp/WS5
 fi
 if [ $ws5 = $ws4 ]; then 
-	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 }
 
@@ -187,7 +188,7 @@ hl_tags() {
 	# populating the workspaces with predefined FG colors
 
 	case "$st1" in
-		'#') ws1="^fg($ffg)^bg($fbg)$ws1^bg()"	;;
+		'#') ws1="^fg($ffg)^bg($fbg)$ws1^bg($dbg)"	;;
 		'.') ws1="^fg($dfg)$ws1"	;;
 		'!') ws1="^fg($ufg)$ws1"	;;
 		':') ws1="^fg($ofg)$ws1"	;;
@@ -195,7 +196,7 @@ hl_tags() {
 	esac
 
 	case "$st2" in
-		'#') ws2="^fg($ffg)^bg($fbg)$ws2^bg()"	;;
+		'#') ws2="^fg($ffg)^bg($fbg)$ws2^bg($dbg)"	;;
 		'.') ws2="^fg($dfg)$ws2"	;;
 		'!') ws2="^fg($ufg)$ws2"	;;
 		':') ws2="^fg($ofg)$ws2"	;;
@@ -203,7 +204,7 @@ hl_tags() {
 	esac
 
 	case "$st3" in
-		'#') ws3="^fg($ffg)^bg($fbg)$ws3^bg()"	;;
+		'#') ws3="^fg($ffg)^bg($fbg)$ws3^bg($dbg)"	;;
 		'.') ws3="^fg($dfg)$ws3"	;;
 		'!') ws3="^fg($ufg)$ws3"	;;
 		':') ws3="^fg($ofg)$ws3"	;;
@@ -211,7 +212,7 @@ hl_tags() {
 	esac
 
 	case "$st4" in
-		'#') ws4="^fg($ffg)^bg($fbg)$ws4^bg()"	;;
+		'#') ws4="^fg($ffg)^bg($fbg)$ws4^bg($dbg)"	;;
 		'.') ws4="^fg($dfg)$ws4"	;;
 		'!') ws4="^fg($ufg)$ws4"	;;
 		':') ws4="^fg($ofg)$ws4"	;;
@@ -219,7 +220,7 @@ hl_tags() {
 	esac
 
 	case "$st5" in
-		'#') ws5="^fg($ffg)^bg($fbg)$ws5^bg()"	;;
+		'#') ws5="^fg($ffg)^bg($fbg)$ws5^bg($dbg)"	;;
 		'.') ws5="^fg($dfg)$ws5"	;;
 		'!') ws5="^fg($ufg)$ws5"	;;
 		':') ws5="^fg($ofg)$ws5"	;;
@@ -227,7 +228,7 @@ hl_tags() {
 	esac
     
 	case "$st6" in
-		'#') ws6="^fg($ffg)^bg($fbg)$ws6^bg()"	;;
+		'#') ws6="^fg($ffg)^bg($fbg)$ws6^bg($dbg)"	;;
 		'.') ws6="^fg($dfg)$ws6"	;;
 		'!') ws6="^fg($ufg)$ws6"	;;
 		':') ws6="^fg($ofg)$ws6"	;;
@@ -235,7 +236,7 @@ hl_tags() {
 	esac
 
 	case "$st7" in
-		'#') ws7="^fg($ffg)^bg($fbg)$ws7^bg()"	;;
+		'#') ws7="^fg($ffg)^bg($fbg)$ws7^bg($dbg)"	;;
 		'.') ws7="^fg($dfg)$ws7"	;;
 		'!') ws7="^fg($ufg)$ws7"	;;
 		':') ws7="^fg($ofg)$ws7"	;;
@@ -243,7 +244,7 @@ hl_tags() {
 	esac
 
 	case "$st8" in
-		'#') ws8="^fg($ffg)^bg($fbg)$ws8^bg()"	;;
+		'#') ws8="^fg($ffg)^bg($fbg)$ws8^bg($dbg)"	;;
 		'.') ws8="^fg($dfg)$ws8"	;;
 		'!') ws8="^fg($ufg)$ws8"	;;
 		':') ws8="^fg($ofg)$ws8"	;;
@@ -283,7 +284,7 @@ herbstclient --idle 2>/dev/null | {
                 '+') prefix="^fg($ffg)^bg($fbg)" ;;
                 ':') prefix="^fg($ofg)^bg($obg)" ;;
                 '!') prefix="^fg($ufg)^bg($ubg)" ;;
-                *)   prefix=''                   ;;
+                *)   prefix=""                   ;;
             esac
             dzenstring="${prefix}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
             dzenstring+="^ca()^fg()^bg()"
