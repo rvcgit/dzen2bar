@@ -65,23 +65,23 @@ ws4=$(echo $FOU | cut -c 2-)
 ws5=$(echo $FIV | cut -c 2-) &&
 # populating the workspaces with predefined FG colors
 if [ "$st1" = "f" ]; then ws1="^fg($dfg)$ws1"; elif
-   [ "$st1" = "O" ]; then ws1="^fg($ffg)$ws1"; elif
+   [ "$st1" = "O" ]; then ws1="^fg($ffg)^bg($fbg)$ws1 ^bg()"; elif
    [ "$st1" = "o" ]; then ws1="^fg($ofg)$ws1"; fi
 
 if [ "$st2" = "f" ]; then ws2="^fg($dfg)$ws2"; elif
-   [ "$st2" = "O" ]; then ws2="^fg($ffg)$ws2"; elif
+   [ "$st2" = "O" ]; then ws2="^fg($ffg)^bg($fbg)$ws2 ^bg()"; elif
    [ "$st2" = "o" ]; then ws2="^fg($ofg)$ws2"; fi
 
 if [ "$st3" = "f" ]; then ws3="^fg($dfg)$ws3"; elif
-   [ "$st3" = "O" ]; then ws3="^fg($ffg)$ws3"; elif
+   [ "$st3" = "O" ]; then ws3="^fg($ffg)^bg($fbg)$ws3 ^bg()"; elif
    [ "$st3" = "o" ]; then ws3="^fg($ofg)$ws3"; fi
 
 if [ "$st4" = "f" ]; then ws4="^fg($dfg)$ws4"; elif
-   [ "$st4" = "O" ]; then ws4="^fg($ffg)$ws4"; elif
+   [ "$st4" = "O" ]; then ws4="^fg($ffg)^bg($fbg)$ws4 ^bg()"; elif
    [ "$st4" = "o" ]; then ws4="^fg($ofg)$ws4"; fi
 
 if [ "$st5" = "f" ]; then ws5="^fg($dfg)$ws5"; elif
-   [ "$st5" = "O" ]; then ws5="^fg($ffg)$ws5"; elif
+   [ "$st5" = "O" ]; then ws5="^fg($ffg)^bg($fbg)$ws5 ^bg()"; elif
    [ "$st5" = "o" ]; then ws5="^fg($ofg)$ws5"; fi
 
 layout=$(bspc query -T -d | grep -q '"userLayout":"monocle"' && echo "  " || echo "  ")
@@ -159,30 +159,30 @@ if [ $fws = $ws2 ]; then
 	echo "^bg($dbg)^fg($dfg) $ws2 " > /tmp/WS2
 fi
 if [ $ws2 = $ws1 ]; then 
-	echo "^bg($dbg)^fg($dfg) II " > /tmp/WS2;echo "^bg($dbg)^fg($dfg) III " > /tmp/WS3;\
-	echo "^bg($dbg)^fg($dfg) IV " > /tmp/WS4;echo "^bg($dbg)^fg($dfg) V " > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS2;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS3;\
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
 fi
 if [ $fws = $ws3 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws3 " > /tmp/WS3; else 
 	echo "^bg($dbg)^fg($dfg) $ws3 " > /tmp/WS3
 fi
 if [ $ws3 = $ws2 ]; then 
-	echo "^bg($dbg)^fg($dfg) III " > /tmp/WS3;echo "^bg($dbg)^fg($dfg) IV " > /tmp/WS4;\
-	echo "^bg($dbg)^fg($dfg) V " > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS3;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;\
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
 fi
 if [ $fws = $ws4 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws4 " > /tmp/WS4; else 
 	echo "^bg($dbg)^fg($dfg) $ws4 " > /tmp/WS4
 fi
 if [ $ws4 = $ws3 ]; then 
-	echo "^bg($dbg)^fg($dfg) IV " > /tmp/WS4;echo "^bg($dbg)^fg($dfg) V " > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
 fi
 if [ $fws = $ws5 ]; then 
 	echo "^bg($fbg)^fg($ffg) $ws5 " > /tmp/WS5; else 
 	echo "^bg($dbg)^fg($dfg) $ws5 " > /tmp/WS5
 fi
 if [ $ws5 = $ws4 ]; then 
-	echo "^bg($dbg)^fg($dfg) V " > /tmp/WS5
+	echo "^bg($dbg)^fg($dfg) ''" > /tmp/WS5
 fi
 }
 
@@ -341,7 +341,7 @@ herbstclient --idle 2>/dev/null | {
 if [ "$cwm" = "bspwm" ]; then
         taglist="c_bspwmtags"; elif  # c_bspwmtags is clickable; bspwmtags is default bspwm
         [ "$cwm" = "herbstluftwm" ]; then
-        taglist="hl_tags"; else		# hl_tags for panelbar; hlwm is default hlwm styled
+        taglist="hl_tags"; else		# hl_tags for panelbar; hlwm_tags is default hlwm
         taglist="ewmh_ws"
 fi
 
