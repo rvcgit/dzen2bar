@@ -119,35 +119,35 @@ fi
 # lets populate workspaces	
 
 if [ $fws = $ws1 ]; then 
-	echo "^bg($fbg)^fg($ffg)$ws1 ^bg($dbg)" > /tmp/WS1; else
-	echo "^bg($dbg)^fg($dfg)$ws1 " > /tmp/WS1
+	echo "^bg($fbg)^fg($ffg) $ws1 ^bg($dbg)" > /tmp/WS1; else
+	echo "^bg($dbg)^fg($dfg) $ws1 " > /tmp/WS1
 fi
 if [ $fws = $ws2 ]; then 
-	echo "^bg($fbg)^fg($ffg)$ws2 ^bg($dbg)" > /tmp/WS2; else 
-	echo "^bg($dbg)^fg($dfg)$ws2 " > /tmp/WS2
+	echo "^bg($fbg)^fg($ffg) $ws2 ^bg($dbg)" > /tmp/WS2; else 
+	echo "^bg($dbg)^fg($dfg) $ws2 " > /tmp/WS2
 fi
 if [ $ws2 = $ws1 ]; then 
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS2;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS3;\
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 if [ $fws = $ws3 ]; then 
-	echo "^bg($fbg)^fg($ffg)$ws3 ^bg($dbg)" > /tmp/WS3; else 
-	echo "^bg($dbg)^fg($dfg)$ws3 " > /tmp/WS3
+	echo "^bg($fbg)^fg($ffg) $ws3 ^bg($dbg)" > /tmp/WS3; else 
+	echo "^bg($dbg)^fg($dfg) $ws3 " > /tmp/WS3
 fi
 if [ $ws3 = $ws2 ]; then 
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS3;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS4;\
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS5
 fi
 if [ $fws = $ws4 ]; then 
-	echo "^bg($fbg)^fg($ffg)$ws4 ^bg($dbg)" > /tmp/WS4; else 
-	echo "^bg($dbg)^fg($dfg)$ws4 " > /tmp/WS4
+	echo "^bg($fbg)^fg($ffg) $ws4 ^bg($dbg)" > /tmp/WS4; else 
+	echo "^bg($dbg)^fg($dfg) $ws4 " > /tmp/WS4
 fi
 if [ $ws4 = $ws3 ]; then 
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS4;echo "^bg($dbg)^fg($dfg) """ > /tmp/WS5
 fi
 if [ $fws = $ws5 ]; then 
-	echo "^bg($fbg)^fg($ffg)$ws5 ^bg($dbg)" > /tmp/WS5; else 
-	echo "^bg($dbg)^fg($dfg)$ws5 " > /tmp/WS5
+	echo "^bg($fbg)^fg($ffg) $ws5 ^bg($dbg)" > /tmp/WS5; else 
+	echo "^bg($dbg)^fg($dfg) $ws5 " > /tmp/WS5
 fi
 if [ $ws5 = $ws4 ]; then 
 	echo "^bg($dbg)^fg($dfg)""" > /tmp/WS5
