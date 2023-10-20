@@ -265,7 +265,7 @@ echo "^ca(1,xdotool set_desktop 7)$ws8 ^ca()" > /tmp/WS8
 
 }
 
-# default hlwm style [ no populating /tmp]
+# default hlwm style [ no populating /tmp ]
 hlwm_tags() {
 X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
 Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
@@ -304,12 +304,19 @@ herbstclient --idle 2>/dev/null | {
 }
 
 # hl_tags is clickable and works in panel and individual dzen mode; hlwm_tags is default bspwm [ needs seperate dzen instance ]
+
 # c_bspwmtags is clickable and works in panel and individual dzen mode; bspwmtags is default bspwm [ needs seperate dzen instance ]
 
 if [ "$cwm" = "bspwm" ]; then
-        taglist="c_bspwmtags"; elif  
-        [ "$cwm" = "herbstluftwm" ]; then
-        taglist="hl_tags"; else		
+	if [ "$(ps aux | grep dzen2panel | head -1 | awk '{print $NF}' | cut -b 12-25)" = "bin/dzen2panel" ];then
+		taglist="c_bspwmtags"; else
+		taglist="bspwmtags"
+	fi; elif
+   [ "$cwm" = "herbstluftwm" ]; then
+	if [ "$(ps aux | grep dzen2panel | head -1 | awk '{print $NF}' | cut -b 12-25)" = "bin/dzen2panel" ];then
+		taglist="hl_tags"; else
+		taglist="hlwm_tags"
+	fi; else
         taglist="ewmh_ws"
 fi
 
