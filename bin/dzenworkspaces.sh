@@ -190,78 +190,78 @@ hl_tags() {
 	# populating the workspaces with predefined FG colors
 
 	case "$st1" in
-		'#') ws1="^fg($ffg)^bg($fbg)$ws1^bg($dbg)"	;;
-		'.') ws1="^fg($dfg)$ws1"	;;
-		'!') ws1="^fg($ufg)$ws1"	;;
-		':') ws1="^fg($ofg)$ws1"	;;
-		*)	ws1="^fg($nfg)$ws1"		;;
+		'#') ws1="^fg($ffg)^bg($fbg) $ws1 ^bg($dbg)"	;;
+		'.') ws1="^fg($dfg) $ws1 "	;;
+		'!') ws1="^fg($ufg) $ws1 "	;;
+		':') ws1="^fg($ofg) $ws1 "	;;
+		*)	ws1="^fg($nfg) $ws1 "		;;
 	esac
 
 	case "$st2" in
-		'#') ws2="^fg($ffg)^bg($fbg)$ws2^bg($dbg)"	;;
-		'.') ws2="^fg($dfg)$ws2"	;;
-		'!') ws2="^fg($ufg)$ws2"	;;
-		':') ws2="^fg($ofg)$ws2"	;;
-		*)	ws2="^fg($nfg)$ws2"		;;
+		'#') ws2="^fg($ffg)^bg($fbg) $ws2 ^bg($dbg)"	;;
+		'.') ws2="^fg($dfg) $ws2 "	;;
+		'!') ws2="^fg($ufg) $ws2 "	;;
+		':') ws2="^fg($ofg) $ws2 "	;;
+		*)	ws2="^fg($nfg) $ws2 "		;;
 	esac
 
 	case "$st3" in
-		'#') ws3="^fg($ffg)^bg($fbg)$ws3^bg($dbg)"	;;
-		'.') ws3="^fg($dfg)$ws3"	;;
-		'!') ws3="^fg($ufg)$ws3"	;;
-		':') ws3="^fg($ofg)$ws3"	;;
-		*)	ws3="^fg($nfg)$ws3"		;;
+		'#') ws3="^fg($ffg)^bg($fbg) $ws3 ^bg($dbg)"	;;
+		'.') ws3="^fg($dfg) $ws3 "	;;
+		'!') ws3="^fg($ufg) $ws3 "	;;
+		':') ws3="^fg($ofg) $ws3 "	;;
+		*)	ws3="^fg($nfg) $ws3 "		;;
 	esac
 
 	case "$st4" in
-		'#') ws4="^fg($ffg)^bg($fbg)$ws4^bg($dbg)"	;;
-		'.') ws4="^fg($dfg)$ws4"	;;
-		'!') ws4="^fg($ufg)$ws4"	;;
-		':') ws4="^fg($ofg)$ws4"	;;
-		*)	ws4="^fg($nfg)$ws4"		;;
+		'#') ws4="^fg($ffg)^bg($fbg) $ws4 ^bg($dbg)"	;;
+		'.') ws4="^fg($dfg) $ws4 "	;;
+		'!') ws4="^fg($ufg) $ws4 "	;;
+		':') ws4="^fg($ofg) $ws4 "	;;
+		*)	ws4="^fg($nfg) $ws4 "		;;
 	esac
 
 	case "$st5" in
-		'#') ws5="^fg($ffg)^bg($fbg)$ws5^bg($dbg)"	;;
-		'.') ws5="^fg($dfg)$ws5"	;;
-		'!') ws5="^fg($ufg)$ws5"	;;
-		':') ws5="^fg($ofg)$ws5"	;;
-		*)	ws5="^fg($nfg)$ws5"		;;
+		'#') ws5="^fg($ffg)^bg($fbg) $ws5 ^bg($dbg)"	;;
+		'.') ws5="^fg($dfg) $ws5 "	;;
+		'!') ws5="^fg($ufg) $ws5 "	;;
+		':') ws5="^fg($ofg) $ws5 "	;;
+		*)	ws5="^fg($nfg) $ws5 "		;;
 	esac
     
 	case "$st6" in
-		'#') ws6="^fg($ffg)^bg($fbg)$ws6^bg($dbg)"	;;
-		'.') ws6="^fg($dfg)$ws6"	;;
-		'!') ws6="^fg($ufg)$ws6"	;;
-		':') ws6="^fg($ofg)$ws6"	;;
-		*)	ws6="^fg($nfg)$ws6"		;;
+		'#') ws6="^fg($ffg)^bg($fbg) $ws6 ^bg($dbg)"	;;
+		'.') ws6="^fg($dfg) $ws6 "	;;
+		'!') ws6="^fg($ufg) $ws6 "	;;
+		':') ws6="^fg($ofg) $ws6 "	;;
+		*)	ws6="^fg($nfg) $ws6 "		;;
 	esac
 
 	case "$st7" in
-		'#') ws7="^fg($ffg)^bg($fbg)$ws7^bg($dbg)"	;;
-		'.') ws7="^fg($dfg)$ws7"	;;
-		'!') ws7="^fg($ufg)$ws7"	;;
-		':') ws7="^fg($ofg)$ws7"	;;
-		*)	ws7="^fg($nfg)$ws7"		;;
+		'#') ws7="^fg($ffg)^bg($fbg) $ws7 ^bg($dbg)"	;;
+		'.') ws7="^fg($dfg) $ws7 "	;;
+		'!') ws7="^fg($ufg) $ws7 "	;;
+		':') ws7="^fg($ofg) $ws7 "	;;
+		*)	ws7="^fg($nfg) $ws7 "		;;
 	esac
 
 	case "$st8" in
-		'#') ws8="^fg($ffg)^bg($fbg)$ws8^bg($dbg)"	;;
-		'.') ws8="^fg($dfg)$ws8"	;;
-		'!') ws8="^fg($ufg)$ws8"	;;
-		':') ws8="^fg($ofg)$ws8"	;;
-		*)	ws8="^fg($nfg)$ws8"		;;
+		'#') ws8="^fg($ffg)^bg($fbg) $ws8 ^bg($dbg)"	;;
+		'.') ws8="^fg($dfg) $ws8 "	;;
+		'!') ws8="^fg($ufg) $ws8 "	;;
+		':') ws8="^fg($ofg) $ws8 "	;;
+		*)	ws8="^fg($nfg) $ws8 "		;;
 	esac
    
 # creating /tmp data for enabling clickable tags
-echo " ^ca(1,xdotool set_desktop 0)$ws1 ^ca()" > /tmp/WS1
-echo "^ca(1,xdotool set_desktop 1)$ws2 ^ca()" > /tmp/WS2
-echo "^ca(1,xdotool set_desktop 2)$ws3 ^ca()" > /tmp/WS3
-echo "^ca(1,xdotool set_desktop 3)$ws4 ^ca()" > /tmp/WS4
-echo "^ca(1,xdotool set_desktop 4)$ws5 ^ca()" > /tmp/WS5
-echo "^ca(1,xdotool set_desktop 5)$ws6 ^ca()" > /tmp/WS6
-echo "^ca(1,xdotool set_desktop 6)$ws7 ^ca()" > /tmp/WS7
-echo "^ca(1,xdotool set_desktop 7)$ws8 ^ca()" > /tmp/WS8
+echo "^ca(1,xdotool set_desktop 0)$ws1^ca()" > /tmp/WS1
+echo "^ca(1,xdotool set_desktop 1)$ws2^ca()" > /tmp/WS2
+echo "^ca(1,xdotool set_desktop 2)$ws3^ca()" > /tmp/WS3
+echo "^ca(1,xdotool set_desktop 3)$ws4^ca()" > /tmp/WS4
+echo "^ca(1,xdotool set_desktop 4)$ws5^ca()" > /tmp/WS5
+echo "^ca(1,xdotool set_desktop 5)$ws6^ca()" > /tmp/WS6
+echo "^ca(1,xdotool set_desktop 6)$ws7^ca()" > /tmp/WS7
+echo "^ca(1,xdotool set_desktop 7)$ws8^ca()" > /tmp/WS8
 
 }
 
@@ -270,7 +270,7 @@ hlwm_tags() {
 X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
 Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
 x1=$(($X*2/1000)) # workspaces bar X position [ 0.5 % of x resolution ]
-wl=$(($X*145/1000)) # -w value w.r.t X resolution for left bar
+wl=$(($X*175/1000)) # -w value w.r.t X resolution for left bar
 
 # BOTTOM BAR
  y=$(($Y-(995/1000*$Y))) # y offset from y resolution; current is 99.5% of Y resolution;
@@ -289,7 +289,7 @@ herbstclient --idle 2>/dev/null | {
                 *)   prefix=""                   ;;
             esac
             dzenstring="${prefix}^ca(1,herbstclient use ${tag:1}) ${tag:1} "
-            dzenstring+="^ca()^fg()^bg()"
+            dzenstring+="^ca()^fg()^bg() "
             echo -n "$dzenstring"
         done
         echo 
