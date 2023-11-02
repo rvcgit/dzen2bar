@@ -1,12 +1,25 @@
 #!/usr/bin/env sh
-X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
-Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
-XP="$(xdotool getmouselocation | awk '{print$1}' | sed 's/x://g')" #mouse coordinate X
-YP="$(xdotool getmouselocation | awk '{print$2}' | sed 's/y://g')" #mouse coordinate Y
+w_mgr=$(wmctrl -m | sed -n '/Name: /s///p')
+if [ $w_mgr = "wlroots wm" ]; then
+	X="$(wlr-randr | grep current | awk '{print $1}' | sed 's/\x/ /' | awk '{print $1}')"  & # your horizontal screen resolution
+	Y="$(wlr-randr | grep current | awk '{print $1}' | sed 's/\x/ /' | awk '{print $2}')"  # your vertical screen resolution
+else	
+	X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
+	Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
+fi	
 
 bar_length=93 # % length w.r.t X width; edit to suit your need
 wc=$(($X*$bar_length/100)) # bar length; % width as per panel_length
+wcbspwm=$(($X*15/100)) # bar length for workspaces bspwm; % width as per panel_length
+wapbspwm=$(($X*75/100)) # apps length
 xc=$(($X*2/1000)) # 0.2% offset of X resolution
+xapps=$(($X*15/100))
+xmpd=$(($X*66/100)) # mpd status info x-offset
+wmpd=$(($X*27/100)) # mpc icon / title
+xherbs=$(($X*153/1000)) # offset to accomodate herbs tags
+wherbs=$(($X*80/100)) #re-adjust the apps panel width
+x4=$(($X*888/1000)) # Exit button X position [ edit value to suit; current is 88.8% of x resolution ]
+we=$(($X*25/1000)) # -w value w.r.t  X resolution for Exit Menu [extreme right]
 
 # BOTTOM BAR
  y=$(($Y*995/1000)) # y offset from y resolution; current is 99.5% of Y resolution
@@ -15,9 +28,9 @@ xc=$(($X*2/1000)) # 0.2% offset of X resolution
 # y=$(($Y-$Y))  # y offser from y resolution; current is 0.3% of Y resolution;
 
 ## right for systray ; add your tray app [stalonetray OR trayer
-w_mgr="$(wmctrl -m | grep Name:| awk '{print $NF}')"
+
 if [ "$w_mgr" != "dwm" ];then # non EWMH compliant
-	if [ $w_mgr = "herbstluftwm" ] ||  [ $w_mgr = "XMonad" ] ;then 
+	if [ $w_mgr = "XMonad" ] || [ $w_mgr = "herbstluftwm" ] ;then 
 		dock="true"
 		else
 		dock="false"
@@ -32,26 +45,26 @@ trayer --edge $edge --align right --distancefrom right --distance 5 \
 --widthtype request --heighttype pixel --height 18 \
 --transparent true --alpha $alfa --tint 0x111827 \
 --SetDockType $dock \
---padding 2 --margin 1 --iconspacing 4 --expand false
+--padding 1 --margin 2 --iconspacing 4 --expand false
 fi &&
 
 ## pkill dzen2 and conky instances first
 killall dzen2 conky &
-wmgr=$(wmctrl -m | grep Name | awk '{print$2}')
+
 ## dzen to be docked or not ?
-if [ $wmgr = "Openbox" ] || [ $wmgr = "herbstluftwm" ]; then 
+if [ $w_mgr = "Openbox" ] || [ $wmgr = "herbstluftwm" ]; then 
 dock=" "; else dock="-dock"
 fi
 # the dzenpanel 
-
+#workspaces script running with conky to update with interval
         sh ~/.bin/dzenworkspaces.sh && conky -c ~/.conky/dzenpanel-unifiedConky | \
         dzen2 -p -e 'enterslave=grabkeys;leaveslave=ungrabkeys; button4=scrollup;button5=scrolldown; \
         key_Left=scrollup;key_Right=scrolldown; button1=menuexec' \
-        -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=10:antialias=true' $dock
+        -h '18' -w $wc -ta l -x "$xc" -y $y -fn 'FiraCode Nerd Font:pixelsize=10.5:antialias=true' $dock
         fi
 
 # optional dzen2 transparency
-sleep 10 && exec `(transset .95 -n "dzen title" >/dev/null 2>&1 &)` &
+sleep 10 && exec `(transset .9 -n "dzen title" >/dev/null 2>&1 &)` &
 
 ## deps for  forecast
 location="MY_CITY" ## TYPE YOUR CITY NAME WITHIN QUOTES
