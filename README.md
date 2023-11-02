@@ -69,5 +69,7 @@ execute this bar with 'dzenbar' OR 'dzen2panel' as you may like.
 * Works fine with freeBSD too; obviously with some edits to be freebsd specific syntax [i have tried with fluxbox and its working flawlessly]
 * added mpd control buttons in the bar [ left and right click controls added ]
 * an animated gif added as preview.
+* for use with wlroots [dwl] the rofi related scripts need to be configured with numbers;
+* dynamic mousepointer location is not possible as on date in wayland
 
 CHEERS !
