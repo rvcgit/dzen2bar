@@ -1,0 +1,23 @@
+conky.config = {
+    out_to_x = false,
+    out_to_console = true,
+    update_interval = 1,
+    use_xft = true,
+    background = false,
+    total_run_times = 0,
+    use_spacer = none
+}
+-- for shell scripts to be executed; notice the "sh -c" syntax
+-- for dwl, execute dwl -s somebar [ for tags and title ] then execute this conky | dzen2 ....[dzen location/font/etc] using a shell startup script.
+conky.text = [[
+  ^bg(\#1a1e12)^fg(\#82afff)^ca(1,sh -c $HOME/.bin/dzenrofi.sh) ^fg(\#eceff4) AppMenu^ca()\
+ ^bg(\#1a1e12)^fg(\#a0522d)^ca(1,sh -c $HOME/.bin/dzen2rofifavmenu) ^fg(\#eceff4) Favs ^ca()\
+ ^bg(\#1a1e12)^fg(\#c2b280)^ca(1,sh -c $HOME/.bin/mpc-playlist-show)  ^fg()^ca()^bg()\
+ ^bg(\#1a1e12)^fg(\#b76e79)^ca(1,mpc prev)  ^fg()^ca()^bg()\
+ ^bg(\#1a1e12)^fg(\#9bc572)^ca(1,mpc toggle)${exec sh -c $HOME/.bin/mpdstatus}^fg()^ca()^bg()\
+ ^bg(\#1a1e12)^fg(\#b76e79)^ca(1,mpc next)   ^fg()^ca()^bg()\
+  ^ca(3,sh -c $HOME/.bin/dzentime.sh)^fg(\#a9aa5d) ^ca()^bg(\#1a1e12) ^fg(\#C8E6C9)${time %d %b %Y}; ${time %r};^ca(3,sh -c $HOME/.bin/dzenweather.sh)   ^fg(\#a9aa5d)${execpi 1818 sh -c $HOME/.bin/openweather}^ca()^fg()^bg()\
+  ^ca(1,terminator -e nmtui)^fg(mediumseagreen)${exec sh -c $HOME/.bin/wifi-status}^ca()\
+  ^ca(3,sh -c $HOME/.bin/dzensysinfo.sh)^fg(\#e97451)  ^fg(\#7986CB) SySInfo ^ca()\
+ ^fg(\#ed2939)^ca(1,wlogout)^ca(2,sh -c $HOME/.bin/dzen2rofiexit.sh) ^ca()^ca()  
+]]
