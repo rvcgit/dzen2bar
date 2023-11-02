@@ -3,7 +3,7 @@ w_mgr=$(wmctrl -m | sed -n '/Name: /s///p')
 if [ $w_mgr = "wlroots wm" ]; then
 	X="$(wlr-randr | grep current | awk '{print $1}' | sed 's/\x/ /' | awk '{print $1}')"  & # your horizontal screen resolution
 	Y="$(wlr-randr | grep current | awk '{print $1}' | sed 's/\x/ /' | awk '{print $2}')"  # your vertical screen resolution
-else	
+else	# for X!!
 	X="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f1)"  # your horizontal screen resolution
 	Y="$(xrandr | grep '*' | uniq | awk '{print$1}' | cut -d 'x' -f2)"  # your vertical screen resolution
 fi	
